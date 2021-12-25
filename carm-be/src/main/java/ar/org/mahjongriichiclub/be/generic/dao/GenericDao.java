@@ -1,4 +1,4 @@
-package ar.org.mahjongriichiclub.be.dao;
+package ar.org.mahjongriichiclub.be.generic.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
