@@ -15,13 +15,13 @@ public abstract class Points extends AbstractEntity {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Game game;
 	
-	@Column(name = "VALUE")
+	@Column(name = "VALUE", nullable=false)
 	private Integer value;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Player player;
 	
-	@Column(name="SANMA")
+	@Column(name="SANMA", nullable=false)
 	private Boolean sanma;
 
 	public Game getGame() {

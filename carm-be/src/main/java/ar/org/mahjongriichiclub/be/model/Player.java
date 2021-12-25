@@ -26,9 +26,6 @@ public class Player extends AbstractEntity {
 	@JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "PLAYER_PERSON_FK"))
 	Person person;
 
-	@Column(name = "LEGAJO")
-	private Long legajo;
-
 	@Column(name = "NICKNAME")
 	private String nickname;
 	
@@ -50,14 +47,6 @@ public class Player extends AbstractEntity {
 
 	public void setPerson(Person person) {
 		this.person = person;
-	}
-
-	public Long getLegajo() {
-		return legajo;
-	}
-
-	public void setLegajo(Long legajo) {
-		this.legajo = legajo;
 	}
 
 	public String getNickname() {

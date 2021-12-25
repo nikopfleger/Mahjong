@@ -2,8 +2,11 @@ package ar.org.mahjongriichiclub.be.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,13 +21,13 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 public class Person extends AbstractEntity {
 	
 
-	@Column(name = "NAMES", nullable = false)
+	@Column(name = "NAMES")
 	private String names;
 	
-	@Column(name = "SURNAMES", nullable = false)
+	@Column(name = "SURNAMES")
 	private String surnames;
 	
-	@Column(name = "COUNTRY")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Country country;
 	
 	@Column(name = "birthday")

@@ -13,13 +13,13 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE country SET deleted = 1 WHERE id=?")
 public class Country extends AbstractEntity {
 	
-	@Column(name="NAME")
+	@Column(name="NAME", nullable=false)
 	private String name;
 	
-	@Column(name="NATIONALITY")
+	@Column(name="NATIONALITY", nullable=false)
 	private String nationality;
 	
-	@Column(name="CODE")
+	@Column(name="CODE", nullable=false)
 	private String code;
 
 	public String getName() {

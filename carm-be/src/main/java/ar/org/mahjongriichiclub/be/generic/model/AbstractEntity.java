@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractEntity implements PersistentObject, Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
@@ -30,8 +30,7 @@ public abstract class AbstractEntity implements PersistentObject, Serializable {
 	@Column(name = "UPDATED_BY")
 	private String updatedBy;
 	@Column(name = "UPDATED")
-	private Date updated;
-	
+	private Date updated;	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -50,6 +49,14 @@ public abstract class AbstractEntity implements PersistentObject, Serializable {
 		return true;
 	}
 	
+	
+	
+	public AbstractEntity() {
+		super();
+	}
+
+
+
 	/**
 	 * @return the id
 	 */
