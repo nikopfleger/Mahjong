@@ -6,5 +6,4 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 public interface GenericDao<T extends AbstractEntity> extends JpaRepository<T,Long> {
 	
-	
 }

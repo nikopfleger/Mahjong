@@ -13,6 +13,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
@@ -32,6 +34,7 @@ public class Person extends AbstractEntity {
 	
 	@Column(name = "birthday")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthday;
 
 	public String getNames() {

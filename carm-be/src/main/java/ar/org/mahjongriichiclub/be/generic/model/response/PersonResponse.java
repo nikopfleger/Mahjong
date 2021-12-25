@@ -1,20 +1,16 @@
-package ar.org.mahjongriichiclub.be.dto;
+package ar.org.mahjongriichiclub.be.generic.model.response;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Person;
-
-public class PersonDTO extends GenericDTO<Person> {
-
+public class PersonResponse {
 	
 	private String names;
 	
 	private String surnames;
 	
-	private CountryDTO country;
+	private CountryResponse country;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthday;
@@ -35,11 +31,11 @@ public class PersonDTO extends GenericDTO<Person> {
 		this.surnames = surnames;
 	}
 
-	public CountryDTO getCountry() {
+	public CountryResponse getCountry() {
 		return country;
 	}
 
-	public void setCountry(CountryDTO country) {
+	public void setCountry(CountryResponse country) {
 		this.country = country;
 	}
 
@@ -53,5 +49,5 @@ public class PersonDTO extends GenericDTO<Person> {
 	
 	
 	
-	
+
 }
