@@ -1,0 +1,67 @@
+package ar.org.mahjongriichiclub.be.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.SQLDelete;
+
+import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+
+@Entity
+@Table(name = "SEASON")
+@SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
+public class Season extends AbstractPersistentObject {
+
+	@Column(name="SEASON_NUMBER" , nullable = false)
+	private Integer number;
+	
+	@Column(name="SEASON_NAME")
+	private String name;
+	
+	@Column(name = "START_DATE")
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+	
+	@Column(name = "END_DATE")
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
+	
+}
