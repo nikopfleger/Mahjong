@@ -10,12 +10,12 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "SEASON")
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
-public class Season extends AbstractPersistentObject {
+public class Season extends AbstractEntity {
 
 	@Column(name="SEASON_NUMBER" , nullable = false)
 	private Integer number;

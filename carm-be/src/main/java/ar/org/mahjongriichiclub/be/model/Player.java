@@ -14,13 +14,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 
 @Entity
 @Table(name = "player")
 @SQLDelete(sql = "UPDATE player SET deleted = 1 WHERE id=?")
-public class Player extends AbstractPersistentObject {
+public class Player extends AbstractEntity {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "PLAYER_PERSON_FK"))

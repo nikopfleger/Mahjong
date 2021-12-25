@@ -13,12 +13,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "RULESET")
 @SQLDelete(sql = "UPDATE RULESET SET deleted = 1 WHERE id=?")
-public class Ruleset extends AbstractPersistentObject {
+public class Ruleset extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UMA_ID", foreignKey = @ForeignKey(name = "RULESET_UMA_FK"))

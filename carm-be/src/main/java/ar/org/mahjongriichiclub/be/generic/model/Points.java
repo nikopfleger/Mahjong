@@ -10,7 +10,7 @@ import ar.org.mahjongriichiclub.be.model.Game;
 import ar.org.mahjongriichiclub.be.model.Player;
 
 @MappedSuperclass
-public abstract class Points extends AbstractPersistentObject {
+public abstract class Points extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Game game;

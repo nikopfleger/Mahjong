@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "TOURNAMENT")
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
-public class Tournament extends AbstractPersistentObject {
+public class Tournament extends AbstractEntity {
 
 	@Column(name= "type")
 	@Enumerated(EnumType.STRING)

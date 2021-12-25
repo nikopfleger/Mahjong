@@ -22,12 +22,12 @@ import org.hibernate.annotations.SQLDelete;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.enumerations.GameType;
 import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "GAME")
 @SQLDelete(sql = "UPDATE GAME SET deleted = 1 WHERE id=?")
-public class Game extends AbstractPersistentObject {
+public class Game extends AbstractEntity {
 	
 	@Column(name="GAME_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)

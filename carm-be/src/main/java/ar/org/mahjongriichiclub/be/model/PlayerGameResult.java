@@ -10,12 +10,12 @@ import javax.validation.constraints.Max;
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.enumerations.Wind;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "PLAYER_GAME_RESULT")
 @SQLDelete(sql = "UPDATE PLAYER_GAME_RESULT SET deleted = 1 WHERE id=?")
-public class PlayerGameResult extends AbstractPersistentObject {
+public class PlayerGameResult extends AbstractEntity {
 	
 	private static final long PRIMERA_POSICION = 1L;
 	private static final long ULTIMA_POSICION = 4L;

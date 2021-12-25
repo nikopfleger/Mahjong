@@ -9,12 +9,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "LOCATION")
 @SQLDelete(sql = "UPDATE LOCATION SET deleted = 1 WHERE id=?")
-public class Location extends AbstractPersistentObject {
+public class Location extends AbstractEntity {
 
 	@Column(name="NAME")
 	private String name;

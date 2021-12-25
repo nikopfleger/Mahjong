@@ -6,12 +6,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name="UMA")
 @SQLDelete(sql = "UPDATE UMA SET deleted = 1 WHERE id=?")
-public class Uma extends AbstractPersistentObject {
+public class Uma extends AbstractEntity {
 	
 	@Column(name="first_place", nullable = false)
 	private Integer firstPlace;

@@ -9,12 +9,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "PLAYER_ACCOUNT")
 @SQLDelete(sql = "UPDATE PLAYER_ACCOUNT SET deleted = 1 WHERE id=?")
-public class PlayerAccount extends AbstractPersistentObject {
+public class PlayerAccount extends AbstractEntity {
 	
 	@Column(name="account_id", nullable=false)
 	public String accountId;

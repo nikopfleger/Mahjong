@@ -5,12 +5,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "TOURNAMENT_RESULTS")
 @SQLDelete(sql = "UPDATE TOURNAMENT_RESULTS SET deleted = 1 WHERE id=?")
-public class TournamentResults extends AbstractPersistentObject  {
+public class TournamentResults extends AbstractEntity  {
 
 	private Player player;
 	

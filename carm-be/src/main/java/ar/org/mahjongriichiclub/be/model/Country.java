@@ -6,12 +6,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name="country")
 @SQLDelete(sql = "UPDATE country SET deleted = 1 WHERE id=?")
-public class Country extends AbstractPersistentObject {
+public class Country extends AbstractEntity {
 	
 	@Column(name="NAME")
 	private String name;

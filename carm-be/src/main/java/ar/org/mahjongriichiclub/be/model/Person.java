@@ -10,12 +10,12 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.generic.model.AbstractPersistentObject;
+import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name="person")
 @SQLDelete(sql = "UPDATE person SET deleted = 1 WHERE id=?")
-public class Person extends AbstractPersistentObject {
+public class Person extends AbstractEntity {
 	
 
 	@Column(name = "NAMES", nullable = false)
