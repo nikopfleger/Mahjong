@@ -7,6 +7,10 @@ public class CountryResponse {
 	private String nationality;
 	
 	private String code;
+	
+	public CountryResponse() {
+		
+	}
 
 	public String getName() {
 		return name;

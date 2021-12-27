@@ -1,0 +1,16 @@
+ar.org.mahjongriichiclub.be
+ar.org.mahjongriichiclub.be.constants
+ar.org.mahjongriichiclub.be.controller
+ar.org.mahjongriichiclub.be.controller.impl
+ar.org.mahjongriichiclub.be.dao
+ar.org.mahjongriichiclub.be.dto
+ar.org.mahjongriichiclub.be.enumerations
+ar.org.mahjongriichiclub.be.exception
+ar.org.mahjongriichiclub.be.generic.dao
+ar.org.mahjongriichiclub.be.generic.dto
+ar.org.mahjongriichiclub.be.generic.model
+ar.org.mahjongriichiclub.be.generic.model.response
+ar.org.mahjongriichiclub.be.generic.service
+ar.org.mahjongriichiclub.be.model
+ar.org.mahjongriichiclub.be.service
+ar.org.mahjongriichiclub.be.service.impl

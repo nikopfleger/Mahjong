@@ -7,6 +7,8 @@ public class GenericDTO<ENTITY extends AbstractEntity>{
 	private Long id;
 
 	private Boolean deleted = false;
+	
+	protected static final String DATE_PATTERN = "dd/MM/yyyy";
 
 	public Long getId() {
 		return id;

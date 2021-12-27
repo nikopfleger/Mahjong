@@ -5,6 +5,11 @@ import javax.validation.constraints.NotBlank;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Country;
 
+
+/**
+ * @author Niko
+ *
+ */
 public class CountryDTO extends GenericDTO<Country> {
 	
 	
