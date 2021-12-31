@@ -1,8 +1,10 @@
 package ar.org.mahjongriichiclub.be.dao;
 
-import ar.org.mahjongriichiclub.be.generic.dao.RepositoryDao;
+import org.springframework.stereotype.Repository;
+
+import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.model.Player;
 
-public interface PlayerDAO extends RepositoryDao<Player> {
+public interface PlayerDAO extends GenericDao<Player> {
 
 }

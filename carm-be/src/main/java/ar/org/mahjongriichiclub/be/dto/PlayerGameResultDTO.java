@@ -1,21 +1,25 @@
 package ar.org.mahjongriichiclub.be.dto;
 
 
+import com.googlecode.jmapper.annotations.JMap;
+
+import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.Wind;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.PlayerGameResult;
 
+@MappedEntity(entity = PlayerGameResult.class)
 public class PlayerGameResultDTO extends GenericDTO<PlayerGameResult> {
 	
-	
+	@JMap("score")
 	private Integer score;
-	
+	@JMap("finalScore")
 	private Integer finalScore;
-	
+	@JMap("chonbo")
 	private Integer chonbo = 0;
-	
+	@JMap("startingWind")
 	private Wind startingWind;
-	
+	@JMap("finalPosition")
 	private Integer finalPosition;
 
 	public Integer getScore() {

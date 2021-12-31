@@ -28,38 +28,23 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 
 		try {
 			if (personDTO.getCountry() == null) {
-				CountryDTO country = this.countryService.findById(personDTO.getCountry().getId(), CountryDTO.class, Country.class);
+				CountryDTO country = this.countryService.findById(Country.class, personDTO.getCountry().getId());
 				personDTO.setCountry(country);
 			}
 		} catch (ServiceException e) {
-			throw e;
+			e.printStackTrace();
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST,
 					new String[] { personDTO.getCountry().getName() });
 		}
 
-		Person person = (Person) this.convertToEntity(new Person(), personDTO);
+		Person person = (Person) this.convertToEntity(personDTO);
 
 		Person savedPerson = this.getPersonDAO().save(person);
-		PersonDTO savedPersonDTO = (PersonDTO) this.convertToDto(savedPerson, new PersonDTO());
+		PersonDTO savedPersonDTO = this.convertToDto(savedPerson);
 		return savedPersonDTO;
 	}
 	
-//	@Override
-//	public PersonDTO findById(Long id) {
-//		PersonDTO personDTO = new PersonDTO();
-//		Person person = null;
-//		
-//		person = this.getPersonDAO().findById(id).orElse(null);
-//		
-//		if (person != null) {
-//			return (PersonDTO) this.convertToDto(person, personDTO);
-//		}
-//
-//		return null;
-//	}
-
-
 	public PersonDAO getPersonDAO() {
 		return personDAO;
 	}

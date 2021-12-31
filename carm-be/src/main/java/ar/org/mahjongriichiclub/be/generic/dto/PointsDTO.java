@@ -2,6 +2,8 @@ package ar.org.mahjongriichiclub.be.generic.dto;
 
 import javax.validation.constraints.NotNull;
 
+import com.googlecode.jmapper.annotations.JMap;
+
 import ar.org.mahjongriichiclub.be.dto.GameDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 import ar.org.mahjongriichiclub.be.generic.model.Points;
@@ -9,15 +11,19 @@ import ar.org.mahjongriichiclub.be.generic.model.Points;
 public class PointsDTO<T extends Points> extends GenericDTO<Points>  {
 
 	@NotNull
+	@JMap("game")
 	private GameDTO game;
 	
 	@NotNull
+	@JMap("value")
 	private Integer value;
 	
 	@NotNull
+	@JMap("player")
 	private PlayerDTO player;
 	
 	@NotNull
+	@JMap("sanma")
 	private Boolean sanma;
 
 	public GameDTO getGame() {

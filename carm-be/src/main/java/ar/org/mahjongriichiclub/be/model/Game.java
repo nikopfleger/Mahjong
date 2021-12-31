@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
+import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
+import ar.org.mahjongriichiclub.be.dto.GameDTO;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.enumerations.GameType;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
@@ -26,6 +28,7 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @Entity
 @Table(name = "GAME")
 @SQLDelete(sql = "UPDATE GAME SET deleted = 1 WHERE id=?")
+@MappedDTO(dto = GameDTO.class)
 public class Game extends AbstractEntity {
 	
 	/**

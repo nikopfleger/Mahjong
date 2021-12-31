@@ -33,11 +33,11 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	@Autowired
 	PersonService personService;
-	
+
 	@Autowired
 	CountryService countryService;
-	
-	@Autowired	
+
+	@Autowired
 	PlayerService playerService;
 
 	/**
@@ -50,21 +50,24 @@ public class BackofficeServiceImpl implements BackofficeService {
 	@Override
 	public ResponseEntity<PersonResponse> addModifyPerson(PersonRequest person) throws ServiceException {
 		PersonResponse personResponse = new PersonResponse();
-		try {		
-			
-			PersonDTO personDTO = this.getPersonService().findById(person.getId(), PersonDTO.class, Person.class);
-			
+		try {
+			PersonDTO personDTO = null;
+
+			if (person.getId() != null) {
+				personDTO = this.getPersonService().findById(Person.class, person.getId());
+			}
+
 			if (personDTO == null) {
 				personDTO = new PersonDTO();
 			}
-			
+
 			this.fillPersonDTO(person, personDTO);
-			
+
 			PersonDTO savedPersonDTO = this.getPersonService().save(personDTO);
 			this.fillPersonResponse(personResponse, savedPersonDTO);
 
 		} catch (ServiceException e) {
-			throw e;
+			e.printStackTrace();
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.CREATE_USER,
 					new String[] { person.getNames() + " " + person.getSurnames() }, e);
@@ -106,34 +109,36 @@ public class BackofficeServiceImpl implements BackofficeService {
 	public ResponseEntity<CountryResponse> addModifyCountry(CountryRequest country) {
 		CountryResponse countryResponse = new CountryResponse();
 		try {
+			CountryDTO countryDTO = null;
 
-			CountryDTO countryDTO = this.getCountryService().findById(country.getId(), CountryDTO.class, Country.class);
-			
+			if (country.getId() != null) {
+				countryDTO = this.getCountryService().findById(Country.class, country.getId());
+			}
+
 			if (countryDTO == null) {
 				countryDTO = new CountryDTO();
 			}
-			
+
 			countryDTO.setName(country.getName());
 			countryDTO.setCode(country.getCode());
 			countryDTO.setNationality(country.getNationality());
-			
+
 			CountryDTO savedCountryDTO = this.getCountryService().save(countryDTO);
-			
+
 			countryResponse.setName(savedCountryDTO.getName());
 			countryResponse.setCode(savedCountryDTO.getCode());
 			countryResponse.setNationality(savedCountryDTO.getNationality());
-			
+
 		} catch (ServiceException e) {
-			throw(e);
+			throw e;
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATE_COUNTRY,
-					new String[] { country.getName() }, e);
+			throw new ServiceException(ServiceExceptionConstants.CREATE_COUNTRY, new String[] { country.getName() }, e);
 
 		}
 
 		return new ResponseEntity<CountryResponse>(countryResponse, HttpStatus.CREATED);
 	}
-	
+
 	/**
 	 * Llama al servicio que guarda el jugador
 	 * 
@@ -142,62 +147,68 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * 
 	 */
 	@Override
-	public ResponseEntity<PlayerResponse> addModifyPlayer(PlayerRequest player) throws ServiceException {
+	public ResponseEntity<PlayerResponse> addModifyPlayer(PlayerRequest player) {
 		PlayerResponse playerResponse = new PlayerResponse();
-		
+
 		try {
-			
-			PlayerDTO playerDTO = this.getPlayerService().findById(player.getId(), PlayerDTO.class, Player.class);
-			
+			PlayerDTO playerDTO = null;
+
+			if (player.getId() != null) {
+				playerDTO = this.getPlayerService().findById(Player.class, player.getId());
+			}
+
 			if (playerDTO == null) {
 				playerDTO = new PlayerDTO();
 			}
-			
-			playerDTO.setNickname(player.getNickname());			
 
-			
-			if (player.getPerson()  != null) {
-				
-				PersonDTO personDTO = new PersonDTO();				
-				this.fillPersonDTO(player.getPerson(), personDTO);
-				playerDTO.setPersonDTO(personDTO);
-				
+			playerDTO.setNickname(player.getNickname());
+
+			PersonDTO personDTO = null;
+			if (player.getPerson() != null) {
+				if (player.getPerson().getId() != null) {
+					personDTO = this.getPersonService().findById(Person.class, player.getPerson().getId());
+				}
+
+				if (personDTO == null) {
+					personDTO = new PersonDTO();
+					this.fillPersonDTO(player.getPerson(), personDTO);
+				}
+
+				playerDTO.setPerson(personDTO);
+
 			}
-			
+
 			PlayerDTO savedPlayerDTO = this.getPlayerService().save(playerDTO);
-			
+
 			PersonResponse personResponse = new PersonResponse();
-			
-			this.fillPersonResponse(personResponse, savedPlayerDTO.getPersonDTO());
-			
+
+			this.fillPersonResponse(personResponse, savedPlayerDTO.getPerson());
+
 			playerResponse.setPerson(personResponse);
 			playerResponse.setNickname(savedPlayerDTO.getNickname());
-			
-		} catch (ServiceException e) {
-			throw(e);
-		}
-		catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATE_PLAYER, new String[] { player.getNickname() });
+
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.CREATE_PLAYER, new String[] { player.getNickname() },
+					e);
 		}
 		return new ResponseEntity<PlayerResponse>(playerResponse, HttpStatus.CREATED);
 	}
-	
-	
+
 	/**
 	 * Llena la personaDTO
+	 * 
 	 * @param person
 	 * @param personDTO
 	 */
 	protected void fillPersonDTO(PersonRequest person, PersonDTO personDTO) throws ServiceException {
-		
-		CountryDTO countryDTO = this.getCountryService().findByCode(person.getCountryCode());		
+
+		CountryDTO countryDTO = this.getCountryService().findByCode(person.getCountryCode());
 		personDTO.setNames(person.getNames());
 		personDTO.setSurnames(person.getSurnames());
 		personDTO.setCountry(countryDTO);
 		personDTO.setBirthday(person.getBirthday());
-		
-	}
 
+	}
 
 	public PersonService getPersonService() {
 		return personService;

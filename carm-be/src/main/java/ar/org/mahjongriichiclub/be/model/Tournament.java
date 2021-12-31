@@ -19,12 +19,15 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
+import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
+import ar.org.mahjongriichiclub.be.dto.TournamentDTO;
 import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "TOURNAMENT")
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
+@MappedDTO(dto = TournamentDTO.class)
 public class Tournament extends AbstractEntity {
 
 	/**
@@ -32,9 +35,9 @@ public class Tournament extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = -5554365457117766193L;
 
-	@Column(name= "type")
+	@Column(name= "tournamentType")
 	@Enumerated(EnumType.STRING)
-	private TournamentType type;
+	private TournamentType tournamentType;
 	
 	@Column(name="startDate")
 	@Temporal(TemporalType.DATE)
@@ -51,14 +54,6 @@ public class Tournament extends AbstractEntity {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_RESULTS_FK"))
 	private List<TournamentResults> results;
-
-	public TournamentType getType() {
-		return type;
-	}
-
-	public void setType(TournamentType type) {
-		this.type = type;
-	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -90,6 +85,14 @@ public class Tournament extends AbstractEntity {
 
 	public void setResults(List<TournamentResults> results) {
 		this.results = results;
+	}
+
+	public TournamentType getTournamentType() {
+		return tournamentType;
+	}
+
+	public void setTournamentType(TournamentType tournamentType) {
+		this.tournamentType = tournamentType;
 	}
 	
 	

@@ -1,15 +1,21 @@
 package ar.org.mahjongriichiclub.be.dto;
 
+import com.googlecode.jmapper.annotations.JMap;
+
+import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.model.SeasonUma;
+
+@MappedEntity(entity = SeasonUma.class)
 public class SeasonUmaDTO extends UmaDTO {
 	
-	private SeasonDTO seasonDTO;
+	private SeasonDTO season;
 
-	public SeasonDTO getSeasonDTO() {
-		return seasonDTO;
+	public SeasonDTO getSeason() {
+		return season;
 	}
 
-	public void setSeasonDTO(SeasonDTO seasonDTO) {
-		this.seasonDTO = seasonDTO;
+	public void setSeason(SeasonDTO season) {
+		this.season = season;
 	}
 
 }

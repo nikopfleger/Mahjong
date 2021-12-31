@@ -1,7 +1,5 @@
 package ar.org.mahjongriichiclub.be.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,24 +19,29 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 
 	@Override
 	public CountryDTO save(CountryDTO countryDTO) {
-		Country country = (Country) this.convertToEntity(new Country(), countryDTO);
+		Country savedCountry = null;
+		Country country = (Country) this.convertToEntity(countryDTO);
+		try {
+			savedCountry = this.getCountryDao().save(country);
+		} catch (Exception e) {
+			throw new ServiceException("No se pudo persistir el pais",e);
+		}
+		
 
-		Country savedCountry = this.getCountryDao().save(country);
-
-		return (CountryDTO) this.convertToDto(savedCountry, new CountryDTO());
+		return this.convertToDto(savedCountry);
 	}
 
 	@Override
 	public CountryDTO findByCode(String code) {
-		CountryDTO countryDTO = new CountryDTO();
 		Country country;
 
 		try {
 			country = this.getCountryDao().findByCode(code);
+
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST, new String[] { code }, e);
 		}
-		return (CountryDTO) this.convertToDto(country, countryDTO);
+		return this.convertToDto(country);
 	}
 
 

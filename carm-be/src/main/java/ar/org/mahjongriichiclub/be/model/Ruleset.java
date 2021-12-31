@@ -12,12 +12,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
+import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
+import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "RULESET")
 @SQLDelete(sql = "UPDATE RULESET SET deleted = 1 WHERE id=?")
+@MappedDTO(dto = RulesetDTO.class)
 public class Ruleset extends AbstractEntity {
 
 	/**

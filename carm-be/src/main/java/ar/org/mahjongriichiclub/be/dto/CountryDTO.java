@@ -2,6 +2,9 @@ package ar.org.mahjongriichiclub.be.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import com.googlecode.jmapper.annotations.JMap;
+
+import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Country;
 
@@ -10,16 +13,20 @@ import ar.org.mahjongriichiclub.be.model.Country;
  * @author Niko
  *
  */
+@MappedEntity(entity = Country.class)
 public class CountryDTO extends GenericDTO<Country> {
 	
 	
 	@NotBlank
+	@JMap("name")
 	private String name;
 	
 	@NotBlank
+	@JMap("nationality")
 	private String nationality;
 	
 	@NotBlank
+	@JMap("code")
 	private String code;
 
 	public String getName() {

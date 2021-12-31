@@ -10,11 +10,14 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
+import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
+import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "SEASON")
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
+@MappedDTO(dto = SeasonDTO.class)
 public class Season extends AbstractEntity {
 
 	/**

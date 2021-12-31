@@ -6,11 +6,16 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
+import com.googlecode.jmapper.annotations.JMap;
+
+import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
+import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name="country")
 @SQLDelete(sql = "UPDATE country SET deleted = 1 WHERE id=?")
+@MappedDTO(dto = CountryDTO.class)
 public class Country extends AbstractEntity {
 	
 	private static final long serialVersionUID = -6916237663098795305L;

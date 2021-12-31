@@ -20,28 +20,28 @@ public class LocalizedException extends RuntimeException {
 		super();
 	}
 	
+	public LocalizedException(Throwable cause) {
+		super(cause);
+	}
+	
 	public LocalizedException(String messageKey) {
 		super(messageKey);
 	}
-
+	
+	public LocalizedException(String messageKey, Throwable cause) {
+		super(messageKey, cause);
+	}
+	
 	public LocalizedException(String messageKey, String[] params) {
 		super(messageKey);
 		this.params = params;
 		this.messageKey = messageKey;
 	}
 
-	public LocalizedException(String messageKey, Throwable cause) {
-		super(messageKey, cause);
-	}
-
 	public LocalizedException(String messageKey, String[] params, Throwable cause) {
 		super(messageKey, cause);
 		this.params = params;
 		this.messageKey = messageKey;
-	}
-
-	public LocalizedException(Throwable cause) {
-		super(cause);
 	}
 
 	@Override
@@ -52,12 +52,13 @@ public class LocalizedException extends RuntimeException {
 			
 			return MessageFormat.format(resource,params);
 		}
-		return Messages.getMessageForLocale(messageKey, Locale.getDefault());
+		String returnMessage = Messages.getMessageForLocale(messageKey, Locale.getDefault());
+		return returnMessage == null?"ERROR":returnMessage;
 	}
 	
 	@Override
 	public String getMessage() {
-		return getLocalizedMessage();
+		return getLocalizedMessage()==null?"ERROR":getLocalizedMessage();
 	}
 
 	@Override

@@ -4,7 +4,6 @@ package ar.org.mahjongriichiclub.be;
 
 import java.util.Locale;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +19,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 public class CarmConfiguration implements WebMvcConfigurer {
-	
-	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
-	}
 	
 	@Bean
 	public MessageSource messageSource() {

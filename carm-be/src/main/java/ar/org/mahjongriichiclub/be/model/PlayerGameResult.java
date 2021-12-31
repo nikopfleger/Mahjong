@@ -9,12 +9,15 @@ import javax.validation.constraints.Max;
 
 import org.hibernate.annotations.SQLDelete;
 
+import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
+import ar.org.mahjongriichiclub.be.dto.PlayerGameResultDTO;
 import ar.org.mahjongriichiclub.be.enumerations.Wind;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "PLAYER_GAME_RESULT")
 @SQLDelete(sql = "UPDATE PLAYER_GAME_RESULT SET deleted = 1 WHERE id=?")
+@MappedDTO(dto = PlayerGameResultDTO.class)
 public class PlayerGameResult extends AbstractEntity {
 	
 	/**

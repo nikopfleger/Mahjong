@@ -1,6 +1,8 @@
 package ar.org.mahjongriichiclub.be.dao;
 
-import ar.org.mahjongriichiclub.be.generic.dao.RepositoryDao;
+import org.springframework.stereotype.Repository;
+
+import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.model.Person;
 
 
@@ -8,6 +10,7 @@ import ar.org.mahjongriichiclub.be.model.Person;
  * @author Niko
  *
  */
-public interface PersonDAO extends RepositoryDao<Person> {
+
+public interface PersonDAO extends GenericDao<Person> {
 
 }
