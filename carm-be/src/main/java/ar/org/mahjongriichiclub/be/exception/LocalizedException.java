@@ -2,7 +2,6 @@ package ar.org.mahjongriichiclub.be.exception;
 
 import java.text.MessageFormat;
 import java.util.Locale;
-import java.util.Map;
 
 public class LocalizedException extends RuntimeException {
 
@@ -20,13 +19,23 @@ public class LocalizedException extends RuntimeException {
 	public LocalizedException() {
 		super();
 	}
-
+	
 	public LocalizedException(String messageKey) {
 		super(messageKey);
 	}
 
 	public LocalizedException(String messageKey, String[] params) {
 		super(messageKey);
+		this.params = params;
+		this.messageKey = messageKey;
+	}
+
+	public LocalizedException(String messageKey, Throwable cause) {
+		super(messageKey, cause);
+	}
+
+	public LocalizedException(String messageKey, String[] params, Throwable cause) {
+		super(messageKey, cause);
 		this.params = params;
 		this.messageKey = messageKey;
 	}

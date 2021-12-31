@@ -1,7 +1,9 @@
 package ar.org.mahjongriichiclub.be.dto;
 
+import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
+import ar.org.mahjongriichiclub.be.model.TournamentResults;
 
-public class TournamentResultsDTO {
+public class TournamentResultsDTO extends GenericDTO<TournamentResults> {
 
 	private PlayerDTO player;
 	

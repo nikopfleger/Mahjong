@@ -7,8 +7,10 @@ import javax.validation.constraints.NotNull;
 
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.enumerations.GameType;
+import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
+import ar.org.mahjongriichiclub.be.model.Game;
 
-public class GameDTO {
+public class GameDTO extends GenericDTO<Game> { 
 	
 	@NotNull
 	private GameType gameType;

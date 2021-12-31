@@ -12,13 +12,18 @@ import ar.org.mahjongriichiclub.be.model.Player;
 @MappedSuperclass
 public abstract class Points extends AbstractEntity {
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -283687870708353098L;
+
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Game game;
 	
 	@Column(name = "VALUE", nullable=false)
 	private Integer value;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Player player;
 	
 	@Column(name="SANMA", nullable=false)

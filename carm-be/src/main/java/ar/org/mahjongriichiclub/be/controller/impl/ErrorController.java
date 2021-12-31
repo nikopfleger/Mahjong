@@ -2,9 +2,7 @@ package ar.org.mahjongriichiclub.be.controller.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +32,6 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 	@ExceptionHandler({ Throwable.class })
 	public ResponseEntity<Object> handleException(Throwable ex, WebRequest request) throws IOException {
 		LogManager.getLogger(getClass()).error("Error on request \n" + request.toString(), ex);
-		List<String> errors = new ArrayList<String>();
 
 		if (HttpClientErrorException.class.isAssignableFrom(ex.getClass())) {
 			Object o = om.readValue(((RestClientResponseException) ex).getResponseBodyAsString(), Object.class);

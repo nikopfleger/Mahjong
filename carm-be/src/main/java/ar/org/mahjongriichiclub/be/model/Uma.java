@@ -13,6 +13,11 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE UMA SET deleted = 1 WHERE id=?")
 public class Uma extends AbstractEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8185788084639680842L;
+
 	@Column(name="first_place", nullable = false)
 	private Integer firstPlace;
 	

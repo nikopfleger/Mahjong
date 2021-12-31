@@ -87,6 +87,14 @@ public class PlayerDTO extends GenericDTO<Player> {
 	public void setPlayerPoints(List<DanPointsDTO> playerPoints) {
 		this.playerPoints = playerPoints;
 	}
+
+	public List<PlayerAccountDTO> getPlayerAccounts() {
+		return playerAccounts;
+	}
+
+	public void setPlayerAccounts(List<PlayerAccountDTO> playerAccounts) {
+		this.playerAccounts = playerAccounts;
+	}
 	
 	
 

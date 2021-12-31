@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 import org.hibernate.annotations.SQLDelete;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -21,21 +22,25 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @Table(name="person")
 @SQLDelete(sql = "UPDATE person SET deleted = 1 WHERE id=?")
 public class Person extends AbstractEntity {
-	
 
-	@Column(name = "NAMES")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -455194059427307438L;
+
+	@Column(name = "ALL_NAMES")
 	private String names;
 	
 	@Column(name = "SURNAMES")
 	private String surnames;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Country country;
 	
-	@Column(name = "birthday")
+	@Column(name = "BIRTHDAY")
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="dd/MM/yyyy")
-	private Date birthday;
+	private Date birthday;	
 
 	public String getNames() {
 		return names;

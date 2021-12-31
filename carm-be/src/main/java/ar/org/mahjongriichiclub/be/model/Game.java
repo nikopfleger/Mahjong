@@ -21,7 +21,6 @@ import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.enumerations.GameType;
-import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
@@ -29,6 +28,11 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE GAME SET deleted = 1 WHERE id=?")
 public class Game extends AbstractEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6207654534713862278L;
+
 	@Column(name="GAME_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private GameType gameType;

@@ -1,6 +1,7 @@
 package ar.org.mahjongriichiclub.be.generic.model;
 
 import java.io.Serializable;
+import java.lang.StackWalker.Option;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,10 +9,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements PersistentObject, Serializable {
-
+	
+	@Transient
+	protected final Logger logger = LogManager.getLogger(getClass());
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -24,13 +37,21 @@ public abstract class AbstractEntity implements PersistentObject, Serializable {
 
 	@Column(name = "CREATED_BY", updatable = false)
 	private String createdBy;
+	
 	@Column(name = "CREATED", updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm:ss")
 	private Date created;
 
 	@Column(name = "UPDATED_BY")
 	private String updatedBy;
+	
 	@Column(name = "UPDATED")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="dd/MM/yyyy hh:mm:ss")
 	private Date updated;	
+	
+
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -55,6 +76,23 @@ public abstract class AbstractEntity implements PersistentObject, Serializable {
 		super();
 	}
 
+	@PrePersist
+	public void prePersist() {
+		Class<?> clazz = StackWalker.getInstance(Option.RETAIN_CLASS_REFERENCE).getCallerClass();
+
+		logger.info("Attempting to add new entity " + clazz.toString());
+		this.setCreated(new Date());
+		this.setCreatedBy("ADMIN");
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		Class<?> clazz = StackWalker.getInstance(Option.RETAIN_CLASS_REFERENCE).getCallerClass();
+		
+		logger.info("Attempting to update id " + this.getId() + " of entity " + clazz.toString());
+		this.setUpdated(new Date());
+		this.setUpdatedBy("ADMIN");
+	}
 
 
 	/**
@@ -129,9 +167,6 @@ public abstract class AbstractEntity implements PersistentObject, Serializable {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
-	
-	
 	
 
 }

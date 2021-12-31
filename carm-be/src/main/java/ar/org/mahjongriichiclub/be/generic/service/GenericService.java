@@ -12,4 +12,7 @@ public interface GenericService<ENTITY extends AbstractEntity, DTO extends Gener
 	
 	@Transactional(readOnly = false)
 	Object convertToEntity(ENTITY entity, DTO dto);
+	
+	@Transactional(readOnly = true)
+	public DTO findById(Long id, Class<DTO> dtoClass, Class<ENTITY> entityClass) throws Exception;
 }

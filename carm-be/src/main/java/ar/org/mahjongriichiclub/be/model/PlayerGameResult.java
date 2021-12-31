@@ -17,6 +17,10 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE PLAYER_GAME_RESULT SET deleted = 1 WHERE id=?")
 public class PlayerGameResult extends AbstractEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6332843877588114705L;
 	private static final long PRIMERA_POSICION = 1L;
 	private static final long ULTIMA_POSICION = 4L;
 

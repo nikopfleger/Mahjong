@@ -12,12 +12,7 @@ import ar.org.mahjongriichiclub.be.model.Person;
  */
 public interface PersonService extends GenericService<Person,PersonDTO> {
 
-	/**
-	 * Guarda la persona
-	 * 
-	 * @params person
-	 * @return PersonDTO
-	 */
 	@Transactional(readOnly = false)
-	public PersonDTO save(PersonDTO person);
+	public PersonDTO save(PersonDTO personDTO);
+
 }

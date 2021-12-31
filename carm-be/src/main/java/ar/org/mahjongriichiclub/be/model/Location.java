@@ -16,6 +16,11 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE LOCATION SET deleted = 1 WHERE id=?")
 public class Location extends AbstractEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6553515250454392026L;
+
 	@Column(name="NAME")
 	private String name;
 	

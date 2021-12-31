@@ -20,6 +20,11 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE RULESET SET deleted = 1 WHERE id=?")
 public class Ruleset extends AbstractEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 679781809336256419L;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UMA_ID", foreignKey = @ForeignKey(name = "RULESET_UMA_FK"))
 	private Uma uma;

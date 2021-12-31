@@ -17,6 +17,11 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
 public class Season extends AbstractEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -842700794019813783L;
+
 	@Column(name="SEASON_NUMBER" , nullable = false)
 	private Integer number;
 	

@@ -1,7 +1,6 @@
 package ar.org.mahjongriichiclub.be.model;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,6 +26,11 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @Table(name = "TOURNAMENT")
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
 public class Tournament extends AbstractEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5554365457117766193L;
 
 	@Column(name= "type")
 	@Enumerated(EnumType.STRING)
