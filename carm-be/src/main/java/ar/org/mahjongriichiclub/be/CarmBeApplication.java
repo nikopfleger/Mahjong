@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CarmBeApplication {
+	
+
 
 	public static void main(String[] args) {
 		Logger logger = LogManager.getRootLogger();

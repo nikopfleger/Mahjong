@@ -38,10 +38,10 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 					new String[] { personDTO.getCountry().getName() });
 		}
 
-		Person person = (Person) this.convertToEntity(personDTO);
+		Person person = (Person) this.toEntity(personDTO);
 
 		Person savedPerson = this.getPersonDAO().save(person);
-		PersonDTO savedPersonDTO = this.convertToDto(savedPerson);
+		PersonDTO savedPersonDTO = this.toDTO(savedPerson);
 		return savedPersonDTO;
 	}
 	

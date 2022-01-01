@@ -10,10 +10,10 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 public interface GenericService<ENTITY extends AbstractEntity, DTO extends GenericDTO<ENTITY>> {
 	
 	@Transactional(readOnly = false)
-	ENTITY convertToEntity(DTO dto);
+	ENTITY toEntity(DTO dto);
 	
 	@Transactional(readOnly = false)
-	DTO convertToDto(ENTITY entity) throws Exception;
+	DTO toDTO(ENTITY entity) throws Exception;
 	
 	@Transactional(readOnly = false)
 	List<DTO> findAll();
@@ -21,9 +21,9 @@ public interface GenericService<ENTITY extends AbstractEntity, DTO extends Gener
 	@Transactional(readOnly = true)
 	public DTO findById(Class<ENTITY> entityClass, Long id) throws Exception;
 
-	public Class<?> findDTOClass(Class<? extends AbstractEntity> clazz);
+	public Class<ENTITY> findEntityClass(Class<DTO> clazz);
 
-	public Class<?> findEntityClass(Class<DTO> clazz);
+	public Class<DTO> findDTOClass(Class<ENTITY> clazz);
 
 
 

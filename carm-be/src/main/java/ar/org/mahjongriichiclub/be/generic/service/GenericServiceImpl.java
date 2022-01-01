@@ -8,24 +8,24 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.googlecode.jmapper.JMapper;
-
 import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
-import ar.org.mahjongriichiclub.be.dto.PersonDTO;
-import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
-import ar.org.mahjongriichiclub.be.model.Person;
+import ma.glasnost.orika.BoundMapperFacade;
+import ma.glasnost.orika.MapperFactory;
+
 
 @Service("genericService")
 public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends GenericDTO<ENTITY>>
 		implements GenericService<ENTITY, DTO> {
 
-
 	@Autowired
 	private GenericDao<ENTITY> genericDao;
+
+	@Autowired
+	private MapperFactory mapperFactory;
 
 	public DTO findById(Class<ENTITY> entityClass, Long id) throws Exception {
 
@@ -33,7 +33,7 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 
 		ENTITY entity = this.getGenericDao().findById(id).orElse(null);
 
-		return entity != null ? this.convertToDto(entity) : null;
+		return entity != null ? this.toDTO(entity) : null;
 
 	}
 
@@ -42,7 +42,7 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 		List<ENTITY> entityResult = this.getGenericDao().findAll();
 		List<DTO> dtoResult = new ArrayList<>();
 		for (ENTITY entity : entityResult) {
-			DTO dtoObject = this.convertToDto(entity);
+			DTO dtoObject = this.toDTO(entity);
 			dtoResult.add(dtoObject);
 		}
 
@@ -50,18 +50,27 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 	}
 
 	@Override
-	public Class<?> findDTOClass(Class<? extends AbstractEntity> clazz) {
+	public Class<DTO> findDTOClass(Class<ENTITY> clazz) {
 		return clazz.getAnnotation(MappedDTO.class).dto();
 	}
-	
+
 	@Override
-	public Class<?> findEntityClass(Class<DTO> clazz) {
+	public Class<ENTITY> findEntityClass(Class<DTO> clazz) {
 		return clazz.getAnnotation(MappedEntity.class).entity();
 	}
 
+	public BoundMapperFacade<ENTITY, DTO> findOrCreateMap(Class<?> entity, Class<?> dto) {
+		BoundMapperFacade<ENTITY, DTO> boundMapperFacade = (BoundMapperFacade<ENTITY, DTO>) mapperFactory
+				.getMapperFacade(entity, dto);
+		if (boundMapperFacade == null) {
+			mapperFactory.classMap(entity, dto);
+			boundMapperFacade = (BoundMapperFacade<ENTITY, DTO>) mapperFactory.getMapperFacade(entity, dto);
+		}
+		return boundMapperFacade;
+	}
 
 	@Override
-	public DTO convertToDto(ENTITY entity) {
+	public DTO toDTO(ENTITY entity) {
 
 		if (entity == null) {
 			return null;
@@ -69,31 +78,21 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 			entity = (ENTITY) Hibernate.unproxy(entity);
 		}
 
-		Class<?> dtoClass = this.findDTOClass(entity.getClass());
-		Class<?> entityClass = entity.getClass();
+		Class<ENTITY> entityClass = (Class<ENTITY>) entity.getClass();
+		Class<DTO> dtoClass = this.findDTOClass(entityClass);
 
-		DTO dto = null;
-		try {
-			dto = (DTO) dtoClass.getDeclaredConstructor().newInstance();
-			JMapper<DTO, ENTITY> entityMapper = (JMapper<DTO,ENTITY>) new JMapper(dtoClass, entityClass);
+		BoundMapperFacade<ENTITY, DTO> boundMapper = this.findOrCreateMap(entityClass, dtoClass);
 
-			dto = entityMapper.getDestination(entity);
-			// dto = (DTO) modelMapper.map(entity, dto.getClass());
-		} catch (Exception e) {
-			throw new ServiceException("Error al instanciar el DTO");
-		}
-
-		return dto;
+		return boundMapper.map(entity);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public ENTITY convertToEntity(DTO dto) {
+	public ENTITY toEntity(DTO dto) {
 		Class<DTO> dtoClass = (Class<DTO>) dto.getClass();
-		Class<ENTITY> entityClass = (Class<ENTITY>) this.findEntityClass(dtoClass);
-		JMapper<ENTITY, DTO> dtoMapper = (JMapper<ENTITY,DTO>) new JMapper(entityClass, dtoClass);
-//		return modelMapper.map(dto, dto.getType());
-		return dtoMapper.getDestinationWithoutControl(dto);
+		Class<ENTITY> entityClass = this.findEntityClass(dtoClass);
+
+		BoundMapperFacade<ENTITY, DTO> boundMapper = this.findOrCreateMap(entityClass, dtoClass);
+		return boundMapper.mapReverse(dto);
 	}
 
 	public GenericDao<ENTITY> getGenericDao() {
@@ -103,6 +102,5 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 	public void setGenericDao(GenericDao<ENTITY> genericDao) {
 		this.genericDao = genericDao;
 	}
-
 
 }

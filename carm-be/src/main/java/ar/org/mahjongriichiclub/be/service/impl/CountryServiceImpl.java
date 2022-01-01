@@ -20,15 +20,15 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 	@Override
 	public CountryDTO save(CountryDTO countryDTO) {
 		Country savedCountry = null;
-		Country country = (Country) this.convertToEntity(countryDTO);
+		Country country = (Country) this.toEntity(countryDTO);
 		try {
 			savedCountry = this.getCountryDao().save(country);
 		} catch (Exception e) {
-			throw new ServiceException("No se pudo persistir el pais",e);
+			e.printStackTrace();
 		}
 		
 
-		return this.convertToDto(savedCountry);
+		return this.toDTO(savedCountry);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST, new String[] { code }, e);
 		}
-		return this.convertToDto(country);
+		return this.toDTO(country);
 	}
 
 

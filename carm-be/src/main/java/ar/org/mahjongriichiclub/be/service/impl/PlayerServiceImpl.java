@@ -19,10 +19,10 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 	@Override
 	public PlayerDTO save(PlayerDTO playerDTO) throws ServiceException {
 
-		Player player = (Player) this.convertToEntity(playerDTO);
+		Player player = (Player) this.toEntity(playerDTO);
 
 		Player savedPlayer = this.getPlayerDAO().save(player);
-		PlayerDTO savedPlayerDTO = this.convertToDto(savedPlayer);
+		PlayerDTO savedPlayerDTO = this.toDTO(savedPlayer);
 		return savedPlayerDTO;
 	}
 

@@ -18,31 +18,6 @@ public class GenericDTO<ENTITY extends AbstractEntity>{
 	
 	public static final String DATE_PATTERN = "dd/MM/yyyy";
 	
-	public Class<ENTITY> getType() {
-		try {
-			MappedEntity mEntity = getClass().getAnnotation(MappedEntity.class);
-			if (mEntity != null) {
-				return mEntity.entity();
-			}
-
-			ParameterizedType paramClass = null;
-			Class superClass = getClass();
-			while (!superClass.equals(Object.class)
-					&& !(superClass.getGenericSuperclass() instanceof ParameterizedType)) {
-				superClass = superClass.getSuperclass();
-			}
-
-			if (superClass.getGenericSuperclass() instanceof ParameterizedType) {
-				paramClass = (ParameterizedType) superClass.getGenericSuperclass();
-			} else {
-				throw new LocalizedException("Error al mapear DTO");
-			}
-			Class type = (Class) paramClass.getActualTypeArguments()[0];
-			return type;
-		} catch (Exception e) {
-			throw new LocalizedException("Error al mapear DTO");
-		}
-	}
 
 	public Long getId() {
 		return id;

@@ -15,6 +15,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
+
 
 
 @Configuration
@@ -28,6 +31,11 @@ public class CarmConfiguration implements WebMvcConfigurer {
 	    messageSource.setBasename("classpath:messages");
 	    messageSource.setDefaultEncoding("UTF-8");
 	    return messageSource;
+	}
+	
+	@Bean
+	public MapperFactory mapperFactory() {
+		return new DefaultMapperFactory.Builder().build();
 	}
 	
 	@Bean
