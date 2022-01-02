@@ -49,7 +49,6 @@ public class PlayerGameResult extends AbstractEntity {
 	@Max(ULTIMA_POSICION)
 	private Integer finalPosition;
 	
-	@Column(name="PLAYER", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Player player;
 
