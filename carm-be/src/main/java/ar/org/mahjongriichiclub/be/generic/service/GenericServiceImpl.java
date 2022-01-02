@@ -10,6 +10,8 @@ import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.BiMap;
+
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
@@ -30,7 +32,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 	private MapperFactory mapperFactory;
 	
 	@Autowired
-	private HashMap<Class<?>, Class<?>> entityDTORelationship;
+	private BiMap<Class<?>, Class<?>> entityDTORelationship;
 
 	public D findById(Long id) throws Exception {
 
@@ -71,12 +73,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 	@Override
 	public Class<E> findEntityClass(Class<D> clazz) {
-		for (Map.Entry<Class<?>, Class<?>> e : entityDTORelationship.entrySet()) {
-			if (e.getValue().equals(clazz)) {
-				return (Class<E>) e.getKey();
-			}
-		}
-		return null;
+		return (Class<E>) this.getEntityDTORelationship().inverse().get(clazz);
 	}
 
 	@Override
@@ -119,11 +116,11 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		this.genericDao = genericDao;
 	}
 
-	public HashMap<Class<?>, Class<?>> getEntityDTORelationship() {
+	public BiMap<Class<?>, Class<?>> getEntityDTORelationship() {
 		return entityDTORelationship;
 	}
 
-	public void setEntityDTORelationship(HashMap<Class<?>, Class<?>> entityDTORelationship) {
+	public void setEntityDTORelationship(BiMap<Class<?>, Class<?>> entityDTORelationship) {
 		this.entityDTORelationship = entityDTORelationship;
 	}
 

@@ -19,6 +19,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ma.glasnost.orika.MapperFactory;
@@ -39,7 +41,7 @@ public class CarmConfiguration implements WebMvcConfigurer {
 	}
 	
 	@Bean
-	public HashMap<Class<?>, Class<?>> entityDTORelationship() {
+	public BiMap<Class<?>, Class<?>> entityDTORelationship() {
 		
 		HashMap<Class<?>, Class<?>> entityDTORelationship = new HashMap<>();
 		
@@ -52,7 +54,7 @@ public class CarmConfiguration implements WebMvcConfigurer {
 			entityDTORelationship.put(entity, dto);
 		}
 		
-		return entityDTORelationship;
+		return HashBiMap.create(entityDTORelationship);
 	}
 
 	@Bean
@@ -60,10 +62,9 @@ public class CarmConfiguration implements WebMvcConfigurer {
 		
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 	
-		HashMap<Class<?>, Class<?>> entityDTORelationship = entityDTORelationship();
+		BiMap<Class<?>, Class<?>> entityDTORelationship = entityDTORelationship();
 
 		for (Map.Entry<Class<?>, Class<?>> e : entityDTORelationship.entrySet()) {
-
 		    mapperFactory.classMap(e.getKey(), e.getValue());
 		    String message = "MapperFactory: Mapping entity=" + e.getKey().getSimpleName() + " with dto=" + e.getValue().getSimpleName();
 		    logger.info(message);
