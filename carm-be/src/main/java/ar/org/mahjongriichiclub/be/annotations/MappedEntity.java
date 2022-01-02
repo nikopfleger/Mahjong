@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface MappedEntity {
 	
+	@SuppressWarnings("rawtypes")
 	public Class entity();
 
 }

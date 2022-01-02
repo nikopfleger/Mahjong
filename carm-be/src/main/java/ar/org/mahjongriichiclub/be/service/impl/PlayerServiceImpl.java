@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import ar.org.mahjongriichiclub.be.dao.PlayerDAO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
-import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.GenericServiceImpl;
 import ar.org.mahjongriichiclub.be.model.Player;
 import ar.org.mahjongriichiclub.be.service.PlayerService;

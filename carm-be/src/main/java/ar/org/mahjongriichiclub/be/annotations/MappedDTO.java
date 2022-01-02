@@ -9,5 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target(TYPE)
 public @interface MappedDTO {
+	@SuppressWarnings("rawtypes")
 	public Class dto();
 }

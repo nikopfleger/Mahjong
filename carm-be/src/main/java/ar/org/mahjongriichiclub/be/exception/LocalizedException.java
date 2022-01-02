@@ -45,6 +45,7 @@ public class LocalizedException extends RuntimeException {
 	}
 
 	@Override
+	@SuppressWarnings("all")
 	public String getLocalizedMessage() {
 		
 		if (params != null && params.length > 0) {

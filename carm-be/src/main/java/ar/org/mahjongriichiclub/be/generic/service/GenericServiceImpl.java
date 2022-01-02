@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
-import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
-import ar.org.mahjongriichiclub.be.model.Country;
 import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
 
@@ -62,20 +60,24 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 		return dtoResult;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<DTO> findDTOClass(Class<ENTITY> clazz) {
 		return clazz.getAnnotation(MappedDTO.class).dto();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<ENTITY> findEntityClass(Class<DTO> clazz) {
 		return clazz.getAnnotation(MappedEntity.class).entity();
 	}
 
+	@SuppressWarnings("unchecked")
 	public BoundMapperFacade<ENTITY, DTO> findOrCreateMap(Class<?> entity, Class<?> dto) {
 		return (BoundMapperFacade<ENTITY, DTO>) mapperFactory.getMapperFacade(entity, dto);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public DTO toDTO(ENTITY entity) {
 
@@ -93,6 +95,7 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 		return boundMapper.map(entity);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ENTITY toEntity(DTO dto) {
 		

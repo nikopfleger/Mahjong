@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.generic.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
