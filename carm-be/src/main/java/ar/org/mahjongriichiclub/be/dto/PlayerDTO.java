@@ -6,14 +6,12 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.googlecode.jmapper.annotations.JMap;
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Player;
 
 @MappedEntity(entity = Player.class)
-public class PlayerDTO extends GenericDTO<Player> {
+public class PlayerDTO extends GenericDTO {
 	
 	@NotNull
 	PersonDTO person;
@@ -21,7 +19,6 @@ public class PlayerDTO extends GenericDTO<Player> {
 	private List<PlayerAccountDTO> playerAccounts;
 	
 	@NotBlank
-	@JMap("nickname")
 	private String nickname;
 	
 	@Transient
@@ -33,10 +30,8 @@ public class PlayerDTO extends GenericDTO<Player> {
 	@Transient
 	private Integer minRate;
 	
-	@JMap("playerRates")
 	private List<RateDTO> playerRates;
 	
-	@JMap("playerPoints")
 	private List<DanPointsDTO> playerPoints;
 
 	public PersonDTO getPerson() {

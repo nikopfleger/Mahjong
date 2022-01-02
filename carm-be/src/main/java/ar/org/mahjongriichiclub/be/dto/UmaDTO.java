@@ -1,25 +1,21 @@
 package ar.org.mahjongriichiclub.be.dto;
 
 
-import com.googlecode.jmapper.annotations.JMap;
+
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Uma;
 
 @MappedEntity(entity = Uma.class)
-public class UmaDTO extends GenericDTO<Uma> {
+public class UmaDTO extends GenericDTO {
 
-	@JMap("firstPlace")
 	private Integer firstPlace;
 	
-	@JMap("secondPlace")
 	private Integer secondPlace;
-	
-	@JMap("thirdPlace")
+
 	private Integer thirdPlace;
 	
-	@JMap("fourthPlace")
 	private Integer fourthPlace;
 
 	public Integer getFirstPlace() {

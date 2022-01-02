@@ -3,28 +3,22 @@ package ar.org.mahjongriichiclub.be.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.googlecode.jmapper.annotations.JMap;
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Tournament;
 
 @MappedEntity(entity = Tournament.class)
-public class TournamentDTO extends GenericDTO<Tournament> { 
+public class TournamentDTO extends GenericDTO { 
 
-	@JMap("tournamentType")
 	private TournamentType tournamentType;
 	
-	@JMap("startDate")
 	private Date startDate;
 	
-	@JMap("endDate")
 	private Date endDate;	
 	
 	private SeasonDTO season;	
 
-	@JMap("results")
 	private List<TournamentResultsDTO> results;
 
 	public Date getStartDate() {

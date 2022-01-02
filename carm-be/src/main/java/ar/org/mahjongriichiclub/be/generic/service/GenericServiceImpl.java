@@ -18,7 +18,7 @@ import ma.glasnost.orika.MapperFactory;
 
 
 @Service("genericService")
-public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends GenericDTO<ENTITY>>
+public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends GenericDTO>
 		implements GenericService<ENTITY, DTO> {
 
 	@Autowired
@@ -28,8 +28,6 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 	private MapperFactory mapperFactory;
 
 	public DTO findById(Class<ENTITY> entityClass, Long id) throws Exception {
-
-		DTO dto = (DTO) this.findDTOClass(entityClass).getDeclaredConstructor().newInstance();
 
 		ENTITY entity = this.getGenericDao().findById(id).orElse(null);
 
@@ -60,13 +58,7 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 	}
 
 	public BoundMapperFacade<ENTITY, DTO> findOrCreateMap(Class<?> entity, Class<?> dto) {
-		BoundMapperFacade<ENTITY, DTO> boundMapperFacade = (BoundMapperFacade<ENTITY, DTO>) mapperFactory
-				.getMapperFacade(entity, dto);
-		if (boundMapperFacade == null) {
-			mapperFactory.classMap(entity, dto);
-			boundMapperFacade = (BoundMapperFacade<ENTITY, DTO>) mapperFactory.getMapperFacade(entity, dto);
-		}
-		return boundMapperFacade;
+		return (BoundMapperFacade<ENTITY, DTO>) mapperFactory.getMapperFacade(entity, dto);
 	}
 
 	@Override
@@ -88,6 +80,7 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 
 	@Override
 	public ENTITY toEntity(DTO dto) {
+		
 		Class<DTO> dtoClass = (Class<DTO>) dto.getClass();
 		Class<ENTITY> entityClass = this.findEntityClass(dtoClass);
 

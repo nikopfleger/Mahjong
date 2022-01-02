@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.googlecode.jmapper.annotations.JMap;
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.enumerations.GameType;
@@ -14,22 +12,18 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Game;
 
 @MappedEntity(entity = Game.class)
-public class GameDTO extends GenericDTO<Game> { 
+public class GameDTO extends GenericDTO { 
 	
 	@NotNull
-	@JMap("gameType")
 	private GameType gameType;
 	
 	@NotNull
-	@JMap("gameLength")
 	private GameLength gameLength;
 	
 	@NotNull
-	@JMap("datePlayed")
 	private Date datePlayed;
 	
 	@NotNull
-	@JMap("results")
 	private List<PlayerGameResultDTO> results;
 	
 	private LocationDTO location;

@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-import com.googlecode.jmapper.annotations.JMap;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.model.SeasonUma;

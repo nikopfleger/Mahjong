@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-import com.googlecode.jmapper.annotations.JMap;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
@@ -8,35 +7,26 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Ruleset;
 
 @MappedEntity(entity = Ruleset.class)
-public class RulesetDTO extends GenericDTO<Ruleset> {
+public class RulesetDTO extends GenericDTO {
 
 	private UmaDTO uma;
 
-	@JMap("oka")
 	private Integer oka;
 	
-	@JMap("chonbo")
 	private Integer chonbo;
 	
-	@JMap("gameType")
 	private GameLength gameType;
 	
-	@JMap("aka")
 	private Boolean aka;
 	
-	@JMap("inPoints")
 	private Integer inPoints;
 	
-	@JMap("outPoints")
 	private Integer outPoints;
-	
-	@JMap("suddenDeath")
+
 	private Boolean suddenDeath;
-	
-	@JMap("sanma")
+
 	private Boolean sanma;
-	
-	@JMap("rounding")
+
 	private Boolean rounding;
 
 	public UmaDTO getUma() {

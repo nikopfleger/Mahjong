@@ -18,7 +18,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.googlecode.jmapper.annotations.JMap;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements PersistentObject, Serializable {

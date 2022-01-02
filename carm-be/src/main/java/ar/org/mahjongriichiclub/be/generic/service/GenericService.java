@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
-public interface GenericService<ENTITY extends AbstractEntity, DTO extends GenericDTO<ENTITY>> {
+public interface GenericService<ENTITY extends AbstractEntity, DTO extends GenericDTO> {
 	
 	@Transactional(readOnly = false)
 	ENTITY toEntity(DTO dto);
@@ -24,6 +24,7 @@ public interface GenericService<ENTITY extends AbstractEntity, DTO extends Gener
 	public Class<ENTITY> findEntityClass(Class<DTO> clazz);
 
 	public Class<DTO> findDTOClass(Class<ENTITY> clazz);
+
 
 
 

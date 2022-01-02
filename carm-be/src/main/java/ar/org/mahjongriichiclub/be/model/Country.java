@@ -6,8 +6,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import com.googlecode.jmapper.annotations.JMap;
-
 import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;

@@ -1,23 +1,17 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-import com.googlecode.jmapper.annotations.JMap;
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Location;
 
 @MappedEntity(entity = Location.class)
-public class LocationDTO extends GenericDTO<Location> {
+public class LocationDTO extends GenericDTO {
 	
-
-	@JMap("name")
 	private String name;	
 
-	@JMap("address")
 	private String address;
-	
-	@JMap("onlineGame")
+
 	private OnlineGame onlineGame;
 
 	public String getName() {

@@ -1,19 +1,13 @@
 package ar.org.mahjongriichiclub.be.generic.dto;
 
-import java.lang.reflect.ParameterizedType;
 
-import com.googlecode.jmapper.annotations.JMap;
 
-import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
-import ar.org.mahjongriichiclub.be.exception.LocalizedException;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
-public class GenericDTO<ENTITY extends AbstractEntity>{
+
+public class GenericDTO {
 	
-	@JMap
 	private Long id;
 
-	@JMap("deleted")
 	private Boolean deleted = false;
 	
 	public static final String DATE_PATTERN = "dd/MM/yyyy";
