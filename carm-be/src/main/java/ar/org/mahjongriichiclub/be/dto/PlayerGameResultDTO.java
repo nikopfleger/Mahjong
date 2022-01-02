@@ -4,6 +4,7 @@ package ar.org.mahjongriichiclub.be.dto;
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.Wind;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
+import ar.org.mahjongriichiclub.be.model.Player;
 import ar.org.mahjongriichiclub.be.model.PlayerGameResult;
 
 @MappedEntity(entity = PlayerGameResult.class)
@@ -19,6 +20,8 @@ public class PlayerGameResultDTO extends GenericDTO {
 	private Wind startingWind;
 	
 	private Integer finalPosition;
+	
+	private Player player;
 
 	public Integer getScore() {
 		return score;
@@ -58,6 +61,14 @@ public class PlayerGameResultDTO extends GenericDTO {
 
 	public void setFinalPosition(Integer finalPosition) {
 		this.finalPosition = finalPosition;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	
 	

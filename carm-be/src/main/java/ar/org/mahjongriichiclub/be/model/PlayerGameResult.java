@@ -1,7 +1,12 @@
 package ar.org.mahjongriichiclub.be.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import javax.validation.constraints.Min;
@@ -43,6 +48,10 @@ public class PlayerGameResult extends AbstractEntity {
 	@Min(PRIMERA_POSICION)
 	@Max(ULTIMA_POSICION)
 	private Integer finalPosition;
+	
+	@Column(name="PLAYER", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Player player;
 
 	public Integer getScore() {
 		return score;
@@ -82,6 +91,14 @@ public class PlayerGameResult extends AbstractEntity {
 
 	public void setFinalPosition(Integer finalPosition) {
 		this.finalPosition = finalPosition;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	

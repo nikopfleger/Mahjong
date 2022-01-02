@@ -48,14 +48,14 @@ public class Game extends AbstractEntity {
 	@Temporal(TemporalType.DATE)
 	private Date datePlayed;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GAME_ID", foreignKey = @ForeignKey(name = "GAME_RESULTS_FK"))
 	private List<PlayerGameResult> results;
 	
 	@Column(name="LOCATION")
 	private Location location;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "GAME_RULESET_FK"))
 	private Ruleset ruleset;
 	

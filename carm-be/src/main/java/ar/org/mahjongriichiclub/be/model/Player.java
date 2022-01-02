@@ -47,6 +47,10 @@ public class Player extends AbstractEntity {
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = true, name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_POINTS_FK"))
 	private List<DanPoints> playerPoints;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_GAMERESULT_FK"))
+	private List<PlayerGameResult> playerResults;
 
 	public Person getPerson() {
 		return person;
@@ -86,6 +90,14 @@ public class Player extends AbstractEntity {
 
 	public void setPlayerPoints(List<DanPoints> playerPoints) {
 		this.playerPoints = playerPoints;
+	}
+
+	public List<PlayerGameResult> getPlayerResults() {
+		return playerResults;
+	}
+
+	public void setPlayerResults(List<PlayerGameResult> playerResults) {
+		this.playerResults = playerResults;
 	}
 	
 	

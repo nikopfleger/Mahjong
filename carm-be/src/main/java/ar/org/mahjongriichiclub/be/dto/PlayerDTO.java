@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Player;
+import ar.org.mahjongriichiclub.be.model.PlayerGameResult;
 
 @MappedEntity(entity = Player.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -36,7 +37,9 @@ public class PlayerDTO extends GenericDTO {
 	private List<RateDTO> playerRates;
 	
 	private List<DanPointsDTO> playerPoints;
-
+	
+	private List<PlayerGameResultDTO> playerResults;
+ 
 	public PersonDTO getPerson() {
 		return person;
 	}
@@ -99,6 +102,14 @@ public class PlayerDTO extends GenericDTO {
 
 	public void setPlayerAccounts(List<PlayerAccountDTO> playerAccounts) {
 		this.playerAccounts = playerAccounts;
+	}
+
+	public List<PlayerGameResultDTO> getPlayerResults() {
+		return playerResults;
+	}
+
+	public void setPlayerResults(List<PlayerGameResultDTO> playerResults) {
+		this.playerResults = playerResults;
 	}
 	
 	
