@@ -18,10 +18,17 @@ public enum Wind {
 		return this.getValue();
 	}
 
-	public static Wind getEnum(String value) {
+	public static Wind getEnumNoException(String value) {
 		for (Wind v : values())
 			if (v.getValue().equalsIgnoreCase(value))
 				return v;
 		return null;
+	}
+	
+	public static Wind getEnum(String value) {
+		for (Wind v : values())
+			if (v.getValue().equalsIgnoreCase(value))
+				return v;
+		throw new IllegalArgumentException();
 	}
 }

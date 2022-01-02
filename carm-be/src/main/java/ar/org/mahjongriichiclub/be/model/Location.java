@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.SQLDelete;
 
@@ -25,12 +26,13 @@ public class Location extends AbstractEntity {
 	private static final long serialVersionUID = -6553515250454392026L;
 
 	@Column(name="NAME")
+	@NotNull
 	private String name;
 	
 	@Column(name="ADDRESS")
 	private String address;
 	
-	@Column(name="ONLINE")
+	@Column(name="ONLINE", unique = true)
 	@Enumerated(EnumType.STRING)
 	private OnlineGame onlineGame;
 

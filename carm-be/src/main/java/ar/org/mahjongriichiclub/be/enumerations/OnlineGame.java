@@ -20,11 +20,18 @@ public enum OnlineGame {
 		return this.getValue();
 	}
 
-	public static OnlineGame getEnum(String value) {
+	public static OnlineGame getEnumNoException(String value) {
 		for (OnlineGame v : values())
 			if (v.getValue().equalsIgnoreCase(value))
 				return v;
 		return null;
+	}
+	
+	public static OnlineGame getEnum(String value) {
+		for (OnlineGame v : values())
+			if (v.getValue().equalsIgnoreCase(value))
+				return v;
+		throw new IllegalArgumentException();
 	}
 
 }

@@ -19,11 +19,19 @@ public enum GameLength {
 		return this.getValue();
 	}
 
-	public static GameLength getEnum(String value) {
+	public static GameLength getEnumNoException(String value) {
 		for (GameLength v : values())
 			if (v.getValue().equalsIgnoreCase(value))
 				return v;
 		return null;
 	}
+	
+	public static GameLength getEnum(String value) {
+		for (GameLength v : values())
+			if (v.getValue().equalsIgnoreCase(value))
+				return v;
+		throw new IllegalArgumentException();
+	}
+
 
 }

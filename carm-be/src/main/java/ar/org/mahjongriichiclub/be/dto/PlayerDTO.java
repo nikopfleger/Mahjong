@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Player;
-import ar.org.mahjongriichiclub.be.model.PlayerGameResult;
 
 @MappedEntity(entity = Player.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)

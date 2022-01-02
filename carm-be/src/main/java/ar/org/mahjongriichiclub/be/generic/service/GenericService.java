@@ -6,27 +6,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
+import ma.glasnost.orika.BoundMapperFacade;
 
-public interface GenericService<ENTITY extends AbstractEntity, DTO extends GenericDTO> {
+public interface GenericService<E extends AbstractEntity, D extends GenericDTO> {
 	
 	@Transactional(readOnly = false)
-	ENTITY toEntity(DTO dto);
+	E toEntity(D dto);
 	
 	@Transactional(readOnly = false)
-	DTO toDTO(ENTITY entity) throws Exception;
+	D toDTO(E entity) throws Exception;
 	
 	@Transactional(readOnly = false)
-	List<DTO> findAll();
+	List<D> findAll();
 	
 	@Transactional(readOnly = true)
-	public DTO findById(Class<ENTITY> entityClass, Long id) throws Exception;
+	public D findById(Long id) throws Exception;
 
 	@Transactional(readOnly = false)
-	public void save(DTO dto);
+	public void save(D dto);
 	
-	public Class<ENTITY> findEntityClass(Class<DTO> clazz);
+	public Class<E> findEntityClass(Class<D> clazz);
 
-	public Class<DTO> findDTOClass(Class<ENTITY> clazz);
+	public Class<D> findDTOClass(Class<E> clazz);
+
+	public BoundMapperFacade<E, D> findMap(Class<E> entity, Class<D> dto);
 
 
 

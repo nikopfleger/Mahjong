@@ -1,5 +1,7 @@
 package ar.org.mahjongriichiclub.be.dto;
 
+import javax.validation.constraints.NotNull;
+
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
@@ -8,6 +10,7 @@ import ar.org.mahjongriichiclub.be.model.Location;
 @MappedEntity(entity = Location.class)
 public class LocationDTO extends GenericDTO {
 	
+	@NotNull
 	private String name;	
 
 	private String address;

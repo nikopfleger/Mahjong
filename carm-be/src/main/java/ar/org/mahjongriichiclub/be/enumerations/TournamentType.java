@@ -18,10 +18,17 @@ public enum TournamentType {
 		return this.getValue();
 	}
 
-	public static TournamentType getEnum(String value) {
+	public static TournamentType getEnumNoException(String value) {
 		for (TournamentType v : values())
 			if (v.getValue().equalsIgnoreCase(value))
 				return v;
 		return null;
+	}
+	
+	public static TournamentType getEnum(String value) {
+		for (TournamentType v : values())
+			if (v.getValue().equalsIgnoreCase(value))
+				return v;
+		throw new IllegalArgumentException();
 	}
 }

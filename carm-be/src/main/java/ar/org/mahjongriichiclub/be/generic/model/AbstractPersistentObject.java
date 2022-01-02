@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class AbstractPersistentObject implements PersistentObject, Serializable {
+public abstract class AbstractPersistentObject implements EntityObject, Serializable {
 
 	private static final long serialVersionUID = 1L;
 

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.org.mahjongriichiclub.be.controller.BackofficeController;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
+import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
+import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
@@ -85,6 +87,22 @@ public class BackofficeControllerImpl implements BackofficeController {
 
 	public void setBackofficeService(BackofficeService backofficeService) {
 		this.backofficeService = backofficeService;
+	}
+	
+	/**
+	 * Agrega una locacion de juego
+	 * 
+	 * @params location
+	 * @return ResponseEntity
+	 */
+	@Override
+	@PostMapping("/location")
+	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(@RequestBody @Validated LocationRequest location) throws ServiceException {
+		LocationDTO locationDTO = this.getBackofficeService().addModifyLocation(location);
+		
+		StatusResponse<LocationDTO> response = new StatusResponse<>(locationDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<LocationDTO>>(response, HttpStatus.CREATED);
+		
 	}
 
 }

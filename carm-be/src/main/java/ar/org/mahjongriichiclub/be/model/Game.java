@@ -59,12 +59,12 @@ public class Game extends AbstractEntity {
 	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "GAME_RULESET_FK"))
 	private Ruleset ruleset;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "GAME_TOURNAMENT_FK"))
 	@Enumerated(EnumType.STRING)
 	private Tournament tournament;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SEASON_ID", foreignKey = @ForeignKey(name = "GAME_SEASON_FK"))
 	private Season season;
 

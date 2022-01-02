@@ -2,7 +2,7 @@ package ar.org.mahjongriichiclub.be.generic.model;
 
 import java.util.Date;
 
-public interface PersistentObject {
+public interface EntityObject {
 
 	public Long getId();
 

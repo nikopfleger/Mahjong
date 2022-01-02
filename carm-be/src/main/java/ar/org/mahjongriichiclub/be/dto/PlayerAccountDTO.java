@@ -30,5 +30,4 @@ public class PlayerAccountDTO extends GenericDTO {
 		this.gameAccount = gameAccount;
 	}
 	
-	
 }

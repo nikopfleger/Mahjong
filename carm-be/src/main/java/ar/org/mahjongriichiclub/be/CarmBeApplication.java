@@ -1,4 +1,4 @@
-package ar.org.mahjongriichiclub.be;
+ package ar.org.mahjongriichiclub.be;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

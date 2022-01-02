@@ -8,20 +8,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class StatusResponse<DTO extends GenericDTO> {
+public class StatusResponse<D extends GenericDTO> {
 	
 	public static final String CREATED = "CREATED";
 
 	private String status;
 	@JsonProperty("object")
-	private DTO dto;
+	private D dto;
 	private List<ApiError> errors = null;
 
 	public StatusResponse(String status) {
 		this.status = status;
 	}
 
-	public StatusResponse(DTO dto, String status) {
+	public StatusResponse(D dto, String status) {
 		this.setDto(dto);
 		this.status = status;
 	}
@@ -47,11 +47,11 @@ public class StatusResponse<DTO extends GenericDTO> {
 		this.errors = errors;
 	}
 
-	public DTO getDto() {
+	public D getDto() {
 		return dto;
 	}
 
-	public void setDto(DTO dto) {
+	public void setDto(D dto) {
 		this.dto = dto;
 	}
 

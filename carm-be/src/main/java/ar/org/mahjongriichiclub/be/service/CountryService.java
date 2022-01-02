@@ -9,9 +9,6 @@ import ar.org.mahjongriichiclub.be.model.Country;
 
 public interface CountryService extends GenericService<Country,CountryDTO> {
 	
-	@Transactional(readOnly = false)
-	public void save(CountryDTO country) throws ServiceException;
-
 	@Transactional(readOnly = true)
 	public CountryDTO findByCode(String code) throws ServiceException;
 

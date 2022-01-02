@@ -19,11 +19,19 @@ public enum GameType {
 		return this.getValue();
 	}
 
-	public static GameType getEnum(String value) {
+
+	public static GameType getEnumNoException(String value) {
 		for (GameType v : values())
 			if (v.getValue().equalsIgnoreCase(value))
 				return v;
 		return null;
+	}
+	
+	public static GameType getEnum(String value) {
+		for (GameType v : values())
+			if (v.getValue().equalsIgnoreCase(value))
+				return v;
+		throw new IllegalArgumentException();
 	}
 
 }

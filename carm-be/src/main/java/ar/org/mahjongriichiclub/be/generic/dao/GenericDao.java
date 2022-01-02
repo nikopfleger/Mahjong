@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
-public interface GenericDao<T extends AbstractEntity> extends JpaRepository<T,Long> {
+public interface GenericDao<E extends AbstractEntity> extends JpaRepository<E,Long> {
 	
-    public Optional<T> findById(Long id);
+    public Optional<E> findById(Long id);
 }

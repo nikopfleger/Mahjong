@@ -47,11 +47,11 @@ public class Tournament extends AbstractEntity {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_SEASON_FK"))
 	private Season season;	
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_RESULTS_FK"))
 	private List<TournamentResults> results;
 

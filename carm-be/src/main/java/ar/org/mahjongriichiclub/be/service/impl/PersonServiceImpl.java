@@ -28,14 +28,14 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 
 		try {
 			if (personDTO.getCountry() == null) {
-				CountryDTO country = this.countryService.findById(Country.class, personDTO.getCountry().getId());
+				CountryDTO country = this.countryService.findById(personDTO.getCountry().getId());
 				personDTO.setCountry(country);
 			}
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST,
-					new String[] { personDTO.getCountry().getName() });
+					new String[] { personDTO.getCountry().getName() }, e);
 		}
 
 		super.save(personDTO);

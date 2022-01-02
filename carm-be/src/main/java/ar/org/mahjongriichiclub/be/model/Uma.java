@@ -2,6 +2,8 @@ package ar.org.mahjongriichiclub.be.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
@@ -14,6 +16,7 @@ import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 @Table(name="UMA")
 @SQLDelete(sql = "UPDATE UMA SET deleted = 1 WHERE id=?")
 @MappedDTO(dto = UmaDTO.class)
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Uma extends AbstractEntity {
 	
 	/**

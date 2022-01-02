@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @MappedSuperclass
-public abstract class AbstractEntity implements PersistentObject, Serializable {
+public abstract class AbstractEntity implements EntityObject, Serializable {
 	
 	@Transient
 	protected final Logger logger = LogManager.getLogger(getClass());

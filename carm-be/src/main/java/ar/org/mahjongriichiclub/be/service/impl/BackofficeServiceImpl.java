@@ -5,19 +5,20 @@ import org.springframework.stereotype.Service;
 
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
+import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-import ar.org.mahjongriichiclub.be.model.Country;
-import ar.org.mahjongriichiclub.be.model.Person;
-import ar.org.mahjongriichiclub.be.model.Player;
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
+import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 import ar.org.mahjongriichiclub.be.service.PersonService;
 import ar.org.mahjongriichiclub.be.service.PlayerService;
+import ar.org.mahjongriichiclub.be.service.LocationService;
 
 /**
  * @author Niko
@@ -34,6 +35,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	@Autowired
 	PlayerService playerService;
+	
+	@Autowired
+	LocationService locationService;
 
 	/**
 	 * Llama al servicio que guarda la persona
@@ -47,10 +51,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		PersonDTO personDTO = null;
 		try {
-			
 
 			if (person.getId() != null) {
-				personDTO = this.getPersonService().findById(Person.class, person.getId());
+				personDTO = this.getPersonService().findById(person.getId());
 			}
 
 			if (personDTO == null) {
@@ -62,7 +65,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 			this.getPersonService().save(personDTO);
 
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.CREATE_USER,
 					new String[] { person.getNames() + " " + person.getSurnames() }, e);
@@ -71,7 +74,6 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		return personDTO;
 	}
-
 
 	/**
 	 * Llama al servicio que guarda el país
@@ -82,13 +84,12 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 */
 	@Override
 	public CountryDTO addModifyCountry(CountryRequest country) {
-		
+
 		CountryDTO countryDTO = null;
 		try {
-			
 
 			if (country.getId() != null) {
-				countryDTO = this.getCountryService().findById(Country.class, country.getId());
+				countryDTO = this.getCountryService().findById(country.getId());
 			}
 
 			if (countryDTO == null) {
@@ -123,10 +124,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		PlayerDTO playerDTO = null;
 		try {
-			
 
 			if (player.getId() != null) {
-				playerDTO = this.getPlayerService().findById(Player.class, player.getId());
+				playerDTO = this.getPlayerService().findById(player.getId());
 			}
 
 			if (playerDTO == null) {
@@ -138,7 +138,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 			PersonDTO personDTO = null;
 			if (player.getPerson() != null) {
 				if (player.getPerson().getId() != null) {
-					personDTO = this.getPersonService().findById(Person.class, player.getPerson().getId());
+					personDTO = this.getPersonService().findById(player.getPerson().getId());
 				}
 
 				if (personDTO == null) {
@@ -151,10 +151,10 @@ public class BackofficeServiceImpl implements BackofficeService {
 			}
 
 			this.getPlayerService().save(playerDTO);
-
-
+		} catch (ServiceException e) {
+			throw e;
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATE_PLAYER, new String[] { player.getNickname() },
+			throw new ServiceException(ServiceExceptionConstants.ERROR_CREATING_PLAYER, new String[] { player.getNickname() },
 					e);
 		}
 		return playerDTO;
@@ -174,6 +174,37 @@ public class BackofficeServiceImpl implements BackofficeService {
 		personDTO.setCountry(countryDTO);
 		personDTO.setBirthday(person.getBirthday());
 
+	}
+
+	@Override
+	public LocationDTO addModifyLocation(LocationRequest location) throws ServiceException {
+		LocationDTO locationDTO = null;
+
+		try {
+			
+			if (location.getId() != null) {
+				locationDTO = this.getLocationService().findById(location.getId());
+			}
+			
+			if (locationDTO == null) {
+				locationDTO = new LocationDTO();
+			}
+			
+			locationDTO.setName(location.getName());
+			locationDTO.setAddress(location.getAddress());
+			locationDTO.setOnlineGame(OnlineGame.getEnum(location.getOnlineGame()));
+
+			this.getLocationService().save(locationDTO);
+			
+		} catch (ServiceException e) {
+			throw e;
+		} catch (IllegalArgumentException e) {
+			throw new ServiceException(ServiceExceptionConstants.INVALID_ONLINE_GAME_VALUE, new String[] { location.getOnlineGame() }, e);
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.ERROR_CREATING_LOCATION, new String[] { location.getName() }, e);
+		}
+		
+		return locationDTO;
 	}
 
 	public PersonService getPersonService() {
@@ -198,6 +229,14 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	public void setPlayerService(PlayerService playerService) {
 		this.playerService = playerService;
+	}
+
+	public LocationService getLocationService() {
+		return locationService;
+	}
+
+	public void setLocationService(LocationService locationService) {
+		this.locationService = locationService;
 	}
 
 }
