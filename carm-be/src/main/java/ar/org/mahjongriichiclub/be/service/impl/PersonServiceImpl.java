@@ -9,7 +9,6 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.GenericServiceImpl;
-import ar.org.mahjongriichiclub.be.model.Country;
 import ar.org.mahjongriichiclub.be.model.Person;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 import ar.org.mahjongriichiclub.be.service.PersonService;

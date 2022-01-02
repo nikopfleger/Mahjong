@@ -25,11 +25,11 @@ public class Location extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = -6553515250454392026L;
 
-	@Column(name="NAME")
+	@Column(name="NAME", unique = true)
 	@NotNull
 	private String name;
 	
-	@Column(name="ADDRESS")
+	@Column(name="ADDRESS", unique = true)
 	private String address;
 	
 	@Column(name="ONLINE", unique = true)

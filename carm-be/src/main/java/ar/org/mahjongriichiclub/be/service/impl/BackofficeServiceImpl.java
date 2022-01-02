@@ -182,8 +182,8 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		try {
 			
-			if (location.getId() != null) {
-				locationDTO = this.getLocationService().findById(location.getId());
+			if ((location.getId() != null) || (location.getName() != null)) {
+				locationDTO = this.getLocationService().findOneByIdOrName(location.getId(), location.getName());
 			}
 			
 			if (locationDTO == null) {
