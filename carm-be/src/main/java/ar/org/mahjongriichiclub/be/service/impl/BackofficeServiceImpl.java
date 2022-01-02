@@ -1,8 +1,6 @@
 package ar.org.mahjongriichiclub.be.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
@@ -10,9 +8,6 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-import ar.org.mahjongriichiclub.be.generic.model.response.CountryResponse;
-import ar.org.mahjongriichiclub.be.generic.model.response.PersonResponse;
-import ar.org.mahjongriichiclub.be.generic.model.response.PlayerResponse;
 import ar.org.mahjongriichiclub.be.model.Country;
 import ar.org.mahjongriichiclub.be.model.Person;
 import ar.org.mahjongriichiclub.be.model.Player;
@@ -44,14 +39,15 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * Llama al servicio que guarda la persona
 	 * 
 	 * @param person
-	 * @return ResponseEntity
+	 * @return PersonDTO
 	 * 
 	 */
 	@Override
-	public ResponseEntity<PersonResponse> addModifyPerson(PersonRequest person) throws ServiceException {
-		PersonResponse personResponse = new PersonResponse();
+	public PersonDTO addModifyPerson(PersonRequest person) throws ServiceException {
+
+		PersonDTO personDTO = null;
 		try {
-			PersonDTO personDTO = null;
+			
 
 			if (person.getId() != null) {
 				personDTO = this.getPersonService().findById(Person.class, person.getId());
@@ -63,8 +59,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 			this.fillPersonDTO(person, personDTO);
 
-			PersonDTO savedPersonDTO = this.getPersonService().save(personDTO);
-			this.fillPersonResponse(personResponse, savedPersonDTO);
+			this.getPersonService().save(personDTO);
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -74,42 +69,23 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		}
 
-		return new ResponseEntity<PersonResponse>(personResponse, HttpStatus.CREATED);
+		return personDTO;
 	}
 
-	/**
-	 * Llena los campos de la persona para la respuesta
-	 * 
-	 * @param personResponse
-	 * @param person
-	 */
-	protected void fillPersonResponse(PersonResponse personResponse, PersonDTO person) {
-		CountryResponse countryResponse = new CountryResponse();
-		CountryDTO countryPerson = person.getCountry();
-
-		countryResponse.setName(countryPerson.getName());
-		countryResponse.setCode(countryPerson.getCode());
-		countryResponse.setNationality(countryPerson.getNationality());
-
-		personResponse.setNames(person.getNames());
-		personResponse.setSurnames(person.getSurnames());
-		personResponse.setBirthday(person.getBirthday());
-		personResponse.setCountry(countryResponse);
-
-	}
 
 	/**
 	 * Llama al servicio que guarda el país
 	 * 
 	 * @param country
-	 * @return ResponseEntity
+	 * @return CountryDTO
 	 * 
 	 */
 	@Override
-	public ResponseEntity<CountryResponse> addModifyCountry(CountryRequest country) {
-		CountryResponse countryResponse = new CountryResponse();
+	public CountryDTO addModifyCountry(CountryRequest country) {
+		
+		CountryDTO countryDTO = null;
 		try {
-			CountryDTO countryDTO = null;
+			
 
 			if (country.getId() != null) {
 				countryDTO = this.getCountryService().findById(Country.class, country.getId());
@@ -123,11 +99,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 			countryDTO.setCode(country.getCode());
 			countryDTO.setNationality(country.getNationality());
 
-			CountryDTO savedCountryDTO = this.getCountryService().save(countryDTO);
-
-			countryResponse.setName(savedCountryDTO.getName());
-			countryResponse.setCode(savedCountryDTO.getCode());
-			countryResponse.setNationality(savedCountryDTO.getNationality());
+			this.getCountryService().save(countryDTO);
 
 		} catch (ServiceException e) {
 			throw e;
@@ -136,22 +108,22 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		}
 
-		return new ResponseEntity<CountryResponse>(countryResponse, HttpStatus.CREATED);
+		return countryDTO;
 	}
 
 	/**
 	 * Llama al servicio que guarda el jugador
 	 * 
 	 * @param player
-	 * @return ResponseEntity
+	 * @return PlayerDTO
 	 * 
 	 */
 	@Override
-	public ResponseEntity<PlayerResponse> addModifyPlayer(PlayerRequest player) {
-		PlayerResponse playerResponse = new PlayerResponse();
+	public PlayerDTO addModifyPlayer(PlayerRequest player) {
 
+		PlayerDTO playerDTO = null;
 		try {
-			PlayerDTO playerDTO = null;
+			
 
 			if (player.getId() != null) {
 				playerDTO = this.getPlayerService().findById(Player.class, player.getId());
@@ -178,20 +150,14 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 			}
 
-			PlayerDTO savedPlayerDTO = this.getPlayerService().save(playerDTO);
+			this.getPlayerService().save(playerDTO);
 
-			PersonResponse personResponse = new PersonResponse();
-
-			this.fillPersonResponse(personResponse, savedPlayerDTO.getPerson());
-
-			playerResponse.setPerson(personResponse);
-			playerResponse.setNickname(savedPlayerDTO.getNickname());
 
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.CREATE_PLAYER, new String[] { player.getNickname() },
 					e);
 		}
-		return new ResponseEntity<PlayerResponse>(playerResponse, HttpStatus.CREATED);
+		return playerDTO;
 	}
 
 	/**

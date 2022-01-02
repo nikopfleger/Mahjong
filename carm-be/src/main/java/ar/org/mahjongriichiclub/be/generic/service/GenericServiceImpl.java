@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.dto.CountryDTO;
+import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
+import ar.org.mahjongriichiclub.be.model.Country;
 import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
 
@@ -33,6 +36,18 @@ public class GenericServiceImpl<ENTITY extends AbstractEntity, DTO extends Gener
 
 		return entity != null ? this.toDTO(entity) : null;
 
+	}
+	
+	@Override
+	public void save(DTO dto) {
+		ENTITY entity = (ENTITY) this.toEntity(dto);
+		try {
+			entity = this.getGenericDao().save(entity);
+		} catch (Exception e) {
+			throw new ServiceException("Error persistiendo entidad " + dto.getClass().getSimpleName());
+		}
+		
+		dto = this.toDTO(entity);
 	}
 
 	@Override

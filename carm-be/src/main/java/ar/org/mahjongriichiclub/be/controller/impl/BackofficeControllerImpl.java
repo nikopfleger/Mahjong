@@ -1,6 +1,7 @@
 package ar.org.mahjongriichiclub.be.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.org.mahjongriichiclub.be.controller.BackofficeController;
+import ar.org.mahjongriichiclub.be.dto.CountryDTO;
+import ar.org.mahjongriichiclub.be.dto.PersonDTO;
+import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
-import ar.org.mahjongriichiclub.be.generic.model.response.PersonResponse;
-import ar.org.mahjongriichiclub.be.generic.model.response.CountryResponse;
-import ar.org.mahjongriichiclub.be.generic.model.response.PlayerResponse;
+import ar.org.mahjongriichiclub.be.generic.model.response.StatusResponse;
 
 /**
  * @author Niko
@@ -38,8 +40,11 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/person")
-	public ResponseEntity<PersonResponse> addModifyPerson(@RequestBody @Validated PersonRequest person) throws ServiceException {
-		return this.getBackofficeService().addModifyPerson(person);
+	public ResponseEntity<StatusResponse<PersonDTO>> addModifyPerson(@RequestBody @Validated PersonRequest person) throws ServiceException {
+		PersonDTO personDTO = this.getBackofficeService().addModifyPerson(person);
+
+		StatusResponse<PersonDTO> response = new StatusResponse<>(personDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<PersonDTO>>(response, HttpStatus.CREATED);
 	}
 
 	/**
@@ -50,8 +55,12 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/country")
-	public ResponseEntity<CountryResponse> addModifyCountry(@RequestBody @Validated CountryRequest country) throws ServiceException {
-		return this.getBackofficeService().addModifyCountry(country);
+	public ResponseEntity<StatusResponse<CountryDTO>> addModifyCountry(@RequestBody @Validated CountryRequest country) throws ServiceException {
+		
+		CountryDTO countryDTO = this.getBackofficeService().addModifyCountry(country);
+		
+		StatusResponse<CountryDTO> response = new StatusResponse<>(countryDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<CountryDTO>>(response, HttpStatus.CREATED);
 	}
 	
 
@@ -63,8 +72,11 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/player")
-	public ResponseEntity<PlayerResponse> addModifyPlayer(@RequestBody @Validated PlayerRequest country) throws ServiceException {
-		return this.getBackofficeService().addModifyPlayer(country);
+	public ResponseEntity<StatusResponse<PlayerDTO>> addModifyPlayer(@RequestBody @Validated PlayerRequest player) throws ServiceException {
+		PlayerDTO playerDTO = this.getBackofficeService().addModifyPlayer(player);
+		
+		StatusResponse<PlayerDTO> response = new StatusResponse<>(playerDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<PlayerDTO>>(response, HttpStatus.CREATED);
 	}
 	
 	public BackofficeService getBackofficeService() {

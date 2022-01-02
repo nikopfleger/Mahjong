@@ -2,6 +2,8 @@ package ar.org.mahjongriichiclub.be.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Country;
@@ -12,6 +14,7 @@ import ar.org.mahjongriichiclub.be.model.Country;
  *
  */
 @MappedEntity(entity = Country.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountryDTO extends GenericDTO {
 	
 	

@@ -24,7 +24,7 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 	private CountryService countryService;
 
 	@Override
-	public PersonDTO save(PersonDTO personDTO) {
+	public void save(PersonDTO personDTO) {
 
 		try {
 			if (personDTO.getCountry() == null) {
@@ -38,11 +38,7 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 					new String[] { personDTO.getCountry().getName() });
 		}
 
-		Person person = (Person) this.toEntity(personDTO);
-
-		Person savedPerson = this.getPersonDAO().save(person);
-		PersonDTO savedPersonDTO = this.toDTO(savedPerson);
-		return savedPersonDTO;
+		super.save(personDTO);
 	}
 	
 	public PersonDAO getPersonDAO() {

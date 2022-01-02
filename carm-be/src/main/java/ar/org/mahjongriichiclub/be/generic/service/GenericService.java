@@ -21,6 +21,9 @@ public interface GenericService<ENTITY extends AbstractEntity, DTO extends Gener
 	@Transactional(readOnly = true)
 	public DTO findById(Class<ENTITY> entityClass, Long id) throws Exception;
 
+	@Transactional(readOnly = false)
+	public void save(DTO dto);
+	
 	public Class<ENTITY> findEntityClass(Class<DTO> clazz);
 
 	public Class<DTO> findDTOClass(Class<ENTITY> clazz);

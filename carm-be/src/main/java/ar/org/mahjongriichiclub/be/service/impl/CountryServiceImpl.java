@@ -18,20 +18,6 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 	private CountryDAO countryDao;
 
 	@Override
-	public CountryDTO save(CountryDTO countryDTO) {
-		Country savedCountry = null;
-		Country country = (Country) this.toEntity(countryDTO);
-		try {
-			savedCountry = this.getCountryDao().save(country);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-
-		return this.toDTO(savedCountry);
-	}
-
-	@Override
 	public CountryDTO findByCode(String code) {
 		Country country;
 

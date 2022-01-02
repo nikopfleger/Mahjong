@@ -4,10 +4,8 @@ import org.springframework.http.ResponseEntity;
 
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
+import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-import ar.org.mahjongriichiclub.be.generic.model.response.CountryResponse;
-import ar.org.mahjongriichiclub.be.generic.model.response.PersonResponse;
-import ar.org.mahjongriichiclub.be.generic.model.response.PlayerResponse;
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
@@ -18,11 +16,11 @@ import ar.org.mahjongriichiclub.be.request.PlayerRequest;
  */
 public interface BackofficeService {
 
-	public ResponseEntity<PersonResponse> addModifyPerson(PersonRequest person) throws ServiceException;
+	public PersonDTO addModifyPerson(PersonRequest person) throws ServiceException;
 
-	public ResponseEntity<CountryResponse> addModifyCountry(CountryRequest country) throws ServiceException;
+	public CountryDTO addModifyCountry(CountryRequest country) throws ServiceException;
 
-	public ResponseEntity<PlayerResponse> addModifyPlayer(PlayerRequest player) throws ServiceException;
+	public PlayerDTO addModifyPlayer(PlayerRequest player) throws ServiceException;
 
 
 }

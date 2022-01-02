@@ -16,16 +16,6 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 	@Autowired
 	PlayerDAO playerDAO;
 
-	@Override
-	public PlayerDTO save(PlayerDTO playerDTO) throws ServiceException {
-
-		Player player = (Player) this.toEntity(playerDTO);
-
-		Player savedPlayer = this.getPlayerDAO().save(player);
-		PlayerDTO savedPlayerDTO = this.toDTO(savedPlayer);
-		return savedPlayerDTO;
-	}
-
 	public PlayerDAO getPlayerDAO() {
 		return playerDAO;
 	}

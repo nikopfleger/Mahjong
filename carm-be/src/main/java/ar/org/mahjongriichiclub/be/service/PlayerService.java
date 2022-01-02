@@ -10,5 +10,5 @@ import ar.org.mahjongriichiclub.be.model.Player;
 public interface PlayerService extends GenericService<Player,PlayerDTO> {
 
 	@Transactional(readOnly = false)
-	public PlayerDTO save(PlayerDTO playerDTO);
+	public void save(PlayerDTO playerDTO);
 }

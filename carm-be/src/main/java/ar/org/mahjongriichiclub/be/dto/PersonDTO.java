@@ -8,12 +8,14 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.model.Person;
 
 @MappedEntity(entity = Person.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO extends GenericDTO {	
 
 	@NotBlank
