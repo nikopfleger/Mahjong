@@ -1,7 +1,9 @@
 package ar.org.mahjongriichiclub.be.generic.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
@@ -28,6 +30,9 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 	@Autowired
 	private MapperFactory mapperFactory;
+	
+	@Autowired
+	private HashMap<Class<?>, Class<?>> entityDTORelationship;
 
 	public D findById(Long id) throws Exception {
 
@@ -63,17 +68,22 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 	@Override
 	public Class<D> findDTOClass(Class<E> clazz) {
-		return clazz.getAnnotation(MappedDTO.class).dto();
+		return (Class<D>) this.getEntityDTORelationship().get(clazz);
 	}
 
 	@Override
 	public Class<E> findEntityClass(Class<D> clazz) {
-		return clazz.getAnnotation(MappedEntity.class).entity();
+		for (Map.Entry<Class<?>, Class<?>> e : entityDTORelationship.entrySet()) {
+			if (e.getValue().equals(clazz)) {
+				return (Class<E>) e.getKey();
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public BoundMapperFacade<E, D> findMap(Class<E> entity, Class<D> dto) {
-		return (BoundMapperFacade<E, D>) mapperFactory.getMapperFacade(entity, dto);
+		return (BoundMapperFacade<E, D>) mapperFactory.getMapperFacade(entity, dto, true);
 	}
 
 	@Override
@@ -109,6 +119,14 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 	public void setGenericDao(GenericDao<E> genericDao) {
 		this.genericDao = genericDao;
+	}
+
+	public HashMap<Class<?>, Class<?>> getEntityDTORelationship() {
+		return entityDTORelationship;
+	}
+
+	public void setEntityDTORelationship(HashMap<Class<?>, Class<?>> entityDTORelationship) {
+		this.entityDTORelationship = entityDTORelationship;
 	}
 
 }

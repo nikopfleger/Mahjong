@@ -1,11 +1,14 @@
 package ar.org.mahjongriichiclub.be;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,20 +38,40 @@ public class CarmConfiguration implements WebMvcConfigurer {
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
+	
+	@Bean
+	public HashMap<Class<?>, Class<?>> entityDTORelationship() {
+		
+		HashMap<Class<?>, Class<?>> entityDTORelationship = new HashMap<>();
+		
+		Reflections reflections = new Reflections("ar.org.mahjongriichiclub.be.dto");
+		Set<Class<?>> dtoClasses = reflections.getTypesAnnotatedWith(MappedEntity.class);
+		
+		for (Class<?> dto : dtoClasses) {
+			MappedEntity anno = dto.getAnnotation(MappedEntity.class);
+			Class<?> entity = anno.entity();
+			entityDTORelationship.put(entity, dto);
+		}
+		
+		return entityDTORelationship;
+	}
 
 	@Bean
 	public MapperFactory mapperFactory() {
+		
+		
 		
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 
 		Reflections reflections = new Reflections("ar.org.mahjongriichiclub.be.dto");
 		Set<Class<?>> dtoClasses = reflections.getTypesAnnotatedWith(MappedEntity.class);
+		
+		HashMap<Class<?>, Class<?>> entityDTORelationship = entityDTORelationship();
 
-		for (Class<?> dto : dtoClasses) {
-		    MappedEntity anno = dto.getAnnotation(MappedEntity.class);
-		    Class<?> entity = anno.entity();
-		    mapperFactory.classMap(entity, dto);
-		    String message = "MapperFactory: Mapping entity=" + entity.getSimpleName() + " with dto=" + dto.getSimpleName();
+		for (Map.Entry<Class<?>, Class<?>> e : entityDTORelationship.entrySet()) {
+
+		    mapperFactory.classMap(e.getKey(), e.getValue());
+		    String message = "MapperFactory: Mapping entity=" + e.getKey().getSimpleName() + " with dto=" + e.getValue().getSimpleName();
 		    logger.info(message);
 		}
 		return mapperFactory;
