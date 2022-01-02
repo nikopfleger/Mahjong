@@ -15,14 +15,11 @@ import org.hibernate.annotations.SQLDelete;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
-import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name="person")
 @SQLDelete(sql = "UPDATE person SET deleted = 1 WHERE id=?")
-@MappedDTO(dto = PersonDTO.class)
 public class Person extends AbstractEntity {
 
 	/**

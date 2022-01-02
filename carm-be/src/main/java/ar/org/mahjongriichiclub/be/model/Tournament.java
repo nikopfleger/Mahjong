@@ -3,7 +3,6 @@ package ar.org.mahjongriichiclub.be.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,15 +18,12 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
-import ar.org.mahjongriichiclub.be.dto.TournamentDTO;
 import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
 @Table(name = "TOURNAMENT")
 @SQLDelete(sql = "UPDATE SEASON SET deleted = 1 WHERE id=?")
-@MappedDTO(dto = TournamentDTO.class)
 public class Tournament extends AbstractEntity {
 
 	/**

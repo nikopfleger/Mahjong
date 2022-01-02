@@ -8,7 +8,6 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,15 +56,10 @@ public class CarmConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public MapperFactory mapperFactory() {
-		
-		
+	public MapperFactory mapperFactory() {		
 		
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-
-		Reflections reflections = new Reflections("ar.org.mahjongriichiclub.be.dto");
-		Set<Class<?>> dtoClasses = reflections.getTypesAnnotatedWith(MappedEntity.class);
-		
+	
 		HashMap<Class<?>, Class<?>> entityDTORelationship = entityDTORelationship();
 
 		for (Map.Entry<Class<?>, Class<?>> e : entityDTORelationship.entrySet()) {

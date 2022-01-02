@@ -5,15 +5,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 
-import ar.org.mahjongriichiclub.be.annotations.MappedDTO;
-import ar.org.mahjongriichiclub.be.dto.RateDTO;
 import ar.org.mahjongriichiclub.be.generic.model.Points;
 
 
 @Entity
 @Table(name = "RATE")
 @SQLDelete(sql = "UPDATE RATE SET deleted = 1 WHERE id=?")
-@MappedDTO(dto = RateDTO.class)
 public class Rate extends Points {
 
 	/**
