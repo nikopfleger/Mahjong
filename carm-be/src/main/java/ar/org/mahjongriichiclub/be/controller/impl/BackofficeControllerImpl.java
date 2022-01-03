@@ -14,12 +14,14 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
+import ar.org.mahjongriichiclub.be.request.UmaRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.generic.model.response.StatusResponse;
 
@@ -42,7 +44,8 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/person")
-	public ResponseEntity<StatusResponse<PersonDTO>> addModifyPerson(@RequestBody @Validated PersonRequest person) throws ServiceException {
+	public ResponseEntity<StatusResponse<PersonDTO>> addModifyPerson(@RequestBody @Validated PersonRequest person)
+			throws ServiceException {
 		PersonDTO personDTO = this.getBackofficeService().addModifyPerson(person);
 
 		StatusResponse<PersonDTO> response = new StatusResponse<>(personDTO, StatusResponse.CREATED);
@@ -57,14 +60,14 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/country")
-	public ResponseEntity<StatusResponse<CountryDTO>> addModifyCountry(@RequestBody @Validated CountryRequest country) throws ServiceException {
-		
+	public ResponseEntity<StatusResponse<CountryDTO>> addModifyCountry(@RequestBody @Validated CountryRequest country)
+			throws ServiceException {
+
 		CountryDTO countryDTO = this.getBackofficeService().addModifyCountry(country);
-		
+
 		StatusResponse<CountryDTO> response = new StatusResponse<>(countryDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<CountryDTO>>(response, HttpStatus.CREATED);
 	}
-	
 
 	/**
 	 * Agrega un jugador
@@ -74,13 +77,14 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/player")
-	public ResponseEntity<StatusResponse<PlayerDTO>> addModifyPlayer(@RequestBody @Validated PlayerRequest player) throws ServiceException {
+	public ResponseEntity<StatusResponse<PlayerDTO>> addModifyPlayer(@RequestBody @Validated PlayerRequest player)
+			throws ServiceException {
 		PlayerDTO playerDTO = this.getBackofficeService().addModifyPlayer(player);
-		
+
 		StatusResponse<PlayerDTO> response = new StatusResponse<>(playerDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<PlayerDTO>>(response, HttpStatus.CREATED);
 	}
-	
+
 	public BackofficeService getBackofficeService() {
 		return backofficeService;
 	}
@@ -88,7 +92,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	public void setBackofficeService(BackofficeService backofficeService) {
 		this.backofficeService = backofficeService;
 	}
-	
+
 	/**
 	 * Agrega una locacion de juego
 	 * 
@@ -97,12 +101,29 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/location")
-	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(@RequestBody @Validated LocationRequest location) throws ServiceException {
+	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(
+			@RequestBody @Validated LocationRequest location) throws ServiceException {
 		LocationDTO locationDTO = this.getBackofficeService().addModifyLocation(location);
-		
+
 		StatusResponse<LocationDTO> response = new StatusResponse<>(locationDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<LocationDTO>>(response, HttpStatus.CREATED);
-		
+
+	}
+
+	/**
+	 * Agrega o modifica un uma
+	 * 
+	 * @params uma
+	 * @return ResponseEntity
+	 */
+	@Override
+	@PostMapping("/uma")
+	public ResponseEntity<StatusResponse<UmaDTO>> addModifyLocation(@RequestBody @Validated UmaRequest uma)
+			throws ServiceException {
+		UmaDTO umaDTO = this.getBackofficeService().addModifyUma(uma);
+
+		StatusResponse<UmaDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<UmaDTO>>(response, HttpStatus.CREATED);
 	}
 
 }

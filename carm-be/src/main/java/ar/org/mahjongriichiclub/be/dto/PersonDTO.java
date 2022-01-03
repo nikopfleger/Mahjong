@@ -19,7 +19,7 @@ import ar.org.mahjongriichiclub.be.model.Person;
 public class PersonDTO extends GenericDTO {	
 
 	@NotBlank
-	private String names;
+	private String name;
 	
 	@NotBlank
 	private String surnames;
@@ -30,12 +30,12 @@ public class PersonDTO extends GenericDTO {
 	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
 	private Date birthday;	
 
-	public String getNames() {
-		return names;
+	public String getName() {
+		return name;
 	}
 
-	public void setNames(String names) {
-		this.names = names;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSurnames() {

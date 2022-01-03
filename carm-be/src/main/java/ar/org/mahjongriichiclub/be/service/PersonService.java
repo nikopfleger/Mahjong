@@ -13,6 +13,6 @@ import ar.org.mahjongriichiclub.be.model.Person;
 public interface PersonService extends GenericService<Person,PersonDTO> {
 
 	@Transactional(readOnly = false)
-	public void save(PersonDTO personDTO);
+	public PersonDTO save(PersonDTO personDTO);
 
 }

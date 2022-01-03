@@ -1,9 +1,7 @@
-package ar.org.mahjongriichiclub.be.generic.service;
+package ar.org.mahjongriichiclub.be.generic.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
@@ -17,6 +15,7 @@ import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
+import ar.org.mahjongriichiclub.be.generic.service.GenericService;
 import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
 
@@ -43,15 +42,15 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 	}
 	
 	@Override
-	public void save(D dto) {
+	public D save(D dto) {
 		E entity = (E) this.toEntity(dto);
 		try {
 			entity = this.getGenericDao().save(entity);
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.ERROR_SAVING_ENTITY, new String[] { dto.getClass().getSimpleName() }, e);
+			throw new ServiceException(ServiceExceptionConstants.SAVING_ENTITY, new String[] { dto.getClass().getSimpleName() }, e);
 		}
 		
-		dto = this.toDTO(entity);
+		return this.toDTO(entity);
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 		return dtoResult;
 	}
-
+	
 	@Override
 	public Class<D> findDTOClass(Class<E> clazz) {
 		return (Class<D>) this.getEntityDTORelationship().get(clazz);

@@ -3,13 +3,14 @@ package ar.org.mahjongriichiclub.be.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
-@Table(name="country")
+@Table(name="country", uniqueConstraints = @UniqueConstraint(columnNames={"id", "code"}))
 @SQLDelete(sql = "UPDATE country SET deleted = 1 WHERE id=?")
 public class Country extends AbstractEntity {
 	

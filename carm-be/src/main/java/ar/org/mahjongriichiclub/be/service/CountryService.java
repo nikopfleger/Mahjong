@@ -12,6 +12,9 @@ public interface CountryService extends GenericService<Country,CountryDTO> {
 	@Transactional(readOnly = true)
 	public CountryDTO findByCode(String code) throws ServiceException;
 
+	@Transactional(readOnly = true)
+	public CountryDTO findOneByIdAndCode(Long id, String code);
+
 
 
 

@@ -28,7 +28,7 @@ public class Person extends AbstractEntity {
 	private static final long serialVersionUID = -455194059427307438L;
 
 	@Column(name = "ALL_NAMES")
-	private String names;
+	private String name;
 	
 	@Column(name = "SURNAMES")
 	private String surnames;
@@ -41,12 +41,12 @@ public class Person extends AbstractEntity {
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthday;	
 
-	public String getNames() {
-		return names;
+	public String getName() {
+		return name;
 	}
 
-	public void setNames(String names) {
-		this.names = names;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSurnames() {

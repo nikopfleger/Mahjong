@@ -22,7 +22,7 @@ public class PlayerDTO extends GenericDTO {
 	private List<PlayerAccountDTO> playerAccounts;
 	
 	@NotBlank
-	private String nickname;
+	private String name;
 	
 	@Transient
 	private Integer todayRate;
@@ -48,11 +48,11 @@ public class PlayerDTO extends GenericDTO {
 	}
 
 	public String getNickname() {
-		return nickname;
+		return name;
 	}
 
 	public void setNickname(String nickname) {
-		this.nickname = nickname;
+		this.name = nickname;
 	}
 
 	public Integer getTodayRate() {

@@ -4,11 +4,13 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
+import ar.org.mahjongriichiclub.be.request.UmaRequest;
 
 /**
  * @author Niko
@@ -23,6 +25,8 @@ public interface BackofficeService {
 	public PlayerDTO addModifyPlayer(PlayerRequest player) throws ServiceException;
 
 	public LocationDTO addModifyLocation(LocationRequest location) throws ServiceException;
+
+	public UmaDTO addModifyUma(UmaRequest uma) throws ServiceException;
 
 
 }

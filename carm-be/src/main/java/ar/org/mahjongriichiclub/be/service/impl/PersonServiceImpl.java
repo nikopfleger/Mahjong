@@ -8,7 +8,7 @@ import ar.org.mahjongriichiclub.be.dao.PersonDAO;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-import ar.org.mahjongriichiclub.be.generic.service.GenericServiceImpl;
+import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
 import ar.org.mahjongriichiclub.be.model.Person;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 import ar.org.mahjongriichiclub.be.service.PersonService;
@@ -23,7 +23,7 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 	private CountryService countryService;
 
 	@Override
-	public void save(PersonDTO personDTO) {
+	public PersonDTO save(PersonDTO personDTO) {
 
 		try {
 			if (personDTO.getCountry() == null) {
@@ -37,7 +37,7 @@ public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> imp
 					new String[] { personDTO.getCountry().getName() }, e);
 		}
 
-		super.save(personDTO);
+		return super.save(personDTO);
 	}
 	
 	public PersonDAO getPersonDAO() {

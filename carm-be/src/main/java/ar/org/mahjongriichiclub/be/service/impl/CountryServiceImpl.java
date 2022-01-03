@@ -7,7 +7,7 @@ import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.CountryDAO;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-import ar.org.mahjongriichiclub.be.generic.service.GenericServiceImpl;
+import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
 import ar.org.mahjongriichiclub.be.model.Country;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 
@@ -29,6 +29,21 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 		}
 		return this.toDTO(country);
 	}
+	
+
+	@Override
+	public CountryDTO findOneByIdAndCode(Long id, String code) {
+		Country country;
+
+		try {
+			country = this.getCountryDao().findOneByIdAndCode(id,code);
+
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST, new String[] { code }, e);
+		}
+		return this.toDTO(country);
+	}
+	
 
 
 	public CountryDAO getCountryDao() {
@@ -38,5 +53,7 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 	public void setCountryDAO(CountryDAO countryDAO) {
 		this.countryDao = countryDAO;
 	}
+
+
 
 }

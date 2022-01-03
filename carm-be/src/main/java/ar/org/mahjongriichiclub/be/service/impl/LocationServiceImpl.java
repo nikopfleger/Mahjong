@@ -1,13 +1,13 @@
 package ar.org.mahjongriichiclub.be.service.impl;
 
-import javax.persistence.NonUniqueResultException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.LocationDAO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
-import ar.org.mahjongriichiclub.be.generic.service.GenericServiceImpl;
+import ar.org.mahjongriichiclub.be.exception.ServiceException;
+import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
 import ar.org.mahjongriichiclub.be.model.Location;
 import ar.org.mahjongriichiclub.be.service.LocationService;
 
@@ -18,18 +18,23 @@ public class LocationServiceImpl extends GenericServiceImpl<Location, LocationDT
 	@Autowired
 	private LocationDAO locationDao;
 
+
+	@Override
+	public LocationDTO findOneByIdAndName(Long id, String name) throws ServiceException {
+		Location location = null;
+		location = this.getLocationDAO().findOneByIdAndName(id,name);
+		
+		if (location == null) {
+			throw new ServiceException(ServiceExceptionConstants.ID_NAME_MUST_BE_UNIQUE_AND_MATCH);
+		}		
+
+		return this.toDTO(location);
+	}	
+	
 	@Override
 	public LocationDTO findByName(String name) {
 
 		Location location = this.getLocationDAO().findByName(name);
-
-		return location != null ? this.toDTO(location) : null;
-	}
-	
-	@Override
-	public LocationDTO findOneByIdOrName(Long id, String name) throws NonUniqueResultException {
-
-		Location location = this.getLocationDAO().findOneByIdOrName(id,name);
 
 		return location != null ? this.toDTO(location) : null;
 	}
@@ -42,6 +47,7 @@ public class LocationServiceImpl extends GenericServiceImpl<Location, LocationDT
 	public void setLocationDAO(LocationDAO locationDao) {
 		this.locationDao = locationDao;
 	}
+
 
 
 }

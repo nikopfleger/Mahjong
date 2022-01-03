@@ -1,21 +1,20 @@
-package ar.org.mahjongriichiclub.be.dto;
+package ar.org.mahjongriichiclub.be.request;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-
-
-import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
-import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Uma;
-
-@MappedEntity(entity = Uma.class)
-public class UmaDTO extends GenericDTO {
+public class UmaRequest extends GenericRequest {
 	
+	@NotEmpty
 	private String name;
 
+	@NotNull
 	private Integer firstPlace;
 	
+	@NotNull
 	private Integer secondPlace;
-
+	
+	@NotNull
 	private Integer thirdPlace;
 	
 	private Integer fourthPlace;
@@ -59,6 +58,4 @@ public class UmaDTO extends GenericDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 }

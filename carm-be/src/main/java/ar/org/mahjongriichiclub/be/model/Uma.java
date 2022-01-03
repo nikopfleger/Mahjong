@@ -5,13 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
-@Table(name="UMA")
+@Table(name="UMA", uniqueConstraints=
+@UniqueConstraint(columnNames={"id", "name"}))
 @SQLDelete(sql = "UPDATE UMA SET deleted = 1 WHERE id=?")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Uma extends AbstractEntity {
@@ -20,7 +22,10 @@ public class Uma extends AbstractEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 8185788084639680842L;
-
+	
+	@Column(name="name", nullable = false)
+	private String name;
+	
 	@Column(name="first_place", nullable = false)
 	private Integer firstPlace;
 	
@@ -63,6 +68,14 @@ public class Uma extends AbstractEntity {
 
 	public void setFourthPlace(Integer fourthPlace) {
 		this.fourthPlace = fourthPlace;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
