@@ -8,6 +8,7 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
@@ -15,6 +16,7 @@ import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
+import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
 import ar.org.mahjongriichiclub.be.request.UmaRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.service.CountryService;
@@ -22,6 +24,7 @@ import ar.org.mahjongriichiclub.be.service.PersonService;
 import ar.org.mahjongriichiclub.be.service.PlayerService;
 import ar.org.mahjongriichiclub.be.service.UmaService;
 import ar.org.mahjongriichiclub.be.service.LocationService;
+import ar.org.mahjongriichiclub.be.service.TResultService;
 
 /**
  * @author Niko
@@ -38,12 +41,15 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	@Autowired
 	PlayerService playerService;
-	
+
 	@Autowired
 	LocationService locationService;
-	
+
 	@Autowired
 	UmaService umaService;
+
+	@Autowired
+	TResultService tResultService;
 
 	/**
 	 * Llama al servicio que guarda la persona
@@ -94,14 +100,10 @@ public class BackofficeServiceImpl implements BackofficeService {
 		CountryDTO countryDTO = null;
 		try {
 
-			if (country.getId() != null && country.getCode() != null) {
-				countryDTO = this.getCountryService().findOneByIdAndCode(country.getId(), country.getCode());
-			} else if (country.getCode() != null) {
+			if (country.getCode() != null) {
 				countryDTO = this.getCountryService().findByCode(country.getCode());
-			} else if (country.getId() != null) {
-				countryDTO = this.getCountryService().findById(country.getId());
 			}
-			
+
 			if (countryDTO == null) {
 				countryDTO = new CountryDTO();
 			}
@@ -115,7 +117,8 @@ public class BackofficeServiceImpl implements BackofficeService {
 		} catch (ServiceException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATING_COUNTRY, new String[] { country.getName() }, e);
+			throw new ServiceException(ServiceExceptionConstants.CREATING_COUNTRY, new String[] { country.getName() },
+					e);
 
 		}
 
@@ -135,8 +138,8 @@ public class BackofficeServiceImpl implements BackofficeService {
 		PlayerDTO playerDTO = null;
 		try {
 
-			if (player.getId() != null) {
-				playerDTO = this.getPlayerService().findById(player.getId());
+			if (player.getNickname() != null) {
+				playerDTO = this.getPlayerService().findByNickname(player.getNickname());
 			}
 
 			if (playerDTO == null) {
@@ -191,36 +194,32 @@ public class BackofficeServiceImpl implements BackofficeService {
 		LocationDTO locationDTO = null;
 
 		try {
-			
-			if ((location.getId() != null) && (location.getName() != null)) {
-				locationDTO = this.getLocationService().findOneByIdAndName(location.getId(), location.getName());
-			} else if (location.getName() != null) {
-				locationDTO = this.getLocationService().findByName(location.getName());
-			} else if (location.getId() != null) {
-				locationDTO = this.getLocationService().findById(location.getId());
-			}
-			
+
+			locationDTO = this.getLocationService().findByName(location.getName());
+
 			if (locationDTO == null) {
 				locationDTO = new LocationDTO();
 			}
-			
+
 			locationDTO.setName(location.getName());
 			locationDTO.setAddress(location.getAddress());
 			locationDTO.setOnlineGame(OnlineGame.getEnum(location.getOnlineGame()));
 
 			locationDTO = this.getLocationService().save(locationDTO);
-			
+
 		} catch (ServiceException e) {
 			throw e;
 		} catch (IllegalArgumentException e) {
-			throw new ServiceException(ServiceExceptionConstants.INVALID_ONLINE_GAME_VALUE, new String[] { location.getOnlineGame() }, e);
+			throw new ServiceException(ServiceExceptionConstants.INVALID_ONLINE_GAME_VALUE,
+					new String[] { location.getOnlineGame() }, e);
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATING_LOCATION, new String[] { location.getName() }, e);
+			throw new ServiceException(ServiceExceptionConstants.CREATING_LOCATION, new String[] { location.getName() },
+					e);
 		}
-		
+
 		return locationDTO;
 	}
-	
+
 	/**
 	 * Llama al servicio que guarda el uma
 	 * 
@@ -230,16 +229,12 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 */
 	@Override
 	public UmaDTO addModifyUma(UmaRequest uma) throws ServiceException {
-		
+
 		UmaDTO umaDTO = null;
 		try {
 
-			if ((uma.getId() != null) && (uma.getName() != null)) {
-				umaDTO = this.getUmaService().findOneByIdAndName(uma.getId(), uma.getName());
-			} else if (uma.getName() != null) {
+			if (uma.getName() != null) {
 				umaDTO = this.getUmaService().findByName(uma.getName());
-			} else if (uma.getId() != null) {
-				umaDTO = this.getUmaService().findById(uma.getId());
 			}
 
 			if (umaDTO == null) {
@@ -251,19 +246,51 @@ public class BackofficeServiceImpl implements BackofficeService {
 			umaDTO.setSecondPlace(uma.getSecondPlace());
 			umaDTO.setThirdPlace(uma.getThirdPlace());
 			umaDTO.setFourthPlace(uma.getFourthPlace());
-			
+
 			umaDTO = this.getUmaService().save(umaDTO);
 
 		} catch (ServiceException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATING_UMA , new String[] { uma.getName() }, e);
+			throw new ServiceException(ServiceExceptionConstants.CREATING_UMA, new String[] { uma.getName() }, e);
 
 		}
 
 		return umaDTO;
 	}
 
+	@Override
+	public TournamentResultsDTO addModifyTourneyResult(TournamentResultsRequest result) throws ServiceException {
+		TournamentResultsDTO tournamentResultDTO = null;
+		PlayerDTO playerDTO = null;
+
+		try {
+
+			if (result.getPlayer() != null && result.getName() != null && result.getSeasonName() != null) {
+				tournamentResultDTO = this.getTResultService().findByPlayerAndTournamentAndSeason(result.getPlayer(), result.getName(), result.getSeasonName());
+			}
+
+			if (tournamentResultDTO == null) {
+				tournamentResultDTO = new TournamentResultsDTO();
+				
+				playerDTO = this.getPlayerService().findByNickname(result.getPlayer());	
+				tournamentResultDTO.setPlayer(playerDTO);
+			}
+
+			tournamentResultDTO.setPoints(result.getPoints());
+			tournamentResultDTO.setFinalPlacement(result.getFinalPlacement());
+
+			tournamentResultDTO = this.getTResultService().save(tournamentResultDTO);
+
+		} catch (ServiceException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.CREATING_TOURNEY_RESULT,
+					new String[] { result.getPlayer() }, e);
+
+		}
+		return null;
+	}
 
 	public PersonService getPersonService() {
 		return personService;
@@ -303,6 +330,14 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	public void setUmaService(UmaService umaService) {
 		this.umaService = umaService;
+	}
+
+	public TResultService getTResultService() {
+		return tResultService;
+	}
+
+	public void setTResultService(TResultService tResultService) {
+		this.tResultService = tResultService;
 	}
 
 }

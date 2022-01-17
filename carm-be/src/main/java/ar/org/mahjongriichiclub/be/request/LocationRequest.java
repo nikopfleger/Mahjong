@@ -2,7 +2,7 @@ package ar.org.mahjongriichiclub.be.request;
 
 import javax.validation.constraints.NotNull;
 
-public class LocationRequest extends GenericRequest {
+public class LocationRequest {
 	
 	@NotNull
 	private String name;

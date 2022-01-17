@@ -17,14 +17,11 @@ import ar.org.mahjongriichiclub.be.model.Country;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountryDTO extends GenericDTO {
 	
-	
-	@NotBlank
+
 	private String name;
 	
-	@NotBlank
 	private String nationality;
 	
-	@NotBlank
 	private String code;
 
 	public String getName() {

@@ -1,22 +1,16 @@
 package ar.org.mahjongriichiclub.be.generic.dto;
 
-import javax.validation.constraints.NotNull;
-
 import ar.org.mahjongriichiclub.be.dto.GameDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 
 public class PointsDTO extends GenericDTO {
 
-	@NotNull
 	private GameDTO game;
-	
-	@NotNull
+
 	private Integer value;
-	
-	@NotNull
+
 	private PlayerDTO player;
-	
-	@NotNull
+
 	private Boolean sanma;
 
 	public GameDTO getGame() {
@@ -50,6 +44,5 @@ public class PointsDTO extends GenericDTO {
 	public void setSanma(Boolean sanma) {
 		this.sanma = sanma;
 	}
-	
-	
+
 }

@@ -18,9 +18,8 @@ public class ServiceExceptionConstants {
 	public static final String CREATING_LOCATION = ERROR_PREFIX + "CREATING_LOCATION";
 	public static final String CREATING_UMA = ERROR_PREFIX + "CREATING_UMA";	
 	public static final String CREATING_PLAYER = ERROR_PREFIX + "CREATING_PLAYER";
+	public static final String CREATING_TOURNEY_RESULT = ERROR_PREFIX + "CREATING_TOURNEY_RESULT";
 	
-	//COUNTRY
-
 	public static final String COUNTRY_DOES_NOT_EXIST = ERROR_PREFIX + "COUNTRY_DOES_NOT_EXIST";
 	public static final String COUNTRY_WITH_ID_DOES_NOT_EXIST = ERROR_PREFIX + "COUNTRY_WITH_ID_DOES_NOT_EXIST";
 	
@@ -28,6 +27,13 @@ public class ServiceExceptionConstants {
 
 	public static final String INVALID_ONLINE_GAME_VALUE = ERROR_PREFIX + "INVALID_ONLINE_GAME_VALUE";
 
-	public static final String ID_NAME_MUST_BE_UNIQUE_AND_MATCH = ERROR_PREFIX + "ID_NAME_MUST_BE_UNIQUE_AND_MATCH";
+	public static final String UMA_DOES_NOT_EXIST = ERROR_PREFIX + "UMA_DOES_NOT_EXIST";
+
+	public static final String PLAYER_DOES_NOT_EXIST = ERROR_PREFIX + "PLAYER_DOES_NOT_EXIST";
+
+	public static final String RECORD_DOES_NOT_EXIST = ERROR_PREFIX + "PLAYER_RECORD_ON_TOURNAMENT";
+	
+
+
 
 }

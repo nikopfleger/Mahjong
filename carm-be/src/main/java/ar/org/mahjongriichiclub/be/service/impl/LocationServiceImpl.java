@@ -25,7 +25,7 @@ public class LocationServiceImpl extends GenericServiceImpl<Location, LocationDT
 		location = this.getLocationDAO().findOneByIdAndName(id,name);
 		
 		if (location == null) {
-			throw new ServiceException(ServiceExceptionConstants.ID_NAME_MUST_BE_UNIQUE_AND_MATCH);
+			throw new ServiceException(ServiceExceptionConstants.UMA_DOES_NOT_EXIST);
 		}		
 
 		return this.toDTO(location);

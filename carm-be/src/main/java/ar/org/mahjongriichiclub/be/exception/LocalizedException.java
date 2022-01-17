@@ -59,7 +59,7 @@ public class LocalizedException extends RuntimeException {
 	
 	@Override
 	public String getMessage() {
-		return getLocalizedMessage()==null?"ERROR":getLocalizedMessage();
+		return getLocalizedMessage()==null?super.getMessage():getLocalizedMessage();
 	}
 
 	@Override

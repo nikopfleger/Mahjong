@@ -2,7 +2,7 @@ package ar.org.mahjongriichiclub.be.request;
 
 import javax.validation.constraints.NotNull;
 
-public class SeasonUmaRequest extends UmaRequest {
+public class SeasonUmaRequest {
 
 	@NotNull
 	private Integer number;

@@ -18,10 +18,8 @@ import ar.org.mahjongriichiclub.be.model.Person;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO extends GenericDTO {	
 
-	@NotBlank
 	private String name;
 	
-	@NotBlank
 	private String surnames;
 	
 	private CountryDTO country;	
@@ -29,6 +27,8 @@ public class PersonDTO extends GenericDTO {
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
 	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
 	private Date birthday;	
+	
+	private String legajo;
 
 	public String getName() {
 		return name;
@@ -60,6 +60,14 @@ public class PersonDTO extends GenericDTO {
 
 	public void setCountry(CountryDTO country) {
 		this.country = country;
+	}
+
+	public String getLegajo() {
+		return legajo;
+	}
+
+	public void setLegajo(String legajo) {
+		this.legajo = legajo;
 	}
 	
 	

@@ -30,6 +30,9 @@ public class Tournament extends AbstractEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -5554365457117766193L;
+	
+	@Column(name = "name")
+	private String name;
 
 	@Column(name= "tournamentType")
 	@Enumerated(EnumType.STRING)

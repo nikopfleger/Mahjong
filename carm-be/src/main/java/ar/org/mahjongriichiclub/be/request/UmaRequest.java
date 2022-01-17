@@ -1,11 +1,12 @@
 package ar.org.mahjongriichiclub.be.request;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class UmaRequest extends GenericRequest {
+public class UmaRequest {
 	
-	@NotEmpty
+	@NotBlank
 	private String name;
 
 	@NotNull

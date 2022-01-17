@@ -37,7 +37,7 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 			Object o = om.readValue(((RestClientResponseException) ex).getResponseBodyAsString(), Object.class);
 			return new ResponseEntity<Object>(o, HttpStatus.BAD_REQUEST);
 		} else if (ServiceException.class.isAssignableFrom(ex.getClass())) {
-			ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "ERROR", ex.getLocalizedMessage());
+			ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "ERROR", ex.getMessage());
 			return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 		}
 		

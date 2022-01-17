@@ -10,8 +10,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
-public class PersonRequest extends GenericRequest {
+public class PersonRequest {
 	
+	private Long id;
 	
 	@NotNull
 	private String name;
@@ -24,6 +25,9 @@ public class PersonRequest extends GenericRequest {
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
 	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
 	private Date birthday;
+	
+	@NotNull
+	private String legajo;
 
 	public String getName() {
 		return name;
@@ -55,6 +59,22 @@ public class PersonRequest extends GenericRequest {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public String getLegajo() {
+		return legajo;
+	}
+
+	public void setLegajo(String legajo) {
+		this.legajo = legajo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	

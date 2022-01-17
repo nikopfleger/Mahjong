@@ -2,7 +2,7 @@ package ar.org.mahjongriichiclub.be.request;
 
 import javax.validation.constraints.NotBlank;
 
-public class CountryRequest extends GenericRequest {
+public class CountryRequest {
 	
 	@NotBlank
 	private String name;

@@ -1,12 +1,12 @@
 package ar.org.mahjongriichiclub.be.request;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
-public class PlayerRequest extends GenericRequest {
+public class PlayerRequest {
 	
 	private PersonRequest person;
 	
-	@NotEmpty
+	@NotBlank
 	private String nickname;
 
 	public PersonRequest getPerson() {

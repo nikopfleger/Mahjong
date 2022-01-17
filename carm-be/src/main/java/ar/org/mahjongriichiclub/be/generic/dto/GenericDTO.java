@@ -1,9 +1,6 @@
 package ar.org.mahjongriichiclub.be.generic.dto;
 
 
-
-
-
 public class GenericDTO {
 	
 	private Long id;
@@ -28,6 +25,7 @@ public class GenericDTO {
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
+
 	
 	
 }

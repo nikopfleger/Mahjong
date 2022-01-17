@@ -14,26 +14,20 @@ import ar.org.mahjongriichiclub.be.model.Game;
 @MappedEntity(entity = Game.class)
 public class GameDTO extends GenericDTO { 
 	
-	@NotNull
 	private GameType gameType;
 	
-	@NotNull
 	private GameLength gameLength;
 	
-	@NotNull
 	private Date datePlayed;
 	
-	@NotNull
 	private List<PlayerGameResultDTO> results;
 	
 	private LocationDTO location;
 	
-	@NotNull
 	private RulesetDTO ruleset;
 	
 	private TournamentDTO tournament;
 	
-	@NotNull
 	private SeasonDTO season;
 
 	public GameType getGameType() {

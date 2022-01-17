@@ -30,7 +30,7 @@ public class Player extends AbstractEntity {
 	@JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "PLAYER_PERSON_FK"))
 	Person person;
 
-	@Column(name = "NICKNAME", nullable = false)
+	@Column(name = "NICKNAME", nullable = false, unique = true)
 	private String name;
 	
 	@OneToMany(fetch = FetchType.LAZY)

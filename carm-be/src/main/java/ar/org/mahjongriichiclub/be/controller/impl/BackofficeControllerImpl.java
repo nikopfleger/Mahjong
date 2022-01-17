@@ -14,6 +14,7 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 
@@ -21,6 +22,7 @@ import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
+import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
 import ar.org.mahjongriichiclub.be.request.UmaRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.generic.model.response.StatusResponse;
@@ -124,6 +126,22 @@ public class BackofficeControllerImpl implements BackofficeController {
 
 		StatusResponse<UmaDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<UmaDTO>>(response, HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Agrega o modifica un resultado de torneo
+	 * 
+	 * @params tournamentResult
+	 * @return ResponseEntity
+	 */
+	@Override
+	@PostMapping("/tourneyResults")
+	public ResponseEntity<StatusResponse<TournamentResultsDTO>> addModifyTourneyResult(@RequestBody @Validated TournamentResultsRequest result)
+			throws ServiceException {
+		TournamentResultsDTO umaDTO = this.getBackofficeService().addModifyTourneyResult(result);
+
+		StatusResponse<TournamentResultsDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<TournamentResultsDTO>>(response, HttpStatus.CREATED);
 	}
 
 }

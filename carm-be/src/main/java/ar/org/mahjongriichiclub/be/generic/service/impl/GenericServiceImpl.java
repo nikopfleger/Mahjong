@@ -65,11 +65,13 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		return dtoResult;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<D> findDTOClass(Class<E> clazz) {
 		return (Class<D>) this.getEntityDTORelationship().get(clazz);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<E> findEntityClass(Class<D> clazz) {
 		return (Class<E>) this.getEntityDTORelationship().inverse().get(clazz);
@@ -80,6 +82,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		return (BoundMapperFacade<E, D>) mapperFactory.getMapperFacade(entity, dto, true);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public D toDTO(E entity) {
 
@@ -97,6 +100,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		return boundMapper.map(entity);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E toEntity(D dto) {
 		
@@ -105,6 +109,19 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 		BoundMapperFacade<E, D> boundMapper = this.findMap(entityClass, dtoClass);
 		return boundMapper.mapReverse(dto);
+	}
+	
+	
+	public E unproxy(E proxied)
+	{
+	    E entity = proxied;
+	    if (entity instanceof HibernateProxy) {
+	        Hibernate.initialize(entity);
+	        entity = (E) ((HibernateProxy) entity)
+	                  .getHibernateLazyInitializer()
+	                  .getImplementation();
+	    }
+	    return entity;
 	}
 
 	public GenericDao<E> getGenericDao() {

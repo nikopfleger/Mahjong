@@ -17,7 +17,6 @@ public class SeasonUma extends Uma {
 	 */
 	private static final long serialVersionUID = 4074564548344207128L;
 	
-	@NotNull
 	private Season season;
 
 	public Season getSeason() {

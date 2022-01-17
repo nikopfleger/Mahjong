@@ -16,12 +16,10 @@ import ar.org.mahjongriichiclub.be.model.Player;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PlayerDTO extends GenericDTO {
 	
-	@NotNull
 	PersonDTO person;
 	
 	private List<PlayerAccountDTO> playerAccounts;
 	
-	@NotBlank
 	private String name;
 	
 	@Transient

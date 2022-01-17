@@ -9,8 +9,7 @@ import ar.org.mahjongriichiclub.be.model.Location;
 
 @MappedEntity(entity = Location.class)
 public class LocationDTO extends GenericDTO {
-	
-	@NotNull
+
 	private String name;	
 
 	private String address;
