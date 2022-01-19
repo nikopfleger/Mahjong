@@ -14,6 +14,7 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
@@ -23,6 +24,7 @@ import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
 import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
+import ar.org.mahjongriichiclub.be.request.SeasonRequest;
 import ar.org.mahjongriichiclub.be.request.UmaRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.generic.model.response.StatusResponse;
@@ -126,6 +128,22 @@ public class BackofficeControllerImpl implements BackofficeController {
 
 		StatusResponse<UmaDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<UmaDTO>>(response, HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Agrega o modifica una temporada
+	 * 
+	 * @params season
+	 * @return ResponseEntity
+	 */
+	@Override
+	@PostMapping("/season")
+	public ResponseEntity<StatusResponse<SeasonDTO>> addModifySeason(@RequestBody @Validated SeasonRequest result)
+			throws ServiceException {
+		SeasonDTO seasonDTO = this.getBackofficeService().addModifySeason(result);
+
+		StatusResponse<SeasonDTO> response = new StatusResponse<>(seasonDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<SeasonDTO>>(response, HttpStatus.CREATED);
 	}
 	
 	/**

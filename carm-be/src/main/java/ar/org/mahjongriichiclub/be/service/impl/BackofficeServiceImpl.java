@@ -4,20 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
+
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
+
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
+
 import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
+import ar.org.mahjongriichiclub.be.request.SeasonRequest;
 import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
 import ar.org.mahjongriichiclub.be.request.UmaRequest;
+
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 import ar.org.mahjongriichiclub.be.service.PersonService;
@@ -25,6 +31,7 @@ import ar.org.mahjongriichiclub.be.service.PlayerService;
 import ar.org.mahjongriichiclub.be.service.UmaService;
 import ar.org.mahjongriichiclub.be.service.LocationService;
 import ar.org.mahjongriichiclub.be.service.TResultService;
+import ar.org.mahjongriichiclub.be.service.SeasonService;
 
 /**
  * @author Niko
@@ -50,6 +57,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	@Autowired
 	TResultService tResultService;
+	
+	@Autowired
+	SeasonService seasonService;
 
 	/**
 	 * Llama al servicio que guarda la persona
@@ -292,7 +302,36 @@ public class BackofficeServiceImpl implements BackofficeService {
 					new String[] { result.getPlayer() }, e);
 
 		}
-		return null;
+		return tournamentResultDTO;
+	}
+	
+
+	@Override
+	public SeasonDTO addModifySeason(SeasonRequest season) {
+		SeasonDTO seasonDTO = null;
+		
+		try {
+			if (season.getNumber() != null) {
+				seasonDTO = this.getSeasonService().findByNumber(season.getNumber());
+			}
+			
+			if (seasonDTO == null) {
+				seasonDTO = new SeasonDTO();
+			}
+			
+			seasonDTO.setName(season.getName());
+			seasonDTO.setNumber(season.getNumber());
+			seasonDTO.setStartDate(season.getStartDate());
+			seasonDTO.setEndDate(season.getEndDate());
+			
+			seasonDTO = this.getSeasonService().save(seasonDTO);
+			
+		} catch (ServiceException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.CREATING_SEASON, new String[] { season.getNumber().toString() },e);
+		}
+		return seasonDTO;
 	}
 
 	public PersonService getPersonService() {
@@ -342,5 +381,22 @@ public class BackofficeServiceImpl implements BackofficeService {
 	public void setTResultService(TResultService tResultService) {
 		this.tResultService = tResultService;
 	}
+
+	public TResultService gettResultService() {
+		return tResultService;
+	}
+
+	public void settResultService(TResultService tResultService) {
+		this.tResultService = tResultService;
+	}
+
+	public SeasonService getSeasonService() {
+		return seasonService;
+	}
+
+	public void setSeasonService(SeasonService seasonService) {
+		this.seasonService = seasonService;
+	}
+
 
 }

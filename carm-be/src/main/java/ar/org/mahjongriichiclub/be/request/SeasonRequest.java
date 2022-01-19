@@ -1,30 +1,24 @@
-package ar.org.mahjongriichiclub.be.dto;
+package ar.org.mahjongriichiclub.be.request;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
-import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Season;
+public class SeasonRequest {
 
-@MappedEntity(entity = Season.class)
-public class SeasonDTO extends GenericDTO {
-
+	@NotNull
 	private Integer number;
 	
 	private String name;
 	
-	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
-	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date startDate;
 	
-	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
-	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date endDate;
-
+	
 	public Integer getNumber() {
 		return number;
 	}
@@ -56,6 +50,4 @@ public class SeasonDTO extends GenericDTO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
-	
 }

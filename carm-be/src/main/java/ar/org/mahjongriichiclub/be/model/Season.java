@@ -10,6 +10,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
@@ -28,12 +30,14 @@ public class Season extends AbstractEntity {
 	@Column(name="SEASON_NAME")
 	private String name;
 	
-	@Column(name = "START_DATE")
+	@Column(name = "START_DATE", nullable = false)
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date startDate;
 	
 	@Column(name = "END_DATE")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date endDate;
 
 	public Integer getNumber() {

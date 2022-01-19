@@ -4,6 +4,7 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
@@ -11,6 +12,7 @@ import ar.org.mahjongriichiclub.be.request.CountryRequest;
 import ar.org.mahjongriichiclub.be.request.LocationRequest;
 import ar.org.mahjongriichiclub.be.request.PersonRequest;
 import ar.org.mahjongriichiclub.be.request.PlayerRequest;
+import ar.org.mahjongriichiclub.be.request.SeasonRequest;
 import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
 import ar.org.mahjongriichiclub.be.request.UmaRequest;
 
@@ -31,6 +33,8 @@ public interface BackofficeService {
 	public UmaDTO addModifyUma(UmaRequest uma) throws ServiceException;
 
 	public TournamentResultsDTO addModifyTourneyResult(TournamentResultsRequest result) throws ServiceException;
+
+	public SeasonDTO addModifySeason(SeasonRequest season);
 
 
 }
