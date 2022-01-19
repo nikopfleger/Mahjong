@@ -40,9 +40,7 @@ public class Person extends AbstractEntity {
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthday;	
-	
-	@Column(name = "LEGAJO", unique = true)
-	private String legajo;
+
 
 	public String getName() {
 		return name;
@@ -74,17 +72,7 @@ public class Person extends AbstractEntity {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	public String getLegajo() {
-		return legajo;
-	}
-
-	public void setLegajo(String legajo) {
-		this.legajo = legajo;
 	}	
-	
-	
 	
 
 }

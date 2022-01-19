@@ -16,15 +16,17 @@ public class UmaServiceImpl extends GenericServiceImpl<Uma, UmaDTO> implements U
 
 	@Autowired
 	UmaDAO umaDAO;
-	
-	@Override
-	public UmaDTO findByName(String name) {
 
-		Uma uma = this.getUmaDAO().findByName(name);
-		
-		if (uma == null) {
+	@Override
+	public UmaDTO findByName(String name) throws ServiceException {
+
+		Uma uma = null;
+
+		try {
+			uma = this.getUmaDAO().findByName(name);
+		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.UMA_DOES_NOT_EXIST);
-		}		
+		}
 
 		return this.toDTO(uma);
 	}

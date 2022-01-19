@@ -26,9 +26,6 @@ public class PersonRequest {
 	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
 	private Date birthday;
 	
-	@NotNull
-	private String legajo;
-
 	public String getName() {
 		return name;
 	}
@@ -59,14 +56,6 @@ public class PersonRequest {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	public String getLegajo() {
-		return legajo;
-	}
-
-	public void setLegajo(String legajo) {
-		this.legajo = legajo;
 	}
 
 	public Long getId() {

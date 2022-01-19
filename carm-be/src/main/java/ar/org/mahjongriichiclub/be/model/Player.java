@@ -31,7 +31,7 @@ public class Player extends AbstractEntity {
 	Person person;
 
 	@Column(name = "NICKNAME", nullable = false, unique = true)
-	private String name;
+	private String nickname;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = true, name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_PLAYERACCOUNT_FK"))
@@ -58,11 +58,11 @@ public class Player extends AbstractEntity {
 	}
 
 	public String getNickname() {
-		return name;
+		return nickname;
 	}
 
 	public void setNickname(String nickname) {
-		this.name = nickname;
+		this.nickname = nickname;
 	}
 
 	public List<PlayerAccount> getPlayerAccounts() {

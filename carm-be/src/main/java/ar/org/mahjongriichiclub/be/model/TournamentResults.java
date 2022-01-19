@@ -11,7 +11,8 @@ import org.hibernate.annotations.SQLDelete;
 import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
 
 @Entity
-@Table(name = "TOURNAMENT_RESULTS",  uniqueConstraints = @UniqueConstraint(columnNames={"player", "tournament", "season"}))
+@Table(name = "TOURNAMENT_RESULTS", uniqueConstraints = @UniqueConstraint(columnNames = { "player_id", "tournament_id",
+		"season_id" }))
 @SQLDelete(sql = "UPDATE TOURNAMENT_RESULTS SET deleted = 1 WHERE id=?")
 public class TournamentResults extends AbstractEntity {
 
@@ -22,16 +23,16 @@ public class TournamentResults extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Player player;
-	
-	private Integer finalPlacement;
-	
-	private Integer points;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Tournament tournament;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Season season;
+
+	private Integer finalPlacement;
+
+	private Integer points;
 
 	public Integer getPoints() {
 		return points;
@@ -56,6 +57,5 @@ public class TournamentResults extends AbstractEntity {
 	public void setFinalPlacement(Integer finalPlacement) {
 		this.finalPlacement = finalPlacement;
 	}
-	
-	
+
 }

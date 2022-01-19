@@ -89,7 +89,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		if (entity == null) {
 			return null;
 		} else if (entity instanceof HibernateProxy) {
-			entity = (E) Hibernate.unproxy(entity);
+			entity = this.unproxy(entity);
 		}
 
 		Class<E> entityClass = (Class<E>) entity.getClass();
@@ -110,8 +110,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		BoundMapperFacade<E, D> boundMapper = this.findMap(entityClass, dtoClass);
 		return boundMapper.mapReverse(dto);
 	}
-	
-	
+
 	public E unproxy(E proxied)
 	{
 	    E entity = proxied;

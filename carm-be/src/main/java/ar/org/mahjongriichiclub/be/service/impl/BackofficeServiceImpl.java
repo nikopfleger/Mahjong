@@ -203,7 +203,10 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 			locationDTO.setName(location.getName());
 			locationDTO.setAddress(location.getAddress());
-			locationDTO.setOnlineGame(OnlineGame.getEnum(location.getOnlineGame()));
+			if (location.getOnlineGame() != null) {
+				locationDTO.setOnlineGame(OnlineGame.getEnum(location.getOnlineGame()));
+			}
+
 
 			locationDTO = this.getLocationService().save(locationDTO);
 

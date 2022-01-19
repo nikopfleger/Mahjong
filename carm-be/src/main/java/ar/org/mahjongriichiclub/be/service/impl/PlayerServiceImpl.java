@@ -19,7 +19,7 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 
 	@Override
 	public PlayerDTO findByNickname(String nickname) {
-		PlayerDTO player = null;
+		Player player = null;
 		
 		try {
 			
@@ -28,7 +28,7 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.PLAYER_DOES_NOT_EXIST, new String[] { nickname } ,e);
 		}
-		return player;
+		return this.toDTO(player);
 	}
 
 	public PlayerDAO getPlayerDAO() {

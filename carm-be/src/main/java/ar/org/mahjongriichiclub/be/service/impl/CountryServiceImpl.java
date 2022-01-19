@@ -31,21 +31,6 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 	}
 	
 
-	@Override
-	public CountryDTO findOneByIdAndCode(Long id, String code) {
-		Country country;
-
-		try {
-			country = this.getCountryDao().findOneByIdAndCode(id,code);
-
-		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST, new String[] { code }, e);
-		}
-		return this.toDTO(country);
-	}
-	
-
-
 	public CountryDAO getCountryDao() {
 		return countryDao;
 	}

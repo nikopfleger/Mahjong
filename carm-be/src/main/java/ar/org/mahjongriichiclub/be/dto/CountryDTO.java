@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
