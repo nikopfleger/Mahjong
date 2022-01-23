@@ -395,6 +395,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 			if (rulesetDTO == null) {
 				rulesetDTO = new RulesetDTO();
 			}
+			
+			
+			this.getRulesetService().findAll(ruleset);
 
 			fillRulesetDTO(ruleset, rulesetDTO);
 			

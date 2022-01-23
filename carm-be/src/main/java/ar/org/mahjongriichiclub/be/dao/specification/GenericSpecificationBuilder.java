@@ -9,25 +9,15 @@ import org.springframework.data.jpa.domain.Specification;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 public class GenericSpecificationBuilder<E extends AbstractEntity> {
-	 private final List<SearchCriteria> params;
+	 private final List<SearchCriteria<E>> params;
 
 	    public GenericSpecificationBuilder() {
-	        params = new ArrayList<SearchCriteria>();
+	        params = new ArrayList<SearchCriteria<E>>();
 	    }
 	    
-	    public GenericSpecificationBuilder<E> with(SearchCriteria criteria) {
+	    public GenericSpecificationBuilder<E> with(SearchCriteria<E> criteria) {
 	    	params.add(criteria);
 	    	return this;
-	    }
-
-	    public GenericSpecificationBuilder<E> with(String key, String operation, Object value, String predicateType) {
-	        params.add(new SearchCriteria(key, operation, value, predicateType));
-	        return this;
-	    }
-	    
-	    public GenericSpecificationBuilder<E> with(String key, String operation, Object value) {
-	        params.add(new SearchCriteria(key, operation, value));
-	        return this;
 	    }
 
 	    public Specification<E> build() {
@@ -36,7 +26,7 @@ public class GenericSpecificationBuilder<E extends AbstractEntity> {
 	        }
 
 	        List<Specification<E>> specs = params.stream()
-	          .map(GenericSpecification<E>::new)
+	          .map(e -> e.getSpecification())
 	          .collect(Collectors.toList());
 	        
 	        Specification<E> result = specs.get(0);
@@ -50,4 +40,5 @@ public class GenericSpecificationBuilder<E extends AbstractEntity> {
 	        }       
 	        return result;
 	    }
+
 }
