@@ -31,7 +31,7 @@ public interface BackofficeController {
 
 	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(LocationModel location) throws ServiceException;
 
-	public ResponseEntity<StatusResponse<UmaDTO>> addModifyLocation(UmaModel uma) throws ServiceException;
+	public ResponseEntity<StatusResponse<UmaDTO>> addModifyUma(UmaModel uma) throws ServiceException;
 
 	public ResponseEntity<StatusResponse<TournamentResultsDTO>> addModifyTourneyResult(TournamentResultsModel result)
 			throws ServiceException;

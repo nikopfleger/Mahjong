@@ -123,7 +123,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/uma")
-	public ResponseEntity<StatusResponse<UmaDTO>> addModifyLocation(@RequestBody @Validated UmaModel uma)
+	public ResponseEntity<StatusResponse<UmaDTO>> addModifyUma(@RequestBody @Validated UmaModel uma)
 			throws ServiceException {
 		UmaDTO umaDTO = this.getBackofficeService().addModifyUma(uma);
 
@@ -176,6 +176,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 		StatusResponse<RulesetDTO> response = new StatusResponse<>(rulesetDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<RulesetDTO>>(response, HttpStatus.CREATED);
 	}
-	
+
+
 
 }
