@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 public class EqualSearchCriteria<E extends AbstractEntity> extends GenericCriteria<E> {
-	
+
 	public static final String EQUAL_COMPARATOR = "=";
 
 	public EqualSearchCriteria(String key, Object value, String predicate) {
@@ -28,7 +28,7 @@ public class EqualSearchCriteria<E extends AbstractEntity> extends GenericCriter
 
 	@Override
 	public Specification<E> getSpecification() {
-		
+
 		Specification<E> spec = new Specification<E>() {
 			private static final long serialVersionUID = 1L;
 
@@ -37,9 +37,8 @@ public class EqualSearchCriteria<E extends AbstractEntity> extends GenericCriter
 				return criteriaBuilder.equal(root.<String>get(getKey()), getValue().toString());
 			}
 		};
-		
+
 		return spec;
 	}
 
-	
 }

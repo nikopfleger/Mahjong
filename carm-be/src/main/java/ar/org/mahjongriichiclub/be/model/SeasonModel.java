@@ -11,20 +11,20 @@ public class SeasonModel {
 
 	@NotNull
 	private Integer number;
-	
+
 	private String name;
-	
-	@JsonFormat(pattern="dd/MM/yyyy")
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
-	
-	@JsonFormat(pattern="dd/MM/yyyy")
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date endDate;
-	
+
 	private Boolean rankedGamesCount;
-	
+
 	@NotEmpty
 	private String ruleset;
-	
+
 	public Boolean getRankedGamesCount() {
 		return rankedGamesCount;
 	}

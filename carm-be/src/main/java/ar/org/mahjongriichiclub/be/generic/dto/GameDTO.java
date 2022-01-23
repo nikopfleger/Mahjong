@@ -8,16 +8,16 @@ import ar.org.mahjongriichiclub.be.dto.PlayerGameResultDTO;
 import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 
-public abstract class GameDTO extends GenericDTO { 
-	
+public abstract class GameDTO extends GenericDTO {
+
 	private GameLength gameLength;
-	
+
 	private Date datePlayed;
-	
+
 	private List<PlayerGameResultDTO> results;
-	
+
 	private LocationDTO location;
-	
+
 	private RulesetDTO ruleset;
 
 	public GameLength getGameLength() {
@@ -59,6 +59,5 @@ public abstract class GameDTO extends GenericDTO {
 	public void setRuleset(RulesetDTO ruleset) {
 		this.ruleset = ruleset;
 	}
-	
-	
+
 }

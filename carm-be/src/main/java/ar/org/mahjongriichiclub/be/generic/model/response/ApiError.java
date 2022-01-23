@@ -7,23 +7,23 @@ import org.springframework.http.HttpStatus;
 
 public class ApiError {
 
-    private HttpStatus status;
-    private String message;
-    private List<String> errors;
+	private HttpStatus status;
+	private String message;
+	private List<String> errors;
 
-    public ApiError(HttpStatus status, String message, List<String> errors) {
-        super();
-        this.setStatus(status);
-        this.setMessage(message);
-        this.setErrors(errors);
-    }
+	public ApiError(HttpStatus status, String message, List<String> errors) {
+		super();
+		this.setStatus(status);
+		this.setMessage(message);
+		this.setErrors(errors);
+	}
 
-    public ApiError(HttpStatus status, String message, String error) {
-        super();
-        this.setStatus(status);
-        this.setMessage(message);
-        setErrors(Arrays.asList(error));
-    }
+	public ApiError(HttpStatus status, String message, String error) {
+		super();
+		this.setStatus(status);
+		this.setMessage(message);
+		setErrors(Arrays.asList(error));
+	}
 
 	public List<String> getErrors() {
 		return errors;

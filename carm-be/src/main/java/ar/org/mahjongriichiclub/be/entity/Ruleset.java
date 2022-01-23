@@ -21,7 +21,7 @@ import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 public class Ruleset extends AbstractEntity {
 
 	private static final long serialVersionUID = 679781809336256419L;
-	
+
 	@Column(name = "NAME", nullable = false, unique = true)
 	private String name;
 
@@ -29,32 +29,32 @@ public class Ruleset extends AbstractEntity {
 	@JoinColumn(name = "UMA_ID", foreignKey = @ForeignKey(name = "RULESET_UMA_FK"))
 	private Uma uma;
 
-	@Column(name="OKA", nullable = false)
+	@Column(name = "OKA", nullable = false)
 	private Integer oka;
-	
-	@Column(name="CHONBO", nullable = false)
+
+	@Column(name = "CHONBO", nullable = false)
 	private Integer chonbo;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="GAME_TYPE", nullable = false)
+	@Column(name = "GAME_TYPE", nullable = false)
 	private GameLength gameLength;
-	
-	@Column(name="AKA", nullable= false)
+
+	@Column(name = "AKA", nullable = false)
 	private Boolean aka;
-	
-	@Column(name="IN_POINTS", nullable= false)
+
+	@Column(name = "IN_POINTS", nullable = false)
 	private Integer inPoints;
-	
-	@Column(name="OUT_POINTS", nullable= false)
+
+	@Column(name = "OUT_POINTS", nullable = false)
 	private Integer outPoints;
-	
-	@Column(name="SUDDEN_DEATH", nullable= false)
+
+	@Column(name = "SUDDEN_DEATH", nullable = false)
 	private Boolean suddenDeath;
-	
-	@Column(name="SANMA", nullable= false)
+
+	@Column(name = "SANMA", nullable = false)
 	private Boolean sanma;
-	
-	@Column(name="ROUNDING", nullable = false)
+
+	@Column(name = "ROUNDING", nullable = false)
 	private Boolean rounding;
 
 	public Uma getUma() {
@@ -144,8 +144,5 @@ public class Ruleset extends AbstractEntity {
 	public void setGameLength(GameLength gameLength) {
 		this.gameLength = gameLength;
 	}
-
-	
-	
 
 }

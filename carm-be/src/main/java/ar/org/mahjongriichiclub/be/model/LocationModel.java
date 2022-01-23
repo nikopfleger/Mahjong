@@ -3,12 +3,12 @@ package ar.org.mahjongriichiclub.be.model;
 import javax.validation.constraints.NotNull;
 
 public class LocationModel {
-	
+
 	@NotNull
 	private String name;
-	
+
 	private String address;
-	
+
 	private String onlineGame;
 
 	public String getName() {
@@ -34,8 +34,5 @@ public class LocationModel {
 	public void setOnlineGame(String onlineGame) {
 		this.onlineGame = onlineGame;
 	}
-	
-	
-	
-	
+
 }

@@ -3,17 +3,17 @@ package ar.org.mahjongriichiclub.be.dao.specification;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 public abstract class GenericCriteria<E extends AbstractEntity> implements SearchCriteria<E> {
-	
+
 	protected String key;
-	
-	protected Object value; 
-	
+
+	protected Object value;
+
 	protected String predicate;
-	
+
 	protected String comparator;
-	
+
 	protected static final String OR_PREDICATE = "OR";
-	
+
 	public GenericCriteria(String key, Object value, String predicate, String comparator) {
 		super();
 		this.key = key;
@@ -21,7 +21,7 @@ public abstract class GenericCriteria<E extends AbstractEntity> implements Searc
 		this.predicate = predicate;
 		this.comparator = comparator;
 	}
-	
+
 	public GenericCriteria(String key, Object value, String comparator) {
 		super();
 		this.key = key;

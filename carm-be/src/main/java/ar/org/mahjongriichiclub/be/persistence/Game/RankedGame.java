@@ -34,5 +34,4 @@ public class RankedGame extends Game {
 		this.season = season;
 	}
 
-
 }

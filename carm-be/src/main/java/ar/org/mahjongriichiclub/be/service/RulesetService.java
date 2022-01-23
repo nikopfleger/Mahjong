@@ -10,8 +10,8 @@ import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.GenericService;
 import ar.org.mahjongriichiclub.be.model.RulesetModel;
 
-public interface RulesetService extends GenericService<Ruleset,RulesetDTO> {
-	
+public interface RulesetService extends GenericService<Ruleset, RulesetDTO> {
+
 	@Transactional(readOnly = true)
 	public RulesetDTO findByName(String name) throws ServiceException;
 

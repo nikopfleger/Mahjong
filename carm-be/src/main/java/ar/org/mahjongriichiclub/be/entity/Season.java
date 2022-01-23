@@ -28,25 +28,25 @@ public class Season extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = -842700794019813783L;
 
-	@Column(name="SEASON_NUMBER" , nullable = false)
+	@Column(name = "SEASON_NUMBER", nullable = false)
 	private Integer number;
-	
-	@Column(name="SEASON_NAME")
+
+	@Column(name = "SEASON_NAME")
 	private String name;
-	
+
 	@Column(name = "START_DATE", nullable = false)
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
-	
+
 	@Column(name = "END_DATE")
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date endDate;
-	
+
 	@Column(name = "RANKED_GAMES_COUNT", nullable = false)
 	private Boolean rankedGamesCount;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "SEASON_RULESET_FK"))
 	private Ruleset ruleset;
@@ -98,6 +98,5 @@ public class Season extends AbstractEntity {
 	public void setRuleset(Ruleset ruleset) {
 		this.ruleset = ruleset;
 	}
-	
-	
+
 }

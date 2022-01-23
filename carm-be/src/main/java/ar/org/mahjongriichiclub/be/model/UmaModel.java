@@ -4,19 +4,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class UmaModel {
-	
+
 	@NotBlank
 	private String name;
 
 	@NotNull
 	private Integer firstPlace;
-	
+
 	@NotNull
 	private Integer secondPlace;
-	
+
 	@NotNull
 	private Integer thirdPlace;
-	
+
 	private Integer fourthPlace;
 
 	public Integer getFirstPlace() {

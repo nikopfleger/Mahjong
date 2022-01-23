@@ -17,14 +17,14 @@ public abstract class Points extends AbstractEntity {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Game game;
-	
-	@Column(name = "VALUE", nullable=false)
+
+	@Column(name = "VALUE", nullable = false)
 	private Integer value;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Player player;
-	
-	@Column(name="SANMA", nullable=false)
+
+	@Column(name = "SANMA", nullable = false)
 	private Boolean sanma;
 
 	public Game getGame() {
@@ -58,7 +58,5 @@ public abstract class Points extends AbstractEntity {
 	public void setSanma(Boolean sanma) {
 		this.sanma = sanma;
 	}
-	
-	
 
 }

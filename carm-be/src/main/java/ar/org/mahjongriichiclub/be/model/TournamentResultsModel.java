@@ -3,21 +3,20 @@ package ar.org.mahjongriichiclub.be.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-
 public class TournamentResultsModel {
-	
+
 	@NotNull
 	private String player;
-	
+
 	@NotNull
 	private Integer finalPlacement;
-	
+
 	@NotNull
 	private Integer points;
-	
+
 	@NotBlank
 	private String name;
-	
+
 	@NotBlank
 	private String seasonName;
 
@@ -60,5 +59,5 @@ public class TournamentResultsModel {
 	public void setSeasonName(String seasonName) {
 		this.seasonName = seasonName;
 	}
-	
+
 }

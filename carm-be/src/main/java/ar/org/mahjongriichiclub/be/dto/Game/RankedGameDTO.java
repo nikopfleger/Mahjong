@@ -8,7 +8,6 @@ import ar.org.mahjongriichiclub.be.persistence.Game.RankedGame;
 @MappedEntity(entity = RankedGame.class)
 public class RankedGameDTO extends GameDTO {
 
-	
 	private SeasonDTO season;
 
 	public SeasonDTO getSeason() {

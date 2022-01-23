@@ -1,23 +1,20 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-
-
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.entity.Uma;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = Uma.class)
 public class UmaDTO extends GenericDTO {
-	
+
 	private String name;
 
 	private Integer firstPlace;
-	
+
 	private Integer secondPlace;
 
 	private Integer thirdPlace;
-	
+
 	private Integer fourthPlace;
 
 	public Integer getFirstPlace() {
@@ -59,6 +56,5 @@ public class UmaDTO extends GenericDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 }

@@ -13,7 +13,7 @@ import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 @Entity
-@Table(name = "LOCATION", uniqueConstraints = @UniqueConstraint(columnNames={"id", "name"}))
+@Table(name = "LOCATION", uniqueConstraints = @UniqueConstraint(columnNames = { "id", "name" }))
 @SQLDelete(sql = "UPDATE LOCATION SET deleted = 1 WHERE id=?")
 public class Location extends AbstractEntity {
 
@@ -22,13 +22,13 @@ public class Location extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = -6553515250454392026L;
 
-	@Column(name="NAME", unique = true, nullable = false)
+	@Column(name = "NAME", unique = true, nullable = false)
 	private String name;
-	
-	@Column(name="ADDRESS", unique = true)
+
+	@Column(name = "ADDRESS", unique = true)
 	private String address;
-	
-	@Column(name="ONLINE", unique = true)
+
+	@Column(name = "ONLINE", unique = true)
 	@Enumerated(EnumType.STRING)
 	private OnlineGame onlineGame;
 
@@ -55,7 +55,5 @@ public class Location extends AbstractEntity {
 	public void setOnlineGame(OnlineGame onlineGame) {
 		this.onlineGame = onlineGame;
 	}
-	
-	
-	
+
 }

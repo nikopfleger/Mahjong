@@ -14,19 +14,19 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 public class SeasonDTO extends GenericDTO {
 
 	private Integer number;
-	
+
 	private String name;
-	
+
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
-	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
+	@JsonFormat(pattern = GenericDTO.DATE_PATTERN)
 	private Date startDate;
-	
+
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
-	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
+	@JsonFormat(pattern = GenericDTO.DATE_PATTERN)
 	private Date endDate;
-	
+
 	private Boolean rankedGamesCount;
-	
+
 	private RulesetDTO ruleset;
 
 	public Integer getNumber() {
@@ -76,6 +76,5 @@ public class SeasonDTO extends GenericDTO {
 	public void setRuleset(RulesetDTO ruleset) {
 		this.ruleset = ruleset;
 	}
-	
-	
+
 }

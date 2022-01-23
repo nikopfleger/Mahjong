@@ -9,7 +9,7 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StatusResponse<D extends GenericDTO> {
-	
+
 	public static final String CREATED = "CREATED";
 
 	private String status;

@@ -368,9 +368,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 			} else {
 				seasonDTO.setRankedGamesCount(Boolean.FALSE);
 			}
-			
+
 			RulesetDTO rulesetDTO = this.getRulesetService().findByName(season.getRuleset());
-			
+
 			seasonDTO.setRuleset(rulesetDTO);
 
 			seasonDTO = this.getSeasonService().save(seasonDTO);
@@ -395,12 +395,11 @@ public class BackofficeServiceImpl implements BackofficeService {
 			if (rulesetDTO == null) {
 				rulesetDTO = new RulesetDTO();
 			}
-			
-			
+
 			this.getRulesetService().findAll(ruleset);
 
 			fillRulesetDTO(ruleset, rulesetDTO);
-			
+
 			rulesetDTO = this.getRulesetService().save(rulesetDTO);
 
 		} catch (ServiceException e) {

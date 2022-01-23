@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.entity.Ruleset;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
@@ -8,21 +7,21 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = Ruleset.class)
 public class RulesetDTO extends GenericDTO {
-	
+
 	private String name;
 
 	private UmaDTO uma;
 
 	private Integer oka;
-	
+
 	private Integer chonbo;
-	
+
 	private GameLength gameLength;
-	
+
 	private Boolean aka;
-	
+
 	private Integer inPoints;
-	
+
 	private Integer outPoints;
 
 	private Boolean suddenDeath;
@@ -54,7 +53,6 @@ public class RulesetDTO extends GenericDTO {
 	public void setChonbo(Integer chonbo) {
 		this.chonbo = chonbo;
 	}
-
 
 	public Boolean getAka() {
 		return aka;
@@ -119,6 +117,5 @@ public class RulesetDTO extends GenericDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 }

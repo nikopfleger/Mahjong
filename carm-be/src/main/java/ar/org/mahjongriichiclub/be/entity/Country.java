@@ -10,19 +10,19 @@ import org.hibernate.annotations.SQLDelete;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 @Entity
-@Table(name="country", uniqueConstraints = @UniqueConstraint(columnNames={"id", "code"}))
+@Table(name = "country", uniqueConstraints = @UniqueConstraint(columnNames = { "id", "code" }))
 @SQLDelete(sql = "UPDATE country SET deleted = 1 WHERE id=?")
 public class Country extends AbstractEntity {
-	
+
 	private static final long serialVersionUID = -6916237663098795305L;
 
-	@Column(name="NAME", nullable=false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
-	
-	@Column(name="NATIONALITY", nullable=false)
+
+	@Column(name = "NATIONALITY", nullable = false)
 	private String nationality;
-	
-	@Column(name="CODE", nullable=false, unique= true)
+
+	@Column(name = "CODE", nullable = false, unique = true)
 	private String code;
 
 	public String getName() {
@@ -48,8 +48,5 @@ public class Country extends AbstractEntity {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
-	
 
-	
 }

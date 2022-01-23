@@ -9,9 +9,7 @@ import ar.org.mahjongriichiclub.be.generic.service.GenericService;
 
 public interface UmaService extends GenericService<Uma, UmaDTO> {
 
-
 	@Transactional(readOnly = true)
 	UmaDTO findByName(String name) throws ServiceException;
-
 
 }

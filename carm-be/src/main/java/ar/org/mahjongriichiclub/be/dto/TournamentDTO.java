@@ -9,15 +9,15 @@ import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = Tournament.class)
-public class TournamentDTO extends GenericDTO { 
+public class TournamentDTO extends GenericDTO {
 
 	private TournamentType tournamentType;
-	
+
 	private Date startDate;
-	
-	private Date endDate;	
-	
-	private SeasonDTO season;	
+
+	private Date endDate;
+
+	private SeasonDTO season;
 
 	private List<TournamentResultsDTO> results;
 
@@ -60,7 +60,5 @@ public class TournamentDTO extends GenericDTO {
 	public void setTournamentType(TournamentType tournamentType) {
 		this.tournamentType = tournamentType;
 	}
-	
-	
-	
+
 }

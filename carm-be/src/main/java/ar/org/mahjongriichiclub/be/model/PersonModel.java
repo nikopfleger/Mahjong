@@ -11,21 +11,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 public class PersonModel {
-	
+
 	private Long id;
-	
+
 	@NotNull
 	private String name;
-	
+
 	@NotNull
 	private String surnames;
-	
+
 	private String countryCode;
-	
+
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
-	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
+	@JsonFormat(pattern = GenericDTO.DATE_PATTERN)
 	private Date birthday;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -65,7 +65,5 @@ public class PersonModel {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 
 }

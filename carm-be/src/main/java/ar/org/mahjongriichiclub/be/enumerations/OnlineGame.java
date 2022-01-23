@@ -1,20 +1,19 @@
 package ar.org.mahjongriichiclub.be.enumerations;
 
 public enum OnlineGame {
-	
-	
+
 	RON2("Ron 2"), TENHOU("Tenhou"), MSOUL("Mahjong Soul");
-	
+
 	private final String value;
-	
-	OnlineGame (String value) {
+
+	OnlineGame(String value) {
 		this.value = value;
 	}
 
 	public String getValue() {
 		return value;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.getValue();
@@ -26,7 +25,7 @@ public enum OnlineGame {
 				return v;
 		return null;
 	}
-	
+
 	public static OnlineGame getEnum(String value) {
 		for (OnlineGame v : values())
 			if (v.getValue().equalsIgnoreCase(value))

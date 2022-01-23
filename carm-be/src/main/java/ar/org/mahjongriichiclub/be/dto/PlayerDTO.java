@@ -13,28 +13,28 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 @MappedEntity(entity = Player.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PlayerDTO extends GenericDTO {
-	
+
 	PersonDTO person;
-	
+
 	private List<PlayerAccountDTO> playerAccounts;
-	
+
 	private String nickname;
-	
+
 	@Transient
 	private Integer todayRate;
-	
+
 	@Transient
 	private Integer maxRate;
-	
+
 	@Transient
 	private Integer minRate;
-	
+
 	private List<RateDTO> playerRates;
-	
+
 	private List<DanPointsDTO> playerPoints;
-	
+
 	private List<PlayerGameResultDTO> playerResults;
- 
+
 	public PersonDTO getPerson() {
 		return person;
 	}
@@ -106,7 +106,5 @@ public class PlayerDTO extends GenericDTO {
 	public void setPlayerResults(List<PlayerGameResultDTO> playerResults) {
 		this.playerResults = playerResults;
 	}
-	
-	
 
 }

@@ -19,7 +19,7 @@ import ar.org.mahjongriichiclub.be.generic.entity.Game;
 @Table(name = "PLAYER_GAME_RESULT")
 @SQLDelete(sql = "UPDATE PLAYER_GAME_RESULT SET deleted = 1 WHERE id=?")
 public class PlayerGameResult extends AbstractEntity {
-	
+
 	/**
 	 * 
 	 */
@@ -27,26 +27,26 @@ public class PlayerGameResult extends AbstractEntity {
 	private static final long PRIMERA_POSICION = 1L;
 	private static final long ULTIMA_POSICION = 4L;
 
-	@Column(name="SCORE")
+	@Column(name = "SCORE")
 	private Integer score;
-	
-	@Column(name="FINAL_SCORE", nullable = false)
+
+	@Column(name = "FINAL_SCORE", nullable = false)
 	private Integer finalScore;
-	
-	@Column(name="CHONBO")
+
+	@Column(name = "CHONBO")
 	private Integer chonbo;
-	
-	@Column(name="STARTING_WIND")
+
+	@Column(name = "STARTING_WIND")
 	private Wind startingWind;
-	
-	@Column(name="FINAL_POSITION")
+
+	@Column(name = "FINAL_POSITION")
 	@Min(PRIMERA_POSICION)
 	@Max(ULTIMA_POSICION)
 	private Integer finalPosition;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Player player;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Game game;
 
@@ -98,6 +98,4 @@ public class PlayerGameResult extends AbstractEntity {
 		this.player = player;
 	}
 
-	
-	
 }

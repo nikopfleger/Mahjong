@@ -5,14 +5,14 @@ import java.util.Hashtable;
 import javax.validation.constraints.NotBlank;
 
 public class PlayerModel {
-	
-	private PersonModel person;
-	
-	@NotBlank
-	private String nickname;	
 
-	private Hashtable<String,String> onlineAccounts;
-	
+	private PersonModel person;
+
+	@NotBlank
+	private String nickname;
+
+	private Hashtable<String, String> onlineAccounts;
+
 	public Hashtable<String, String> getOnlineAccounts() {
 		return onlineAccounts;
 	}
@@ -36,7 +36,5 @@ public class PlayerModel {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
-	
 
 }

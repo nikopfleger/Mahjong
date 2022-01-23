@@ -40,7 +40,7 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 			ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "ERROR", ex.getMessage());
 			return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 		}
-		
+
 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 	}
 

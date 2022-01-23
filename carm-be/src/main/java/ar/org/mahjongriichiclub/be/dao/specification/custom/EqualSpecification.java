@@ -11,16 +11,16 @@ import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 public class EqualSpecification<E extends AbstractEntity> extends GenericSpecification<E> {
 
-
 	private static final long serialVersionUID = 1L;
-	
+
 	public EqualSpecification(EqualSearchCriteria<E> criteria) {
 		super(criteria);
 	}
 
 	@Override
 	public Predicate toPredicate(Root<E> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-		return criteriaBuilder.equal(root.<String>get(this.getCriteria().getKey()), this.getCriteria().getValue().toString());
-	}	
+		return criteriaBuilder.equal(root.<String>get(this.getCriteria().getKey()),
+				this.getCriteria().getValue().toString());
+	}
 
 }

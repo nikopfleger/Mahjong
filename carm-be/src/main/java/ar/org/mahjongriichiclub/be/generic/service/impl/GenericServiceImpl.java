@@ -19,17 +19,15 @@ import ar.org.mahjongriichiclub.be.generic.service.GenericService;
 import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
 
-
 @Service("genericService")
-public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
-		implements GenericService<E, D> {
+public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO> implements GenericService<E, D> {
 
 	@Autowired
 	private GenericDao<E> genericDao;
 
 	@Autowired
 	private MapperFactory mapperFactory;
-	
+
 	@Autowired
 	private BiMap<Class<?>, Class<?>> entityDTORelationship;
 
@@ -40,16 +38,17 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		return entity != null ? this.toDTO(entity) : null;
 
 	}
-	
+
 	@Override
 	public D save(D dto) {
 		E entity = (E) this.toEntity(dto);
 		try {
 			entity = this.getGenericDao().save(entity);
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.SAVING_ENTITY, new String[] { dto.getClass().getSimpleName() }, e);
+			throw new ServiceException(ServiceExceptionConstants.SAVING_ENTITY,
+					new String[] { dto.getClass().getSimpleName() }, e);
 		}
-		
+
 		return this.toDTO(entity);
 	}
 
@@ -64,7 +63,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 
 		return dtoResult;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<D> findDTOClass(Class<E> clazz) {
@@ -103,7 +102,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 	@SuppressWarnings("unchecked")
 	@Override
 	public E toEntity(D dto) {
-		
+
 		Class<D> dtoClass = (Class<D>) dto.getClass();
 		Class<E> entityClass = this.findEntityClass(dtoClass);
 
@@ -112,16 +111,13 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 	}
 
 	@SuppressWarnings("unchecked")
-	public E unproxy(E proxied)
-	{
-	    E entity = proxied;
-	    if (entity instanceof HibernateProxy) {
-	        Hibernate.initialize(entity);
-	        entity = (E) ((HibernateProxy) entity)
-	                  .getHibernateLazyInitializer()
-	                  .getImplementation();
-	    }
-	    return entity;
+	public E unproxy(E proxied) {
+		E entity = proxied;
+		if (entity instanceof HibernateProxy) {
+			Hibernate.initialize(entity);
+			entity = (E) ((HibernateProxy) entity).getHibernateLazyInitializer().getImplementation();
+		}
+		return entity;
 	}
 
 	public GenericDao<E> getGenericDao() {

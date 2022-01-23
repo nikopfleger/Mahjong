@@ -40,5 +40,4 @@ public interface BackofficeService {
 
 	public RulesetDTO addModifyRuleset(RulesetModel ruleset) throws ServiceException;;
 
-
 }

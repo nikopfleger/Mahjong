@@ -13,35 +13,36 @@ import ar.org.mahjongriichiclub.be.service.PlayerService;
 
 @Service("playerServiceImpl")
 public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> implements PlayerService {
-	
+
 	@Autowired
 	PlayerDAO playerDAO;
 
 	@Override
 	public PlayerDTO findByNickname(String nickname) {
 		Player player = null;
-		
+
 		try {
-			
+
 			player = this.getPlayerDAO().findByNickname(nickname);
-			
+
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.PLAYER_DOES_NOT_EXIST, new String[] { nickname } ,e);
+			throw new ServiceException(ServiceExceptionConstants.PLAYER_DOES_NOT_EXIST, new String[] { nickname }, e);
 		}
 		return this.toDTO(player);
 	}
-	
+
 	@Override
 	public PlayerDTO findByPersonId(Long id) {
 		Player player = null;
-		
+
 		try {
 			player = this.getPlayerDAO().findByPersonId(id);
-			
+
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.PERSON_DOES_NOT_EXIST, new String[] { id.toString() } ,e);
+			throw new ServiceException(ServiceExceptionConstants.PERSON_DOES_NOT_EXIST, new String[] { id.toString() },
+					e);
 		}
-		
+
 		return this.toDTO(player);
 	}
 
@@ -52,8 +53,5 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 	public void setPlayerDAO(PlayerDAO playerDAO) {
 		this.playerDAO = playerDAO;
 	}
-
-
-
 
 }

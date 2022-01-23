@@ -14,19 +14,19 @@ import ar.org.mahjongriichiclub.be.service.TResultService;
 @Service("tResultServiceImpl")
 public class TResultServiceImpl extends GenericServiceImpl<TournamentResults, TournamentResultsDTO>
 		implements TResultService {
-	
+
 	@Autowired
 	private TournamentResultsDAO tournamentResultsDAO;
-	
 
 	@Override
 	public TournamentResultsDTO findByPlayerAndTournamentAndSeason(String player, String tournament, String season) {
 		TournamentResults result = null;
-		
+
 		try {
 			result = this.getTournamentResultsDAO().findByPlayerAndTournamentAndSeason(player, tournament, season);
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.RECORD_DOES_NOT_EXIST, new String[] { player, tournament, season } ,e);
+			throw new ServiceException(ServiceExceptionConstants.RECORD_DOES_NOT_EXIST,
+					new String[] { player, tournament, season }, e);
 		}
 		return this.toDTO(result);
 	}

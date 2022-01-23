@@ -6,7 +6,7 @@ import ar.org.mahjongriichiclub.be.persistence.Game.TournamentGame;
 
 @MappedEntity(entity = TournamentGame.class)
 public class TournamentGameDTO extends RankedGameDTO {
-	
+
 	private TournamentDTO tournament;
 
 	public TournamentDTO getTournament() {
@@ -16,7 +16,5 @@ public class TournamentGameDTO extends RankedGameDTO {
 	public void setTournament(TournamentDTO tournament) {
 		this.tournament = tournament;
 	}
-	
-	
-	
+
 }

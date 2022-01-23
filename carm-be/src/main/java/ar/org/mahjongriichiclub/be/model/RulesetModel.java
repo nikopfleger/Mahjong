@@ -4,10 +4,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class RulesetModel {
-	
+
 	@NotBlank
 	private String name;
-	
+
 	@NotBlank
 	private String uma;
 

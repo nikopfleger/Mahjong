@@ -29,7 +29,6 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 		}
 		return this.toDTO(country);
 	}
-	
 
 	public CountryDAO getCountryDao() {
 		return countryDao;
@@ -38,7 +37,5 @@ public class CountryServiceImpl extends GenericServiceImpl<Country, CountryDTO> 
 	public void setCountryDAO(CountryDAO countryDAO) {
 		this.countryDao = countryDAO;
 	}
-
-
 
 }

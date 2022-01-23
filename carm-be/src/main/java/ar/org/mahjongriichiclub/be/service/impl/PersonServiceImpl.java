@@ -10,5 +10,4 @@ import ar.org.mahjongriichiclub.be.service.PersonService;
 @Service("personServiceImpl")
 public class PersonServiceImpl extends GenericServiceImpl<Person, PersonDTO> implements PersonService {
 
-
 }

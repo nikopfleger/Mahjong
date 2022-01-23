@@ -5,8 +5,6 @@ import java.util.Locale;
 
 public class LocalizedException extends RuntimeException {
 
-	
-
 	/**
 	 * 
 	 */
@@ -15,23 +13,23 @@ public class LocalizedException extends RuntimeException {
 	private String messageKey;
 	private Locale locale;
 	private String[] params = null;
-	
+
 	public LocalizedException() {
 		super();
 	}
-	
+
 	public LocalizedException(Throwable cause) {
 		super(cause);
 	}
-	
+
 	public LocalizedException(String messageKey) {
 		super(messageKey);
 	}
-	
+
 	public LocalizedException(String messageKey, Throwable cause) {
 		super(messageKey, cause);
 	}
-	
+
 	public LocalizedException(String messageKey, String[] params) {
 		super(messageKey);
 		this.params = params;
@@ -47,19 +45,19 @@ public class LocalizedException extends RuntimeException {
 	@Override
 	@SuppressWarnings("all")
 	public String getLocalizedMessage() {
-		
+
 		if (params != null && params.length > 0) {
 			String resource = Messages.getMessageResource(Locale.getDefault()).getString(messageKey);
-			
-			return MessageFormat.format(resource,params);
+
+			return MessageFormat.format(resource, params);
 		}
 		String returnMessage = Messages.getMessageForLocale(messageKey, Locale.getDefault());
-		return returnMessage == null?"ERROR":returnMessage;
+		return returnMessage == null ? "ERROR" : returnMessage;
 	}
-	
+
 	@Override
 	public String getMessage() {
-		return getLocalizedMessage()==null?super.getMessage():getLocalizedMessage();
+		return getLocalizedMessage() == null ? super.getMessage() : getLocalizedMessage();
 	}
 
 	@Override
@@ -92,6 +90,5 @@ public class LocalizedException extends RuntimeException {
 	public void setParams(String[] params) {
 		this.params = params;
 	}
-	
-	
+
 }

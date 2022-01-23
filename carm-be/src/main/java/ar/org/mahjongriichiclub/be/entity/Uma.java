@@ -12,30 +12,29 @@ import org.hibernate.annotations.SQLDelete;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 @Entity
-@Table(name="UMA", uniqueConstraints=
-@UniqueConstraint(columnNames={"id", "name"}))
+@Table(name = "UMA", uniqueConstraints = @UniqueConstraint(columnNames = { "id", "name" }))
 @SQLDelete(sql = "UPDATE UMA SET deleted = 1 WHERE id=?")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Uma extends AbstractEntity {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8185788084639680842L;
-	
-	@Column(name="name", nullable = false, unique = true)
+
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
-	
-	@Column(name="first_place", nullable = false)
+
+	@Column(name = "first_place", nullable = false)
 	private Integer firstPlace;
-	
-	@Column(name="second_place", nullable = false)
+
+	@Column(name = "second_place", nullable = false)
 	private Integer secondPlace;
-	
-	@Column(name="third_place", nullable = false)
+
+	@Column(name = "third_place", nullable = false)
 	private Integer thirdPlace;
-	
-	@Column(name="fourth_place")
+
+	@Column(name = "fourth_place")
 	private Integer fourthPlace;
 
 	public Integer getFirstPlace() {
@@ -77,8 +76,5 @@ public class Uma extends AbstractEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-
 
 }

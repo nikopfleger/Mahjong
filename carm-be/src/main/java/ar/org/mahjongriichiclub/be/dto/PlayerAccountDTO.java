@@ -1,7 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.entity.PlayerAccount;
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
@@ -11,7 +9,7 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 public class PlayerAccountDTO extends GenericDTO {
 
 	public String accountId;
-	
+
 	public OnlineGame gameAccount;
 
 	public String getAccountId() {
@@ -29,5 +27,5 @@ public class PlayerAccountDTO extends GenericDTO {
 	public void setGameAccount(OnlineGame gameAccount) {
 		this.gameAccount = gameAccount;
 	}
-	
+
 }

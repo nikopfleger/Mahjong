@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.entity.Player;
 import ar.org.mahjongriichiclub.be.entity.PlayerGameResult;
@@ -9,7 +8,6 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = PlayerGameResult.class)
 public class PlayerGameResultDTO extends GenericDTO {
-	
 
 	private Integer score;
 
@@ -18,9 +16,9 @@ public class PlayerGameResultDTO extends GenericDTO {
 	private Integer chonbo = 0;
 
 	private Wind startingWind;
-	
+
 	private Integer finalPosition;
-	
+
 	private Player player;
 
 	public Integer getScore() {
@@ -70,7 +68,5 @@ public class PlayerGameResultDTO extends GenericDTO {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	
-	
 
 }

@@ -1,6 +1,5 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.entity.Tournament;
 import ar.org.mahjongriichiclub.be.entity.TournamentResults;
@@ -10,11 +9,11 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 public class TournamentResultsDTO extends GenericDTO {
 
 	private PlayerDTO player;
-	
+
 	private Integer finalPlacement;
-	
+
 	private Integer points;
-	
+
 	private Tournament tournament;
 
 	public PlayerDTO getPlayer() {
@@ -48,6 +47,5 @@ public class TournamentResultsDTO extends GenericDTO {
 	public void setTournament(Tournament tournament) {
 		this.tournament = tournament;
 	}
-	
-	
+
 }

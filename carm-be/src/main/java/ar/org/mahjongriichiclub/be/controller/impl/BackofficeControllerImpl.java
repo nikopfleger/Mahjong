@@ -106,8 +106,8 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/location")
-	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(
-			@RequestBody @Validated LocationModel location) throws ServiceException {
+	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(@RequestBody @Validated LocationModel location)
+			throws ServiceException {
 		LocationDTO locationDTO = this.getBackofficeService().addModifyLocation(location);
 
 		StatusResponse<LocationDTO> response = new StatusResponse<>(locationDTO, StatusResponse.CREATED);
@@ -130,7 +130,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 		StatusResponse<UmaDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<UmaDTO>>(response, HttpStatus.CREATED);
 	}
-	
+
 	/**
 	 * Agrega o modifica una temporada
 	 * 
@@ -146,7 +146,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 		StatusResponse<SeasonDTO> response = new StatusResponse<>(seasonDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<SeasonDTO>>(response, HttpStatus.CREATED);
 	}
-	
+
 	/**
 	 * Agrega o modifica un resultado de torneo
 	 * 
@@ -155,8 +155,8 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/tournament/result")
-	public ResponseEntity<StatusResponse<TournamentResultsDTO>> addModifyTourneyResult(@RequestBody @Validated TournamentResultsModel result)
-			throws ServiceException {
+	public ResponseEntity<StatusResponse<TournamentResultsDTO>> addModifyTourneyResult(
+			@RequestBody @Validated TournamentResultsModel result) throws ServiceException {
 		TournamentResultsDTO umaDTO = this.getBackofficeService().addModifyTourneyResult(result);
 
 		StatusResponse<TournamentResultsDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
@@ -171,13 +171,12 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/ruleset")
-	public ResponseEntity<StatusResponse<RulesetDTO>> addModifyRuleset(@RequestBody @Validated RulesetModel ruleset) throws ServiceException {
+	public ResponseEntity<StatusResponse<RulesetDTO>> addModifyRuleset(@RequestBody @Validated RulesetModel ruleset)
+			throws ServiceException {
 		RulesetDTO rulesetDTO = this.getBackofficeService().addModifyRuleset(ruleset);
-		
+
 		StatusResponse<RulesetDTO> response = new StatusResponse<>(rulesetDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<RulesetDTO>>(response, HttpStatus.CREATED);
 	}
-
-
 
 }

@@ -7,8 +7,8 @@ import ar.org.mahjongriichiclub.be.entity.Country;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.GenericService;
 
-public interface CountryService extends GenericService<Country,CountryDTO> {
-	
+public interface CountryService extends GenericService<Country, CountryDTO> {
+
 	@Transactional(readOnly = true)
 	public CountryDTO findByCode(String code) throws ServiceException;
 

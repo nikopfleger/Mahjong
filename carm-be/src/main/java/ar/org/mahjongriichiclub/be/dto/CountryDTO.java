@@ -1,12 +1,10 @@
 package ar.org.mahjongriichiclub.be.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
 import ar.org.mahjongriichiclub.be.entity.Country;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-
 
 /**
  * @author Niko
@@ -15,12 +13,11 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 @MappedEntity(entity = Country.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountryDTO extends GenericDTO {
-	
 
 	private String name;
-	
+
 	private String nationality;
-	
+
 	private String code;
 
 	public String getName() {
@@ -46,7 +43,5 @@ public class CountryDTO extends GenericDTO {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
-	
 
 }

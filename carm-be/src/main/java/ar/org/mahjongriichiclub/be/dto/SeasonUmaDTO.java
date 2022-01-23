@@ -5,7 +5,7 @@ import ar.org.mahjongriichiclub.be.entity.SeasonUma;
 
 @MappedEntity(entity = SeasonUma.class)
 public class SeasonUmaDTO extends UmaDTO {
-	
+
 	private SeasonDTO season;
 
 	public SeasonDTO getSeason() {

@@ -29,7 +29,8 @@ public interface BackofficeController {
 
 	public ResponseEntity<StatusResponse<PlayerDTO>> addModifyPlayer(PlayerModel player) throws ServiceException;
 
-	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(LocationModel location) throws ServiceException;
+	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(LocationModel location)
+			throws ServiceException;
 
 	public ResponseEntity<StatusResponse<UmaDTO>> addModifyUma(UmaModel uma) throws ServiceException;
 
@@ -37,7 +38,7 @@ public interface BackofficeController {
 			throws ServiceException;
 
 	public ResponseEntity<StatusResponse<SeasonDTO>> addModifySeason(SeasonModel result) throws ServiceException;
-	
+
 	public ResponseEntity<StatusResponse<RulesetDTO>> addModifyRuleset(RulesetModel ruleset) throws ServiceException;
 
 }

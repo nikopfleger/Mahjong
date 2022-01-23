@@ -7,5 +7,4 @@ public interface RulesetDAO extends GenericDao<Ruleset> {
 
 	public Ruleset findByName(String name);
 
-
 }

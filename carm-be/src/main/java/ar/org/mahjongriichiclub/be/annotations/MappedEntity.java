@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Target(TYPE)
 @Documented
 public @interface MappedEntity {
-	
+
 	@SuppressWarnings("rawtypes")
 	public Class entity();
 

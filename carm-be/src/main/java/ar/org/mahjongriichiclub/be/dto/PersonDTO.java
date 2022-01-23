@@ -2,7 +2,6 @@ package ar.org.mahjongriichiclub.be.dto;
 
 import java.util.Date;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,18 +13,18 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = Person.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonDTO extends GenericDTO {	
+public class PersonDTO extends GenericDTO {
 
 	private String name;
-	
+
 	private String surnames;
-	
-	private CountryDTO country;	
+
+	private CountryDTO country;
 
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
-	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
-	private Date birthday;	
-	
+	@JsonFormat(pattern = GenericDTO.DATE_PATTERN)
+	private Date birthday;
+
 	private String legajo;
 
 	public String getName() {
@@ -67,7 +66,5 @@ public class PersonDTO extends GenericDTO {
 	public void setLegajo(String legajo) {
 		this.legajo = legajo;
 	}
-	
-	
-	
+
 }

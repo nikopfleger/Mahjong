@@ -14,20 +14,20 @@ import ar.org.mahjongriichiclub.be.service.SeasonService;
 @Service("seasonServiceImpl")
 public class SeasonServiceImpl extends GenericServiceImpl<Season, SeasonDTO> implements SeasonService {
 
-
 	@Autowired
 	private SeasonDAO seasonDAO;
-	
+
 	@Override
 	public SeasonDTO findByNumber(Integer number) throws ServiceException {
 		Season season = null;
-		
+
 		try {
 			season = this.getSeasonDAO().findByNumber(number);
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.SEASON_DOES_NOT_EXIST, new String[] { number.toString() } ,e);
+			throw new ServiceException(ServiceExceptionConstants.SEASON_DOES_NOT_EXIST,
+					new String[] { number.toString() }, e);
 		}
- 		
+
 		return this.toDTO(season);
 	}
 

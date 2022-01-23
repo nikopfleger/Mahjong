@@ -15,7 +15,6 @@ import org.hibernate.annotations.SQLDelete;
 
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
-
 @Entity
 @Table(name = "player")
 @SQLDelete(sql = "UPDATE player SET deleted = 1 WHERE id=?")
@@ -32,19 +31,19 @@ public class Player extends AbstractEntity {
 
 	@Column(name = "NICKNAME", nullable = false, unique = true)
 	private String nickname;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(nullable = true, name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_PLAYERACCOUNT_FK"))
 	private List<PlayerAccount> playerAccounts;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = true, name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_RATE_FK"))
 	private List<Rate> playerRates;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = true, name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_POINTS_FK"))
 	private List<DanPoints> playerPoints;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_GAMERESULT_FK"))
 	private List<PlayerGameResult> playerResults;
@@ -96,6 +95,5 @@ public class Player extends AbstractEntity {
 	public void setPlayerResults(List<PlayerGameResult> playerResults) {
 		this.playerResults = playerResults;
 	}
-	
-	
+
 }

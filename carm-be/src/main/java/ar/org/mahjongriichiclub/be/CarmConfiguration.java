@@ -28,9 +28,9 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 
 @Configuration
 public class CarmConfiguration implements WebMvcConfigurer {
-	
+
 	private static final Logger logger = LogManager.getRootLogger();
-	
+
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -39,35 +39,36 @@ public class CarmConfiguration implements WebMvcConfigurer {
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
-	
+
 	@Bean
 	public BiMap<Class<?>, Class<?>> entityDTORelationship() {
-		
+
 		HashMap<Class<?>, Class<?>> entityDTORelationship = new HashMap<>();
-		
+
 		Reflections reflections = new Reflections("ar.org.mahjongriichiclub.be.dto");
 		Set<Class<?>> dtoClasses = reflections.getTypesAnnotatedWith(MappedEntity.class);
-		
+
 		for (Class<?> dto : dtoClasses) {
 			MappedEntity anno = dto.getAnnotation(MappedEntity.class);
 			Class<?> entity = anno.entity();
 			entityDTORelationship.put(entity, dto);
 		}
-		
+
 		return HashBiMap.create(entityDTORelationship);
 	}
 
 	@Bean
-	public MapperFactory mapperFactory() {		
-		
+	public MapperFactory mapperFactory() {
+
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-	
+
 		BiMap<Class<?>, Class<?>> entityDTORelationship = entityDTORelationship();
 
 		for (Map.Entry<Class<?>, Class<?>> e : entityDTORelationship.entrySet()) {
-		    mapperFactory.classMap(e.getKey(), e.getValue());
-		    String message = "MapperFactory: Mapping entity=" + e.getKey().getSimpleName() + " with dto=" + e.getValue().getSimpleName();
-		    logger.info(message);
+			mapperFactory.classMap(e.getKey(), e.getValue());
+			String message = "MapperFactory: Mapping entity=" + e.getKey().getSimpleName() + " with dto="
+					+ e.getValue().getSimpleName();
+			logger.info(message);
 		}
 		return mapperFactory;
 	}

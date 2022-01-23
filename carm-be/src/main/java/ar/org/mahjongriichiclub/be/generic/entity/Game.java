@@ -26,31 +26,29 @@ import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="GAME_TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "GAME_TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class Game extends AbstractEntity {
-	
 
 	private static final long serialVersionUID = -6207654534713862278L;
 
-	@Column(name="GAME_LENGTH", nullable = false)
+	@Column(name = "GAME_LENGTH", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private GameLength gameLength;
 
-	@Column(name="DATE_PLAYED", nullable = false)
+	@Column(name = "DATE_PLAYED", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date datePlayed;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GAME_ID", foreignKey = @ForeignKey(name = "GAME_RESULTS_FK"))
 	private List<PlayerGameResult> results;
-	
-	@Column(name="LOCATION")
+
+	@Column(name = "LOCATION")
 	private Location location;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "GAME_RULESET_FK"), nullable = false)
 	private Ruleset ruleset;
-
 
 	public GameLength getGameLength() {
 		return gameLength;
@@ -91,5 +89,5 @@ public abstract class Game extends AbstractEntity {
 	public void setRuleset(Ruleset ruleset) {
 		this.ruleset = ruleset;
 	}
-	
+
 }

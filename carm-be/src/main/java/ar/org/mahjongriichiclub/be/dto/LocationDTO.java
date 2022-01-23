@@ -8,7 +8,7 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 @MappedEntity(entity = Location.class)
 public class LocationDTO extends GenericDTO {
 
-	private String name;	
+	private String name;
 
 	private String address;
 
@@ -37,7 +37,5 @@ public class LocationDTO extends GenericDTO {
 	public void setOnlineGame(OnlineGame onlineGame) {
 		this.onlineGame = onlineGame;
 	}
-	
-	
 
 }

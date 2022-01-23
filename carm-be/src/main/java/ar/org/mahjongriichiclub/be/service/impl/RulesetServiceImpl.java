@@ -39,9 +39,9 @@ public class RulesetServiceImpl extends GenericServiceImpl<Ruleset, RulesetDTO> 
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.ERROR_FINDING_RULESETS, e);
 		}
-		
+
 		List<RulesetDTO> dtos = new ArrayList<>();
-		
+
 		for (Ruleset entity : entities) {
 			dtos.add(toDTO(entity));
 		}

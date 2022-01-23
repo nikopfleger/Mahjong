@@ -30,26 +30,26 @@ public class Tournament extends AbstractEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -5554365457117766193L;
-	
+
 	@Column(name = "name")
 	private String name;
 
-	@Column(name= "tournamentType")
+	@Column(name = "tournamentType")
 	@Enumerated(EnumType.STRING)
 	private TournamentType tournamentType;
-	
-	@Column(name="startDate")
+
+	@Column(name = "startDate")
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
-	
-	@Column(name="endDate")
+
+	@Column(name = "endDate")
 	@Temporal(TemporalType.DATE)
-	private Date endDate;	
-	
+	private Date endDate;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_SEASON_FK"))
 	private Season season;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_RULESET_FK"))
 	private Ruleset ruleset;
@@ -113,6 +113,5 @@ public class Tournament extends AbstractEntity {
 	public void setRuleset(Ruleset ruleset) {
 		this.ruleset = ruleset;
 	}
-	
-	
+
 }

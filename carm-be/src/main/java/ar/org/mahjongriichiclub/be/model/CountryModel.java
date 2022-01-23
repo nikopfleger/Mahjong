@@ -3,13 +3,13 @@ package ar.org.mahjongriichiclub.be.model;
 import javax.validation.constraints.NotBlank;
 
 public class CountryModel {
-	
+
 	@NotBlank
 	private String name;
-	
+
 	@NotBlank
 	private String code;
-	
+
 	@NotBlank
 	private String nationality;
 
