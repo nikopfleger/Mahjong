@@ -20,26 +20,24 @@ import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 @SQLDelete(sql = "UPDATE RULESET SET deleted = 1 WHERE id=?")
 public class Ruleset extends AbstractEntity {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 679781809336256419L;
 	
+	@Column(name = "NAME", nullable = false, unique = true)
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "UMA_ID", foreignKey = @ForeignKey(name = "RULESET_UMA_FK"))
 	private Uma uma;
 
-	@Column(name="OKA")
+	@Column(name="OKA", nullable = false)
 	private Integer oka;
 	
-	@Column(name="CHONBO")
+	@Column(name="CHONBO", nullable = false)
 	private Integer chonbo;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="GAME_TYPE", nullable= false)
-	private GameLength gameType;
+	@Column(name="GAME_TYPE", nullable = false)
+	private GameLength gameLength;
 	
 	@Column(name="AKA", nullable= false)
 	private Boolean aka;
@@ -81,14 +79,6 @@ public class Ruleset extends AbstractEntity {
 
 	public void setChonbo(Integer chonbo) {
 		this.chonbo = chonbo;
-	}
-
-	public GameLength getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(GameLength gameType) {
-		this.gameType = gameType;
 	}
 
 	public Boolean getAka() {
@@ -145,6 +135,14 @@ public class Ruleset extends AbstractEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public GameLength getGameLength() {
+		return gameLength;
+	}
+
+	public void setGameLength(GameLength gameLength) {
+		this.gameLength = gameLength;
 	}
 
 	

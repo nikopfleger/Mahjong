@@ -26,14 +26,14 @@ public class Player extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = 4280970450449600006L;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "PLAYER_PERSON_FK"))
+	@OneToOne(fetch = FetchType.LAZY, orphanRemoval = false)
+	@JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "PLAYER_PERSON_FK"), unique = true)
 	Person person;
 
 	@Column(name = "NICKNAME", nullable = false, unique = true)
 	private String nickname;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(nullable = true, name = "PLAYER_ID", foreignKey = @ForeignKey(name = "PLAYER_PLAYERACCOUNT_FK"))
 	private List<PlayerAccount> playerAccounts;
 	

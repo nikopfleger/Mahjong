@@ -11,7 +11,7 @@ import ar.org.mahjongriichiclub.be.entity.Player;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = Player.class)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PlayerDTO extends GenericDTO {
 	
 	PersonDTO person;

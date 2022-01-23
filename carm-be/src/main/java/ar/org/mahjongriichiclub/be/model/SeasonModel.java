@@ -2,6 +2,7 @@ package ar.org.mahjongriichiclub.be.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -20,6 +21,9 @@ public class SeasonModel {
 	private Date endDate;
 	
 	private Boolean rankedGamesCount;
+	
+	@NotEmpty
+	private String ruleset;
 	
 	public Boolean getRankedGamesCount() {
 		return rankedGamesCount;
@@ -59,5 +63,13 @@ public class SeasonModel {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getRuleset() {
+		return ruleset;
+	}
+
+	public void setRuleset(String ruleset) {
+		this.ruleset = ruleset;
 	}
 }

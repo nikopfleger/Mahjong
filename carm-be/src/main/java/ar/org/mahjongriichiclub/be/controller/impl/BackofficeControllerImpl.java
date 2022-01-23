@@ -170,7 +170,8 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 * @return ResponseEntity
 	 */
 	@Override
-	public ResponseEntity<StatusResponse<RulesetDTO>> addModifyRuleset(RulesetModel ruleset) throws ServiceException {
+	@PostMapping("/ruleset")
+	public ResponseEntity<StatusResponse<RulesetDTO>> addModifyRuleset(@RequestBody @Validated RulesetModel ruleset) throws ServiceException {
 		RulesetDTO rulesetDTO = this.getBackofficeService().addModifyRuleset(ruleset);
 		
 		StatusResponse<RulesetDTO> response = new StatusResponse<>(rulesetDTO, StatusResponse.CREATED);

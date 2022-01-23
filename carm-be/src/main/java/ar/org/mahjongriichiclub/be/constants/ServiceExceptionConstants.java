@@ -34,10 +34,19 @@ public class ServiceExceptionConstants {
 	public static final String PLAYER_DOES_NOT_EXIST = ERROR_PREFIX + "PLAYER_DOES_NOT_EXIST";
 	public static final String RECORD_DOES_NOT_EXIST = ERROR_PREFIX + "PLAYER_RECORD_ON_TOURNAMENT";
 	public static final String SEASON_DOES_NOT_EXIST = ERROR_PREFIX + "SEASON_DOES_NOT_EXIST";
-
+	public static final String RULESET_DOES_NOT_EXIST = ERROR_PREFIX + "RULESET_DOES_NOT_EXIST";
+	public static final String PERSON_DOES_NOT_EXIST = ERROR_PREFIX + "PERSON_DOES_NOT_EXIST";
+	
 	public static final String ONLINE_GAME_DOES_NOT_EXIST = ERROR_PREFIX + "ONLINE_GAME_DOES_NOT_EXIST";
 
 	public static final String ERROR_FINDING_RULESETS = ERROR_PREFIX + "RULESET_DOES_NOT_EXIST";
+
+	public static final String INVALID_GAME_LENGTH_NAME = ERROR_PREFIX + "INVALID_GAME_LENGTH_NAME";
+
+
+
+
+
 
 
 

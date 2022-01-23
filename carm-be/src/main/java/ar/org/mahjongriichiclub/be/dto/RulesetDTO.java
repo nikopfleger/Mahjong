@@ -8,6 +8,8 @@ import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
 
 @MappedEntity(entity = Ruleset.class)
 public class RulesetDTO extends GenericDTO {
+	
+	private String name;
 
 	private UmaDTO uma;
 
@@ -15,7 +17,7 @@ public class RulesetDTO extends GenericDTO {
 	
 	private Integer chonbo;
 	
-	private GameLength gameType;
+	private GameLength gameLength;
 	
 	private Boolean aka;
 	
@@ -53,13 +55,6 @@ public class RulesetDTO extends GenericDTO {
 		this.chonbo = chonbo;
 	}
 
-	public GameLength getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(GameLength gameType) {
-		this.gameType = gameType;
-	}
 
 	public Boolean getAka() {
 		return aka;
@@ -107,6 +102,22 @@ public class RulesetDTO extends GenericDTO {
 
 	public void setRounding(Boolean rounding) {
 		this.rounding = rounding;
+	}
+
+	public GameLength getGameLength() {
+		return gameLength;
+	}
+
+	public void setGameLength(GameLength gameLength) {
+		this.gameLength = gameLength;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

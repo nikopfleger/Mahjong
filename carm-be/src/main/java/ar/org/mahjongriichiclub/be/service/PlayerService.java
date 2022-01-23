@@ -12,4 +12,7 @@ public interface PlayerService extends GenericService<Player,PlayerDTO> {
 
 	@Transactional(readOnly = true)
 	public PlayerDTO findByNickname(String nickname);
+
+	@Transactional(readOnly = true)
+	public PlayerDTO findByPersonId(Long id);
 }

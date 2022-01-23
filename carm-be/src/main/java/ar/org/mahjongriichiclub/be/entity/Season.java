@@ -4,6 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,6 +46,10 @@ public class Season extends AbstractEntity {
 	
 	@Column(name = "RANKED_GAMES_COUNT", nullable = false)
 	private Boolean rankedGamesCount;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "SEASON_RULESET_FK"))
+	private Ruleset ruleset;
 
 	public Integer getNumber() {
 		return number;
@@ -81,6 +89,14 @@ public class Season extends AbstractEntity {
 
 	public void setRankedGamesCount(Boolean rankedGamesCount) {
 		this.rankedGamesCount = rankedGamesCount;
+	}
+
+	public Ruleset getRuleset() {
+		return ruleset;
+	}
+
+	public void setRuleset(Ruleset ruleset) {
+		this.ruleset = ruleset;
 	}
 	
 	

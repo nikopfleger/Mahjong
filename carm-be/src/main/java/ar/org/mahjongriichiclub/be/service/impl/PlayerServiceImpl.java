@@ -30,6 +30,20 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 		}
 		return this.toDTO(player);
 	}
+	
+	@Override
+	public PlayerDTO findByPersonId(Long id) {
+		Player player = null;
+		
+		try {
+			player = this.getPlayerDAO().findByPersonId(id);
+			
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.PERSON_DOES_NOT_EXIST, new String[] { id.toString() } ,e);
+		}
+		
+		return this.toDTO(player);
+	}
 
 	public PlayerDAO getPlayerDAO() {
 		return playerDAO;
@@ -38,6 +52,8 @@ public class PlayerServiceImpl extends GenericServiceImpl<Player, PlayerDTO> imp
 	public void setPlayerDAO(PlayerDAO playerDAO) {
 		this.playerDAO = playerDAO;
 	}
+
+
 
 
 }

@@ -7,4 +7,6 @@ public interface PlayerDAO extends GenericDao<Player> {
 
 	public Player findByNickname(String nickname);
 
+	public Player findByPersonId(Long id);
+
 }

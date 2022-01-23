@@ -26,6 +26,8 @@ public class SeasonDTO extends GenericDTO {
 	private Date endDate;
 	
 	private Boolean rankedGamesCount;
+	
+	private RulesetDTO ruleset;
 
 	public Integer getNumber() {
 		return number;
@@ -65,6 +67,14 @@ public class SeasonDTO extends GenericDTO {
 
 	public void setRankedGamesCount(Boolean rankedGamesCount) {
 		this.rankedGamesCount = rankedGamesCount;
+	}
+
+	public RulesetDTO getRuleset() {
+		return ruleset;
+	}
+
+	public void setRuleset(RulesetDTO ruleset) {
+		this.ruleset = ruleset;
 	}
 	
 	

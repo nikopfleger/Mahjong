@@ -1,19 +1,26 @@
 package ar.org.mahjongriichiclub.be.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class RulesetModel {
 	
+	@NotBlank
 	private String name;
 	
+	@NotBlank
 	private String uma;
 
 	private Integer oka;
 
 	private Integer chonbo;
 
-	private String gameType;
+	@NotBlank
+	private String gameLength;
 
 	private Boolean aka;
 
+	@NotNull
 	private Integer inPoints;
 
 	private Integer outPoints;
@@ -46,14 +53,6 @@ public class RulesetModel {
 
 	public void setChonbo(Integer chonbo) {
 		this.chonbo = chonbo;
-	}
-
-	public String getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
 	}
 
 	public Boolean getAka() {
@@ -110,6 +109,14 @@ public class RulesetModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getGameLength() {
+		return gameLength;
+	}
+
+	public void setGameLength(String gameLength) {
+		this.gameLength = gameLength;
 	}
 
 }

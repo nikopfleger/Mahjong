@@ -48,7 +48,11 @@ public class Tournament extends AbstractEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_SEASON_FK"))
-	private Season season;	
+	private Season season;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "RULESET_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_RULESET_FK"))
+	private Ruleset ruleset;
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TOURNAMENT_ID", foreignKey = @ForeignKey(name = "TOURNAMENT_RESULTS_FK"))
@@ -92,6 +96,22 @@ public class Tournament extends AbstractEntity {
 
 	public void setTournamentType(TournamentType tournamentType) {
 		this.tournamentType = tournamentType;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Ruleset getRuleset() {
+		return ruleset;
+	}
+
+	public void setRuleset(Ruleset ruleset) {
+		this.ruleset = ruleset;
 	}
 	
 	

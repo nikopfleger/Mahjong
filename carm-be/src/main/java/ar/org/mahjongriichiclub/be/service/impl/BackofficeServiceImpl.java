@@ -18,7 +18,7 @@ import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
-
+import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.model.CountryModel;
@@ -63,10 +63,10 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	@Autowired
 	TResultService tResultService;
-	
+
 	@Autowired
 	SeasonService seasonService;
-	
+
 	@Autowired
 	RulesetService rulesetService;
 
@@ -79,7 +79,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 */
 	@Override
 	public PersonDTO addModifyPerson(PersonModel person) throws ServiceException {
-		
+
 		PersonDTO personDTO = null;
 		try {
 
@@ -153,10 +153,10 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 */
 	@Override
 	public PlayerDTO addModifyPlayer(PlayerModel player) {
-		
+
 		String onlineIDValue = null;
 		PlayerDTO playerDTO = null;
-		
+
 		try {
 
 			if (player.getNickname() != null) {
@@ -179,32 +179,28 @@ public class BackofficeServiceImpl implements BackofficeService {
 					personDTO = new PersonDTO();
 					this.fillPersonDTO(player.getPerson(), personDTO);
 				}
-				
-				
-				
+
 				if (player.getOnlineAccounts() != null && player.getOnlineAccounts().size() > 0) {
-					
+
 					List<PlayerAccountDTO> accounts = new ArrayList<>();
-					
+
 					for (Map.Entry<String, String> onlineID : player.getOnlineAccounts().entrySet()) {
-						
+
 						PlayerAccountDTO playerAccount = new PlayerAccountDTO();
-						
+
 						playerAccount.setAccountId(onlineID.getKey());
-						
-						onlineIDValue = onlineID.getValue();
+
+						onlineIDValue = onlineID.getValue().toUpperCase();
 						OnlineGame onlineGame = OnlineGame.valueOf(onlineIDValue);
 						playerAccount.setGameAccount(onlineGame);
-						
+
 						accounts.add(playerAccount);
 					}
-					
+
 					playerDTO.setPlayerAccounts(accounts);
 				}
 
-
 				playerDTO.setPerson(personDTO);
-				
 
 			}
 
@@ -212,7 +208,8 @@ public class BackofficeServiceImpl implements BackofficeService {
 		} catch (ServiceException e) {
 			throw e;
 		} catch (IllegalArgumentException e) {
-			throw new ServiceException(ServiceExceptionConstants.ONLINE_GAME_DOES_NOT_EXIST, new String[] { onlineIDValue }, e);
+			throw new ServiceException(ServiceExceptionConstants.ONLINE_GAME_DOES_NOT_EXIST,
+					new String[] { onlineIDValue }, e);
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.CREATING_PLAYER, new String[] { player.getNickname() },
 					e);
@@ -230,15 +227,15 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 		personDTO.setName(person.getName());
 		personDTO.setSurnames(person.getSurnames());
-		personDTO.setBirthday(person.getBirthday());		
-		
-		if (personDTO.getCountry() != null) {
-				CountryDTO country = this.countryService.findByCode(personDTO.getCountry().getCode());
-				if (country == null) {
-					throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST,
-							new String[] { personDTO.getCountry().getName() });
-				}
-				personDTO.setCountry(country);
+		personDTO.setBirthday(person.getBirthday());
+
+		if (personDTO.getCountry() == null) {
+			CountryDTO country = this.countryService.findByCode(person.getCountryCode());
+			if (country == null) {
+				throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST,
+						new String[] { person.getCountryCode() });
+			}
+			personDTO.setCountry(country);
 		}
 
 	}
@@ -260,7 +257,6 @@ public class BackofficeServiceImpl implements BackofficeService {
 			if (location.getOnlineGame() != null) {
 				locationDTO.setOnlineGame(OnlineGame.getEnum(location.getOnlineGame()));
 			}
-
 
 			locationDTO = this.getLocationService().save(locationDTO);
 
@@ -324,13 +320,14 @@ public class BackofficeServiceImpl implements BackofficeService {
 		try {
 
 			if (result.getPlayer() != null && result.getName() != null && result.getSeasonName() != null) {
-				tournamentResultDTO = this.getTResultService().findByPlayerAndTournamentAndSeason(result.getPlayer(), result.getName(), result.getSeasonName());
+				tournamentResultDTO = this.getTResultService().findByPlayerAndTournamentAndSeason(result.getPlayer(),
+						result.getName(), result.getSeasonName());
 			}
 
 			if (tournamentResultDTO == null) {
 				tournamentResultDTO = new TournamentResultsDTO();
-				
-				playerDTO = this.getPlayerService().findByNickname(result.getPlayer());	
+
+				playerDTO = this.getPlayerService().findByNickname(result.getPlayer());
 				tournamentResultDTO.setPlayer(playerDTO);
 			}
 
@@ -348,21 +345,20 @@ public class BackofficeServiceImpl implements BackofficeService {
 		}
 		return tournamentResultDTO;
 	}
-	
 
 	@Override
 	public SeasonDTO addModifySeason(SeasonModel season) {
 		SeasonDTO seasonDTO = null;
-		
+
 		try {
 			if (season.getNumber() != null) {
 				seasonDTO = this.getSeasonService().findByNumber(season.getNumber());
 			}
-			
+
 			if (seasonDTO == null) {
 				seasonDTO = new SeasonDTO();
 			}
-			
+
 			seasonDTO.setName(season.getName());
 			seasonDTO.setNumber(season.getNumber());
 			seasonDTO.setStartDate(season.getStartDate());
@@ -373,39 +369,75 @@ public class BackofficeServiceImpl implements BackofficeService {
 				seasonDTO.setRankedGamesCount(Boolean.FALSE);
 			}
 			
+			RulesetDTO rulesetDTO = this.getRulesetService().findByName(season.getRuleset());
 			
+			seasonDTO.setRuleset(rulesetDTO);
+
 			seasonDTO = this.getSeasonService().save(seasonDTO);
-			
+
 		} catch (ServiceException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATING_SEASON, new String[] { season.getNumber().toString() },e);
+			throw new ServiceException(ServiceExceptionConstants.CREATING_SEASON,
+					new String[] { season.getNumber().toString() }, e);
 		}
 		return seasonDTO;
 	}
-	
 
 	@Override
 	public RulesetDTO addModifyRuleset(RulesetModel ruleset) throws ServiceException {
-		
-		RulesetDTO rulesetDTO = null;
-		
 
+		RulesetDTO rulesetDTO = null;
 
 		try {
-			rulesetDTO = this.getRulesetService().findFirst(ruleset);
+			rulesetDTO = this.getRulesetService().findByName(ruleset.getName());
+
+			if (rulesetDTO == null) {
+				rulesetDTO = new RulesetDTO();
+			}
+
+			fillRulesetDTO(ruleset, rulesetDTO);
 			
-			
-			
+			rulesetDTO = this.getRulesetService().save(rulesetDTO);
+
 		} catch (ServiceException e) {
 			throw e;
+		} catch (IllegalArgumentException e) {
+			throw new ServiceException(ServiceExceptionConstants.INVALID_GAME_LENGTH_NAME,
+					new String[] { ruleset.getGameLength() }, e);
 		} catch (Exception e) {
-			throw new ServiceException(ServiceExceptionConstants.CREATING_RULESET, e);
+			throw new ServiceException(ServiceExceptionConstants.CREATING_RULESET, new String[] { ruleset.getName() },
+					e);
 		}
-		
+
 		return rulesetDTO;
 	}
 
+	private void fillRulesetDTO(RulesetModel ruleset, RulesetDTO rulesetDTO) throws IllegalArgumentException {
+
+		UmaDTO umaDTO = this.getUmaService().findByName(ruleset.getUma());
+
+		if (umaDTO == null) {
+			throw new ServiceException(ServiceExceptionConstants.UMA_DOES_NOT_EXIST, new String[] { ruleset.getUma() });
+		}
+
+		rulesetDTO.setName(ruleset.getName());
+
+		rulesetDTO.setUma(umaDTO);
+		rulesetDTO.setAka(ruleset.getAka() != null ? ruleset.getAka() : Boolean.FALSE);
+		rulesetDTO.setChonbo(ruleset.getChonbo() != null ? ruleset.getChonbo() : 0);
+
+		GameLength gameLength = GameLength.valueOf(ruleset.getGameLength().toUpperCase());
+
+		rulesetDTO.setGameLength(gameLength);
+		rulesetDTO.setInPoints(ruleset.getInPoints());
+		rulesetDTO.setOutPoints(ruleset.getOutPoints() != null ? ruleset.getOutPoints() : ruleset.getInPoints());
+		rulesetDTO.setOka(ruleset.getOka() != null ? ruleset.getOka() : 0);
+		rulesetDTO.setRounding(ruleset.getRounding() != null ? ruleset.getRounding() : Boolean.FALSE);
+		rulesetDTO.setSanma(ruleset.getSanma() != null ? ruleset.getSanma() : Boolean.FALSE);
+		rulesetDTO.setSuddenDeath(ruleset.getSuddenDeath() != null ? ruleset.getSuddenDeath() : Boolean.FALSE);
+
+	}
 
 	public PersonService getPersonService() {
 		return personService;
@@ -478,6 +510,5 @@ public class BackofficeServiceImpl implements BackofficeService {
 	public void setRulesetService(RulesetService rulesetService) {
 		this.rulesetService = rulesetService;
 	}
-
 
 }
