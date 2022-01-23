@@ -1,9 +1,8 @@
 package ar.org.mahjongriichiclub.be.generic.dto;
 
-import ar.org.mahjongriichiclub.be.dto.GameDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
 
-public class PointsDTO extends GenericDTO {
+public abstract class PointsDTO extends GenericDTO {
 
 	private GameDTO game;
 

@@ -4,8 +4,8 @@ package ar.org.mahjongriichiclub.be.dto;
 
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Uma;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Uma;
 
 @MappedEntity(entity = Uma.class)
 public class UmaDTO extends GenericDTO {

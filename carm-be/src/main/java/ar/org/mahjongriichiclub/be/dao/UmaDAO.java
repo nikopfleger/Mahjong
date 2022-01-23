@@ -1,7 +1,7 @@
 package ar.org.mahjongriichiclub.be.dao;
 
+import ar.org.mahjongriichiclub.be.entity.Uma;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
-import ar.org.mahjongriichiclub.be.model.Uma;
 
 public interface UmaDAO extends GenericDao<Uma> {
 

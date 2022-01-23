@@ -30,7 +30,7 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 public class CarmConfiguration implements WebMvcConfigurer {
 	
 	private static final Logger logger = LogManager.getRootLogger();
-
+	
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();

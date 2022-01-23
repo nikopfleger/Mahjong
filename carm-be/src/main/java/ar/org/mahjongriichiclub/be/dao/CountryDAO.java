@@ -1,8 +1,8 @@
 package ar.org.mahjongriichiclub.be.dao;
 
 
+import ar.org.mahjongriichiclub.be.entity.Country;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
-import ar.org.mahjongriichiclub.be.model.Country;
 
 public interface CountryDAO extends GenericDao<Country> {
 	

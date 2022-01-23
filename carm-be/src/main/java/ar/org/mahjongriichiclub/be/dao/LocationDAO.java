@@ -1,8 +1,8 @@
 package ar.org.mahjongriichiclub.be.dao;
 
 
+import ar.org.mahjongriichiclub.be.entity.Location;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
-import ar.org.mahjongriichiclub.be.model.Location;
 
 public interface LocationDAO extends GenericDao<Location> {
 	

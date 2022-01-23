@@ -2,9 +2,9 @@ package ar.org.mahjongriichiclub.be.dto;
 
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Ruleset;
 import ar.org.mahjongriichiclub.be.enumerations.GameLength;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Ruleset;
 
 @MappedEntity(entity = Ruleset.class)
 public class RulesetDTO extends GenericDTO {

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.UmaDAO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
+import ar.org.mahjongriichiclub.be.entity.Uma;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
-import ar.org.mahjongriichiclub.be.model.Uma;
 import ar.org.mahjongriichiclub.be.service.UmaService;
 
 @Service("umaServiceImpl")

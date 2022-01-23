@@ -4,8 +4,8 @@ package ar.org.mahjongriichiclub.be.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Country;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Country;
 
 
 /**

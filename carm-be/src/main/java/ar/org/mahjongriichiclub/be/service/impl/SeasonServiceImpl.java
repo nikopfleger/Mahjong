@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.SeasonDAO;
 import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
+import ar.org.mahjongriichiclub.be.entity.Season;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
-import ar.org.mahjongriichiclub.be.model.Season;
 import ar.org.mahjongriichiclub.be.service.SeasonService;
 
 @Service("seasonServiceImpl")

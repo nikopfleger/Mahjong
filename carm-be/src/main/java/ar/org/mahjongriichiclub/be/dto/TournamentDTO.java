@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Tournament;
 import ar.org.mahjongriichiclub.be.enumerations.TournamentType;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Tournament;
 
 @MappedEntity(entity = Tournament.class)
 public class TournamentDTO extends GenericDTO { 

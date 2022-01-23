@@ -14,20 +14,21 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-
-import ar.org.mahjongriichiclub.be.request.CountryRequest;
-import ar.org.mahjongriichiclub.be.request.LocationRequest;
-import ar.org.mahjongriichiclub.be.request.PersonRequest;
-import ar.org.mahjongriichiclub.be.request.PlayerRequest;
-import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
-import ar.org.mahjongriichiclub.be.request.SeasonRequest;
-import ar.org.mahjongriichiclub.be.request.UmaRequest;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.generic.model.response.StatusResponse;
+import ar.org.mahjongriichiclub.be.model.CountryModel;
+import ar.org.mahjongriichiclub.be.model.LocationModel;
+import ar.org.mahjongriichiclub.be.model.PersonModel;
+import ar.org.mahjongriichiclub.be.model.PlayerModel;
+import ar.org.mahjongriichiclub.be.model.RulesetModel;
+import ar.org.mahjongriichiclub.be.model.SeasonModel;
+import ar.org.mahjongriichiclub.be.model.TournamentResultsModel;
+import ar.org.mahjongriichiclub.be.model.UmaModel;
 
 /**
  * @author Niko
@@ -48,7 +49,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/person")
-	public ResponseEntity<StatusResponse<PersonDTO>> addModifyPerson(@RequestBody @Validated PersonRequest person)
+	public ResponseEntity<StatusResponse<PersonDTO>> addModifyPerson(@RequestBody @Validated PersonModel person)
 			throws ServiceException {
 		PersonDTO personDTO = this.getBackofficeService().addModifyPerson(person);
 
@@ -64,7 +65,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/country")
-	public ResponseEntity<StatusResponse<CountryDTO>> addModifyCountry(@RequestBody @Validated CountryRequest country)
+	public ResponseEntity<StatusResponse<CountryDTO>> addModifyCountry(@RequestBody @Validated CountryModel country)
 			throws ServiceException {
 
 		CountryDTO countryDTO = this.getBackofficeService().addModifyCountry(country);
@@ -81,7 +82,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/player")
-	public ResponseEntity<StatusResponse<PlayerDTO>> addModifyPlayer(@RequestBody @Validated PlayerRequest player)
+	public ResponseEntity<StatusResponse<PlayerDTO>> addModifyPlayer(@RequestBody @Validated PlayerModel player)
 			throws ServiceException {
 		PlayerDTO playerDTO = this.getBackofficeService().addModifyPlayer(player);
 
@@ -106,7 +107,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	@Override
 	@PostMapping("/location")
 	public ResponseEntity<StatusResponse<LocationDTO>> addModifyLocation(
-			@RequestBody @Validated LocationRequest location) throws ServiceException {
+			@RequestBody @Validated LocationModel location) throws ServiceException {
 		LocationDTO locationDTO = this.getBackofficeService().addModifyLocation(location);
 
 		StatusResponse<LocationDTO> response = new StatusResponse<>(locationDTO, StatusResponse.CREATED);
@@ -122,7 +123,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/uma")
-	public ResponseEntity<StatusResponse<UmaDTO>> addModifyLocation(@RequestBody @Validated UmaRequest uma)
+	public ResponseEntity<StatusResponse<UmaDTO>> addModifyLocation(@RequestBody @Validated UmaModel uma)
 			throws ServiceException {
 		UmaDTO umaDTO = this.getBackofficeService().addModifyUma(uma);
 
@@ -138,7 +139,7 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 */
 	@Override
 	@PostMapping("/season")
-	public ResponseEntity<StatusResponse<SeasonDTO>> addModifySeason(@RequestBody @Validated SeasonRequest result)
+	public ResponseEntity<StatusResponse<SeasonDTO>> addModifySeason(@RequestBody @Validated SeasonModel result)
 			throws ServiceException {
 		SeasonDTO seasonDTO = this.getBackofficeService().addModifySeason(result);
 
@@ -153,13 +154,28 @@ public class BackofficeControllerImpl implements BackofficeController {
 	 * @return ResponseEntity
 	 */
 	@Override
-	@PostMapping("/tourneyResults")
-	public ResponseEntity<StatusResponse<TournamentResultsDTO>> addModifyTourneyResult(@RequestBody @Validated TournamentResultsRequest result)
+	@PostMapping("/tournament/result")
+	public ResponseEntity<StatusResponse<TournamentResultsDTO>> addModifyTourneyResult(@RequestBody @Validated TournamentResultsModel result)
 			throws ServiceException {
 		TournamentResultsDTO umaDTO = this.getBackofficeService().addModifyTourneyResult(result);
 
 		StatusResponse<TournamentResultsDTO> response = new StatusResponse<>(umaDTO, StatusResponse.CREATED);
 		return new ResponseEntity<StatusResponse<TournamentResultsDTO>>(response, HttpStatus.CREATED);
 	}
+
+	/**
+	 * Agrega o modifica un set de reglas de juego
+	 * 
+	 * @params ruleset
+	 * @return ResponseEntity
+	 */
+	@Override
+	public ResponseEntity<StatusResponse<RulesetDTO>> addModifyRuleset(RulesetModel ruleset) throws ServiceException {
+		RulesetDTO rulesetDTO = this.getBackofficeService().addModifyRuleset(ruleset);
+		
+		StatusResponse<RulesetDTO> response = new StatusResponse<>(rulesetDTO, StatusResponse.CREATED);
+		return new ResponseEntity<StatusResponse<RulesetDTO>>(response, HttpStatus.CREATED);
+	}
+	
 
 }

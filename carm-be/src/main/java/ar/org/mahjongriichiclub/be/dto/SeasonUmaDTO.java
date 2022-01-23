@@ -1,7 +1,7 @@
 package ar.org.mahjongriichiclub.be.dto;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
-import ar.org.mahjongriichiclub.be.model.SeasonUma;
+import ar.org.mahjongriichiclub.be.entity.SeasonUma;
 
 @MappedEntity(entity = SeasonUma.class)
 public class SeasonUmaDTO extends UmaDTO {

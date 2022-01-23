@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.LocationDAO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
+import ar.org.mahjongriichiclub.be.entity.Location;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
-import ar.org.mahjongriichiclub.be.model.Location;
 import ar.org.mahjongriichiclub.be.service.LocationService;
 
 

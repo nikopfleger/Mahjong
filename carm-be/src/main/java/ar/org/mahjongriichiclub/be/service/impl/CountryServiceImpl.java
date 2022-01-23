@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.CountryDAO;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
+import ar.org.mahjongriichiclub.be.entity.Country;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
-import ar.org.mahjongriichiclub.be.model.Country;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 
 @Service(value = "countryServiceImpl")

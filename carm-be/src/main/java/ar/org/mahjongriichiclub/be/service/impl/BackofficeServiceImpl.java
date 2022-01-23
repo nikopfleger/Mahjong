@@ -1,5 +1,9 @@
 package ar.org.mahjongriichiclub.be.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,22 +12,23 @@ import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
+import ar.org.mahjongriichiclub.be.dto.PlayerAccountDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 
 import ar.org.mahjongriichiclub.be.enumerations.OnlineGame;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-
-import ar.org.mahjongriichiclub.be.request.CountryRequest;
-import ar.org.mahjongriichiclub.be.request.LocationRequest;
-import ar.org.mahjongriichiclub.be.request.PersonRequest;
-import ar.org.mahjongriichiclub.be.request.PlayerRequest;
-import ar.org.mahjongriichiclub.be.request.SeasonRequest;
-import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
-import ar.org.mahjongriichiclub.be.request.UmaRequest;
-
+import ar.org.mahjongriichiclub.be.model.CountryModel;
+import ar.org.mahjongriichiclub.be.model.LocationModel;
+import ar.org.mahjongriichiclub.be.model.PersonModel;
+import ar.org.mahjongriichiclub.be.model.PlayerModel;
+import ar.org.mahjongriichiclub.be.model.RulesetModel;
+import ar.org.mahjongriichiclub.be.model.SeasonModel;
+import ar.org.mahjongriichiclub.be.model.TournamentResultsModel;
+import ar.org.mahjongriichiclub.be.model.UmaModel;
 import ar.org.mahjongriichiclub.be.service.BackofficeService;
 import ar.org.mahjongriichiclub.be.service.CountryService;
 import ar.org.mahjongriichiclub.be.service.PersonService;
@@ -32,6 +37,7 @@ import ar.org.mahjongriichiclub.be.service.UmaService;
 import ar.org.mahjongriichiclub.be.service.LocationService;
 import ar.org.mahjongriichiclub.be.service.TResultService;
 import ar.org.mahjongriichiclub.be.service.SeasonService;
+import ar.org.mahjongriichiclub.be.service.RulesetService;
 
 /**
  * @author Niko
@@ -60,6 +66,9 @@ public class BackofficeServiceImpl implements BackofficeService {
 	
 	@Autowired
 	SeasonService seasonService;
+	
+	@Autowired
+	RulesetService rulesetService;
 
 	/**
 	 * Llama al servicio que guarda la persona
@@ -69,8 +78,8 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * 
 	 */
 	@Override
-	public PersonDTO addModifyPerson(PersonRequest person) throws ServiceException {
-
+	public PersonDTO addModifyPerson(PersonModel person) throws ServiceException {
+		
 		PersonDTO personDTO = null;
 		try {
 
@@ -105,7 +114,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * 
 	 */
 	@Override
-	public CountryDTO addModifyCountry(CountryRequest country) {
+	public CountryDTO addModifyCountry(CountryModel country) {
 
 		CountryDTO countryDTO = null;
 		try {
@@ -143,9 +152,11 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * 
 	 */
 	@Override
-	public PlayerDTO addModifyPlayer(PlayerRequest player) {
-
+	public PlayerDTO addModifyPlayer(PlayerModel player) {
+		
+		String onlineIDValue = null;
 		PlayerDTO playerDTO = null;
+		
 		try {
 
 			if (player.getNickname() != null) {
@@ -168,14 +179,40 @@ public class BackofficeServiceImpl implements BackofficeService {
 					personDTO = new PersonDTO();
 					this.fillPersonDTO(player.getPerson(), personDTO);
 				}
+				
+				
+				
+				if (player.getOnlineAccounts() != null && player.getOnlineAccounts().size() > 0) {
+					
+					List<PlayerAccountDTO> accounts = new ArrayList<>();
+					
+					for (Map.Entry<String, String> onlineID : player.getOnlineAccounts().entrySet()) {
+						
+						PlayerAccountDTO playerAccount = new PlayerAccountDTO();
+						
+						playerAccount.setAccountId(onlineID.getKey());
+						
+						onlineIDValue = onlineID.getValue();
+						OnlineGame onlineGame = OnlineGame.valueOf(onlineIDValue);
+						playerAccount.setGameAccount(onlineGame);
+						
+						accounts.add(playerAccount);
+					}
+					
+					playerDTO.setPlayerAccounts(accounts);
+				}
+
 
 				playerDTO.setPerson(personDTO);
+				
 
 			}
 
 			playerDTO = this.getPlayerService().save(playerDTO);
 		} catch (ServiceException e) {
 			throw e;
+		} catch (IllegalArgumentException e) {
+			throw new ServiceException(ServiceExceptionConstants.ONLINE_GAME_DOES_NOT_EXIST, new String[] { onlineIDValue }, e);
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.CREATING_PLAYER, new String[] { player.getNickname() },
 					e);
@@ -189,18 +226,25 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * @param person
 	 * @param personDTO
 	 */
-	protected void fillPersonDTO(PersonRequest person, PersonDTO personDTO) throws ServiceException {
+	protected void fillPersonDTO(PersonModel person, PersonDTO personDTO) throws ServiceException {
 
-		CountryDTO countryDTO = this.getCountryService().findByCode(person.getCountryCode());
 		personDTO.setName(person.getName());
 		personDTO.setSurnames(person.getSurnames());
-		personDTO.setCountry(countryDTO);
-		personDTO.setBirthday(person.getBirthday());
+		personDTO.setBirthday(person.getBirthday());		
+		
+		if (personDTO.getCountry() != null) {
+				CountryDTO country = this.countryService.findByCode(personDTO.getCountry().getCode());
+				if (country == null) {
+					throw new ServiceException(ServiceExceptionConstants.COUNTRY_DOES_NOT_EXIST,
+							new String[] { personDTO.getCountry().getName() });
+				}
+				personDTO.setCountry(country);
+		}
 
 	}
 
 	@Override
-	public LocationDTO addModifyLocation(LocationRequest location) throws ServiceException {
+	public LocationDTO addModifyLocation(LocationModel location) throws ServiceException {
 		LocationDTO locationDTO = null;
 
 		try {
@@ -241,7 +285,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 	 * 
 	 */
 	@Override
-	public UmaDTO addModifyUma(UmaRequest uma) throws ServiceException {
+	public UmaDTO addModifyUma(UmaModel uma) throws ServiceException {
 
 		UmaDTO umaDTO = null;
 		try {
@@ -273,7 +317,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 	}
 
 	@Override
-	public TournamentResultsDTO addModifyTourneyResult(TournamentResultsRequest result) throws ServiceException {
+	public TournamentResultsDTO addModifyTourneyResult(TournamentResultsModel result) throws ServiceException {
 		TournamentResultsDTO tournamentResultDTO = null;
 		PlayerDTO playerDTO = null;
 
@@ -307,7 +351,7 @@ public class BackofficeServiceImpl implements BackofficeService {
 	
 
 	@Override
-	public SeasonDTO addModifySeason(SeasonRequest season) {
+	public SeasonDTO addModifySeason(SeasonModel season) {
 		SeasonDTO seasonDTO = null;
 		
 		try {
@@ -323,6 +367,12 @@ public class BackofficeServiceImpl implements BackofficeService {
 			seasonDTO.setNumber(season.getNumber());
 			seasonDTO.setStartDate(season.getStartDate());
 			seasonDTO.setEndDate(season.getEndDate());
+			if (season.getRankedGamesCount() != null) {
+				seasonDTO.setRankedGamesCount(season.getRankedGamesCount());
+			} else {
+				seasonDTO.setRankedGamesCount(Boolean.FALSE);
+			}
+			
 			
 			seasonDTO = this.getSeasonService().save(seasonDTO);
 			
@@ -333,6 +383,29 @@ public class BackofficeServiceImpl implements BackofficeService {
 		}
 		return seasonDTO;
 	}
+	
+
+	@Override
+	public RulesetDTO addModifyRuleset(RulesetModel ruleset) throws ServiceException {
+		
+		RulesetDTO rulesetDTO = null;
+		
+
+
+		try {
+			rulesetDTO = this.getRulesetService().findFirst(ruleset);
+			
+			
+			
+		} catch (ServiceException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new ServiceException(ServiceExceptionConstants.CREATING_RULESET, e);
+		}
+		
+		return rulesetDTO;
+	}
+
 
 	public PersonService getPersonService() {
 		return personService;
@@ -396,6 +469,14 @@ public class BackofficeServiceImpl implements BackofficeService {
 
 	public void setSeasonService(SeasonService seasonService) {
 		this.seasonService = seasonService;
+	}
+
+	public RulesetService getRulesetService() {
+		return rulesetService;
+	}
+
+	public void setRulesetService(RulesetService rulesetService) {
+		this.rulesetService = rulesetService;
 	}
 
 

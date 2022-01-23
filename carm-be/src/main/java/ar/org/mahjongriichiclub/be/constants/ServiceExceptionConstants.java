@@ -20,6 +20,8 @@ public class ServiceExceptionConstants {
 	public static final String CREATING_PLAYER = ERROR_PREFIX + "CREATING_PLAYER";
 	public static final String CREATING_TOURNEY_RESULT = ERROR_PREFIX + "CREATING_TOURNEY_RESULT";
 	public static final String CREATING_SEASON = ERROR_PREFIX + "CREATING_SEASON";
+	public static final String CREATING_RULESET = ERROR_PREFIX + "CREATING_RULESET";
+
 	
 	public static final String COUNTRY_DOES_NOT_EXIST = ERROR_PREFIX + "COUNTRY_DOES_NOT_EXIST";
 	public static final String COUNTRY_WITH_ID_DOES_NOT_EXIST = ERROR_PREFIX + "COUNTRY_WITH_ID_DOES_NOT_EXIST";
@@ -32,6 +34,11 @@ public class ServiceExceptionConstants {
 	public static final String PLAYER_DOES_NOT_EXIST = ERROR_PREFIX + "PLAYER_DOES_NOT_EXIST";
 	public static final String RECORD_DOES_NOT_EXIST = ERROR_PREFIX + "PLAYER_RECORD_ON_TOURNAMENT";
 	public static final String SEASON_DOES_NOT_EXIST = ERROR_PREFIX + "SEASON_DOES_NOT_EXIST";
+
+	public static final String ONLINE_GAME_DOES_NOT_EXIST = ERROR_PREFIX + "ONLINE_GAME_DOES_NOT_EXIST";
+
+	public static final String ERROR_FINDING_RULESETS = ERROR_PREFIX + "RULESET_DOES_NOT_EXIST";
+
 
 
 	

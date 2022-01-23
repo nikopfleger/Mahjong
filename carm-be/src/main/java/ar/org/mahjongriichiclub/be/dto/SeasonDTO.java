@@ -7,8 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Season;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Season;
 
 @MappedEntity(entity = Season.class)
 public class SeasonDTO extends GenericDTO {
@@ -24,6 +24,8 @@ public class SeasonDTO extends GenericDTO {
 	@DateTimeFormat(pattern = GenericDTO.DATE_PATTERN)
 	@JsonFormat(pattern= GenericDTO.DATE_PATTERN)
 	private Date endDate;
+	
+	private Boolean rankedGamesCount;
 
 	public Integer getNumber() {
 		return number;
@@ -55,6 +57,14 @@ public class SeasonDTO extends GenericDTO {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Boolean getRankedGamesCount() {
+		return rankedGamesCount;
+	}
+
+	public void setRankedGamesCount(Boolean rankedGamesCount) {
+		this.rankedGamesCount = rankedGamesCount;
 	}
 	
 	

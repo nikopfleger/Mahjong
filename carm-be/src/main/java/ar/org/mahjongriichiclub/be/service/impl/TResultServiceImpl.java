@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.TournamentResultsDAO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
+import ar.org.mahjongriichiclub.be.entity.TournamentResults;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.service.impl.GenericServiceImpl;
-import ar.org.mahjongriichiclub.be.model.TournamentResults;
 import ar.org.mahjongriichiclub.be.service.TResultService;
 
 @Service("tResultServiceImpl")

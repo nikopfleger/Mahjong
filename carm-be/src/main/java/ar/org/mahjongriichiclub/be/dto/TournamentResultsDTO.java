@@ -2,9 +2,9 @@ package ar.org.mahjongriichiclub.be.dto;
 
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Tournament;
+import ar.org.mahjongriichiclub.be.entity.TournamentResults;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Tournament;
-import ar.org.mahjongriichiclub.be.model.TournamentResults;
 
 @MappedEntity(entity = TournamentResults.class)
 public class TournamentResultsDTO extends GenericDTO {

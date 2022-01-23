@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
+import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 import ma.glasnost.orika.BoundMapperFacade;
 
 public interface GenericService<E extends AbstractEntity, D extends GenericDTO> {

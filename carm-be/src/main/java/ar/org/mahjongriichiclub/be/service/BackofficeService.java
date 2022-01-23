@@ -4,17 +4,19 @@ import ar.org.mahjongriichiclub.be.dto.CountryDTO;
 import ar.org.mahjongriichiclub.be.dto.LocationDTO;
 import ar.org.mahjongriichiclub.be.dto.PersonDTO;
 import ar.org.mahjongriichiclub.be.dto.PlayerDTO;
+import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.dto.SeasonDTO;
 import ar.org.mahjongriichiclub.be.dto.TournamentResultsDTO;
 import ar.org.mahjongriichiclub.be.dto.UmaDTO;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
-import ar.org.mahjongriichiclub.be.request.CountryRequest;
-import ar.org.mahjongriichiclub.be.request.LocationRequest;
-import ar.org.mahjongriichiclub.be.request.PersonRequest;
-import ar.org.mahjongriichiclub.be.request.PlayerRequest;
-import ar.org.mahjongriichiclub.be.request.SeasonRequest;
-import ar.org.mahjongriichiclub.be.request.TournamentResultsRequest;
-import ar.org.mahjongriichiclub.be.request.UmaRequest;
+import ar.org.mahjongriichiclub.be.model.CountryModel;
+import ar.org.mahjongriichiclub.be.model.LocationModel;
+import ar.org.mahjongriichiclub.be.model.PersonModel;
+import ar.org.mahjongriichiclub.be.model.PlayerModel;
+import ar.org.mahjongriichiclub.be.model.RulesetModel;
+import ar.org.mahjongriichiclub.be.model.SeasonModel;
+import ar.org.mahjongriichiclub.be.model.TournamentResultsModel;
+import ar.org.mahjongriichiclub.be.model.UmaModel;
 
 /**
  * @author Niko
@@ -22,19 +24,21 @@ import ar.org.mahjongriichiclub.be.request.UmaRequest;
  */
 public interface BackofficeService {
 
-	public PersonDTO addModifyPerson(PersonRequest person) throws ServiceException;
+	public PersonDTO addModifyPerson(PersonModel person) throws ServiceException;
 
-	public CountryDTO addModifyCountry(CountryRequest country) throws ServiceException;
+	public CountryDTO addModifyCountry(CountryModel country) throws ServiceException;
 
-	public PlayerDTO addModifyPlayer(PlayerRequest player) throws ServiceException;
+	public PlayerDTO addModifyPlayer(PlayerModel player) throws ServiceException;
 
-	public LocationDTO addModifyLocation(LocationRequest location) throws ServiceException;
+	public LocationDTO addModifyLocation(LocationModel location) throws ServiceException;
 
-	public UmaDTO addModifyUma(UmaRequest uma) throws ServiceException;
+	public UmaDTO addModifyUma(UmaModel uma) throws ServiceException;
 
-	public TournamentResultsDTO addModifyTourneyResult(TournamentResultsRequest result) throws ServiceException;
+	public TournamentResultsDTO addModifyTourneyResult(TournamentResultsModel result) throws ServiceException;
 
-	public SeasonDTO addModifySeason(SeasonRequest season);
+	public SeasonDTO addModifySeason(SeasonModel season) throws ServiceException;;
+
+	public RulesetDTO addModifyRuleset(RulesetModel ruleset) throws ServiceException;;
 
 
 }

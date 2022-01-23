@@ -14,7 +14,7 @@ import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
 import ar.org.mahjongriichiclub.be.generic.dao.GenericDao;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.generic.model.AbstractEntity;
+import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 import ar.org.mahjongriichiclub.be.generic.service.GenericService;
 import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -111,6 +111,7 @@ public class GenericServiceImpl<E extends AbstractEntity, D extends GenericDTO>
 		return boundMapper.mapReverse(dto);
 	}
 
+	@SuppressWarnings("unchecked")
 	public E unproxy(E proxied)
 	{
 	    E entity = proxied;

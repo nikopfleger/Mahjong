@@ -3,14 +3,12 @@ package ar.org.mahjongriichiclub.be.dto;
 import java.util.List;
 
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import ar.org.mahjongriichiclub.be.annotations.MappedEntity;
+import ar.org.mahjongriichiclub.be.entity.Player;
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
-import ar.org.mahjongriichiclub.be.model.Player;
 
 @MappedEntity(entity = Player.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
