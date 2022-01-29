@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.kodgemisi.specification.GenericSpecificationBuilder;
+import com.kodgemisi.specification.RelationType;
+
 import ar.org.mahjongriichiclub.be.constants.ServiceExceptionConstants;
 import ar.org.mahjongriichiclub.be.dao.RulesetDAO;
-import ar.org.mahjongriichiclub.be.dao.specification.EqualSearchCriteria;
-import ar.org.mahjongriichiclub.be.dao.specification.GenericSpecificationBuilder;
 import ar.org.mahjongriichiclub.be.dto.RulesetDTO;
 import ar.org.mahjongriichiclub.be.entity.Ruleset;
 import ar.org.mahjongriichiclub.be.exception.ServiceException;
@@ -30,12 +31,16 @@ public class RulesetServiceImpl extends GenericServiceImpl<Ruleset, RulesetDTO> 
 		List<Ruleset> entities = null;
 
 		try {
-			GenericSpecificationBuilder<Ruleset> builder = new GenericSpecificationBuilder<>();
+			
+			Specification<Ruleset> specification = GenericSpecificationBuilder.<Ruleset>of(Ruleset.class)
+					.join("uma")
+	 				.equals("chonbo", ruleset.getChonbo())
+	 				.equals("uma.name", ruleset.getUma(), RelationType.TO_MANY)
+	 				.build();
+			
+			entities = this.getRulesetDAO().findAll(specification);
+	
 
-			builder.with(new EqualSearchCriteria<Ruleset>("chonbo", ruleset.getChonbo()));
-			Specification<Ruleset> spec = builder.build();
-
-			entities = this.getRulesetDAO().findAll(spec);
 		} catch (Exception e) {
 			throw new ServiceException(ServiceExceptionConstants.ERROR_FINDING_RULESETS, e);
 		}
