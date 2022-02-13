@@ -180,4 +180,12 @@ public abstract class AbstractEntity implements EntityObject, Serializable {
 		this.updated = updated;
 	}
 
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 }

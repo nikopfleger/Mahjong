@@ -173,6 +173,10 @@ public class BackofficeServiceImpl implements BackofficeService {
 			if (player.getPerson() != null) {
 				if (player.getPerson().getId() != null) {
 					personDTO = this.getPersonService().findById(player.getPerson().getId());
+					
+					if (personDTO == null) {
+						throw new ServiceException(ServiceExceptionConstants.PERSON_DOES_NOT_EXIST, new String[] { player.getPerson().getName() });
+					}
 				}
 
 				if (personDTO == null) {
