@@ -14,6 +14,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.Version;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,6 +36,10 @@ public abstract class AbstractEntity implements EntityObject, Serializable {
 
 	@Column(name = "deleted", nullable = false)
 	private Boolean deleted = false;
+	
+	@Column(name = "VERSION", nullable = false)
+	@Version
+	private Integer version;
 
 	@Column(name = "CREATED_BY", updatable = false)
 	private String createdBy;
