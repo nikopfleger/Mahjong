@@ -2,6 +2,7 @@ package ar.org.mahjongriichiclub.be.generic.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.org.mahjongriichiclub.be.generic.dto.GenericDTO;
@@ -22,7 +23,8 @@ public interface GenericService<E extends AbstractEntity, D extends GenericDTO> 
 	@Transactional(readOnly = true)
 	public D findById(Long id) throws Exception;
 
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackForClassName = {
+			"java.lang.Throwable", "java.lang.Exception" })
 	public D save(D dto);
 
 	public Class<E> findEntityClass(Class<D> clazz);

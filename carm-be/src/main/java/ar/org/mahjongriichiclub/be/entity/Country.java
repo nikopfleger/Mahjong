@@ -10,7 +10,7 @@ import org.hibernate.annotations.SQLDelete;
 import ar.org.mahjongriichiclub.be.generic.entity.AbstractEntity;
 
 @Entity
-@Table(name = "country", uniqueConstraints = @UniqueConstraint(columnNames = { "id", "code" }))
+@Table(name = "country")
 @SQLDelete(sql = "UPDATE country SET deleted = 1 WHERE id=?")
 public class Country extends AbstractEntity {
 
